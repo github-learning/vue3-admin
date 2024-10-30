@@ -9,7 +9,8 @@
     "preview": "vite preview",
     "lint": "eslint",
     "lint:fix": "eslint --fix --quiet",
-    "prepare": "husky"
+    "prepare": "husky",
+     "commit":"git-cz"
   },
   "dependencies": {
     "vue": "^3.5.12"
@@ -19,6 +20,8 @@
     "@commitlint/config-conventional": "^19.5.0",
     "@eslint/js": "^9.13.0",
     "@vitejs/plugin-vue": "^5.1.4",
+    "commitizen": "^4.3.1",
+    "cz-conventional-changelog": "^3.3.0",
     "eslint": "^9.13.0",
     "eslint-plugin-vue": "^9.30.0",
     "globals": "^15.11.0",
@@ -36,5 +39,10 @@
     "src/**/*.{html,json,css,scss}": [
       "npx prettier --write"
     ]
-  }
+  },
+  "config":{
+    "commitizen":{
+        "path":"node_modules/cz-conventional-changelog"
+    }
+}
 }
