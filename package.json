@@ -1,0 +1,38 @@
+{
+  "name": "vue3-admin",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vue-tsc -b && vite build",
+    "preview": "vite preview",
+    "lint": "eslint",
+    "lint:fix": "eslint --fix --quiet",
+    "prepare": "husky"
+  },
+  "dependencies": {
+    "vue": "^3.5.12"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.13.0",
+    "@vitejs/plugin-vue": "^5.1.4",
+    "eslint": "^9.13.0",
+    "eslint-plugin-vue": "^9.30.0",
+    "globals": "^15.11.0",
+    "husky": "^9.1.6",
+    "lint-staged": "^15.2.10",
+    "typescript": "~5.6.2",
+    "typescript-eslint": "^8.12.1",
+    "vite": "^5.4.9",
+    "vue-tsc": "^2.1.6"
+  },
+  "lint-staged": {
+    "src/**/*.{js,cjs,ts,vue}": [
+      "npm run lint:fix"
+    ],
+    "src/**/*.{html,json,css,scss}": [
+      "npx prettier --write"
+    ]
+  }
+}
