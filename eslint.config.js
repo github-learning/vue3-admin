@@ -36,7 +36,7 @@ export default [
   // 8. 自定义规则,根据需要增加  eslint 主要是校验代码规范  prettier  格式化代码的
   {
     rules: {
-      "no-console": "error", // 参照下方实例图
+      "no-console": "warn", // 参照下方实例图
       "vue/multi-word-component-names": "off",
       // semi: 1
     },
