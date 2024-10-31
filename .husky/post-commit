@@ -1,10 +1,25 @@
 #!/bin/sh
 
-# 获取最近的一条提交记录
+# 定义存储日志的文件路径
+LOG_FILE="./commit-logs/commit-history.log"
+
+# 获取最近的一条提交信息
 COMMIT_HASH=$(git rev-parse --short HEAD)
 COMMIT_MESSAGE=$(git log -1 --pretty=%B)
 COMMIT_AUTHOR=$(git log -1 --pretty=%an)
 COMMIT_DATE=$(git log -1 --date=format:'%Y-%m-%d %H:%M:%S' --pretty=%cd)
 
-# 定义日志内容格式
+# 定义日志格式
 LOG_CONTENT="Commit: $COMMIT_HASH
+Author: $COMMIT_AUTHOR
+Date: $COMMIT_DATE
+
+Message:
+$COMMIT_MESSAGE
+-------------------------------"
+
+# 确保日志文件夹存在
+mkdir -p "$(dirname "$LOG_FILE")"
+
+# 将日志内容追加写入文件
+echo "$LOG_CONTENT" >> "$LOG_FILE"
