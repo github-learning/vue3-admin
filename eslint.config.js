@@ -2,6 +2,7 @@ import globals from "globals";
 import pluginJs from "@eslint/js"; // 检验js规范的 (推荐)
 import tseslint from "typescript-eslint"; // 推荐的ts规范
 import pluginVue from "eslint-plugin-vue"; //推荐的vue的规范
+import prettierRecommended from 'eslint-plugin-prettier/recommended';
 
 export default [
   // 1. 检测文件的格式
@@ -37,8 +38,8 @@ export default [
     rules: {
       "no-console": "error", // 参照下方实例图
       "vue/multi-word-component-names": "off",
-      semi: 1
+      // semi: 1
     },
   },
-  
+  prettierRecommended // 覆盖掉eslint的规范
 ];
