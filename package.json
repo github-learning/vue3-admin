@@ -12,6 +12,7 @@
     "prepare": "husky"
   },
   "dependencies": {
+    "pinia": "^2.2.5",
     "vue": "^3.5.12"
   },
   "devDependencies": {
