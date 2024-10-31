@@ -1,0 +1,10 @@
+#!/bin/sh
+
+# 获取最近的一条提交记录
+COMMIT_HASH=$(git rev-parse --short HEAD)
+COMMIT_MESSAGE=$(git log -1 --pretty=%B)
+COMMIT_AUTHOR=$(git log -1 --pretty=%an)
+COMMIT_DATE=$(git log -1 --date=format:'%Y-%m-%d %H:%M:%S' --pretty=%cd)
+
+# 定义日志内容格式
+LOG_CONTENT="Commit: $COMMIT_HASH
