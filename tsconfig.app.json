@@ -20,7 +20,8 @@
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true,
     "noUncheckedSideEffectImports": true,
-    "types": ["element-plus/global"]
+    // "types": ["element-plus/global"]
+    "types": ["element-plus/global", "./auto-imports.d.ts", "./components.d.ts"]
   },
   "include": ["src/**/*.ts", "src/**/*.tsx", "src/**/*.vue"]
 }

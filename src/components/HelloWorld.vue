@@ -23,23 +23,13 @@ const infoTip = () => {
 
 <template>
   <h1>{{ msg }}</h1>
-  <el-space wrap>
-    <el-card v-for="i in 3" :key="i" class="box-card" style="width: 250px">
-      <template #header>
-        <div class="card-header">
-          <span>Card name</span>
-          <el-button class="button" text>Operation button</el-button>
-        </div>
-      </template>
-      <div v-for="o in 4" :key="o" class="text item">
-        {{ 'List item ' + o }}
-      </div>
-    </el-card>
-  </el-space>
 
   <div class="card">
     <el-button type="primary" @click="increment()">
-      count is {{ count }} doubleCount is {{ doubleCount }}
+      <el-icon><House /></el-icon>
+      <span class="info">
+        count is {{ count }} doubleCount is {{ doubleCount }}</span
+      >
     </el-button>
     <el-button type="info" @click="infoTip">info message</el-button>
     <!-- <button type="button" @click="count++">count is {{ count }}</button> -->
@@ -69,5 +59,8 @@ const infoTip = () => {
 <style scoped>
 .read-the-docs {
   color: #888;
+}
+.info {
+  @apply text-red;
 }
 </style>

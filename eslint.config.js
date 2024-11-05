@@ -3,12 +3,31 @@ import pluginJs from "@eslint/js"; // 检验js规范的 (推荐)
 import tseslint from "typescript-eslint"; // 推荐的ts规范
 import pluginVue from "eslint-plugin-vue"; //推荐的vue的规范
 import prettierRecommended from 'eslint-plugin-prettier/recommended';
+// esModule  commonjs
+// 1.
+// import autoImport from "./.eslintrc-auto-import.json" with { type: "json" }
+
+// 2.
+import { createRequire } from 'module'
+const require = createRequire(import.meta.url)
+const autoImport = require('./.eslintrc-auto-import.json')
+
+// 3.fs.readFile
+
 
 export default [
   // 1. 检测文件的格式
   { files: ["**/*.{js,mjs,cjs,ts,vue}"] },
   // 2. 定义不同环境的全局变量
-  { languageOptions: { globals: { ...globals.browser, ...globals.node } } },
+  {
+    languageOptions: {
+      globals: {
+        ...globals.browser,
+        ...globals.node,
+        ...autoImport.globals
+      }
+    }
+  },
   // 3. js 推荐 规则
   pluginJs.configs.recommended,
   // 4. ts 推荐 规则

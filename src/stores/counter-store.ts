@@ -1,6 +1,3 @@
-import { defineStore } from 'pinia'
-import { computed, ref, reactive } from 'vue'
-
 export const useCounterStore = defineStore(
   'counter',
   () => {
@@ -21,10 +18,10 @@ export const useCounterStore = defineStore(
   },
 
   {
-    // persist: true
-    persist: {
-      pick: ['count', 'minCount'],
-      storage: sessionStorage
-    }
+    persist: true
+    // persist: {
+    //   pick: ['count', 'minCount'],
+    //   storage: sessionStorage
+    // }
   }
 )
