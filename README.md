@@ -11,4 +11,4 @@ Learn more about the recommended Project Setup and IDE Support in the [Vue Docs 
 
 ## 11.05 更新日志
 
-1. element-plus / svg / pinia / unocss 接入
+1. element-plus / svg / pinia / unocss / normalize 接入
