@@ -25,3 +25,4 @@ export const useCounterStore = defineStore(
     // }
   }
 )
+// export default useCounterStore

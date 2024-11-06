@@ -1,4 +1,4 @@
-import './style.css'
+// import './style.css'
 import 'normalize.css/normalize.css'
 
 import { createApp } from 'vue'
@@ -16,7 +16,9 @@ for (const [key, component] of Object.entries(ElementPlusIconsVue)) {
   app.component(key, component)
 }
 import 'virtual:uno.css'
+import { router } from './router'
 pinia.use(piniaPluginPersistedstate)
+app.use(router)
 app.use(pinia)
 app.use(element)
 app.mount('#app')

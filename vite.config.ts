@@ -1,3 +1,4 @@
+import path from 'path'
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import AutoImport from 'unplugin-auto-import/vite'
@@ -8,7 +9,14 @@ import ElementPlus from 'unplugin-element-plus/vite'
 // UnoCSS 原子化css
 import UnoCSS from 'unocss/vite'
 
+const pathSrc = path.resolve(__dirname, 'src')
+
 export default defineConfig({
+  resolve: {
+    alias: {
+      '@': pathSrc
+    }
+  },
   plugins: [
     vue(),
     UnoCSS(),
@@ -23,6 +31,12 @@ export default defineConfig({
       resolvers: [
         // 自动导入 Element Plus 组件
         ElementPlusResolver()
+      ],
+      // 所有的组件可以自动加载
+      dirs: [
+        'src/components',
+        'src/layout/components',
+        'src/views/**/components'
       ]
     }),
 
