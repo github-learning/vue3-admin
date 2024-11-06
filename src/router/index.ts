@@ -1,3 +1,5 @@
+import { createRouter, createWebHashHistory, RouteRecordRaw } from 'vue-router'
+
 export const layoutsRoutes: RouteRecordRaw[] = [
   {
     path: '/dashboard',

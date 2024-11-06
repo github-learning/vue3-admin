@@ -14,8 +14,9 @@
   </template>
 </template>
 <script setup lang="ts">
+import { RouteRecordRaw } from 'vue-router'
 defineProps<{
-  menuData: []
+  menuData: RouteRecordRaw[]
 }>()
 
 defineOptions({

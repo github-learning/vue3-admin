@@ -1,10 +1,8 @@
 <script setup lang="ts">
 defineProps<{ msg: string }>()
 
-import { getCurrentInstance } from 'vue'
 // const count = ref(0)
 import { useCounterStore } from '../stores/counter-store'
-import { storeToRefs } from 'pinia'
 
 const store = useCounterStore()
 
