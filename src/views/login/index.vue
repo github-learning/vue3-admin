@@ -1,150 +1,143 @@
 <template>
-  <el-row class="h-100vh bg-indigo-500">
-    <el-col :span="16">
-      <div class="h-full flex-center flex-col">
-        <div class="font-bold text-3xl text-white mb-4">欢迎光临</div>
-        <div>此站点是《vue3+vite5 实战后台开发》演示地址</div>
+  <el-row class="login-container">
+    <el-col :lg="16" :md="12" class="left">
+      <div>
+        <div>欢迎光临</div>
+        <div>此站点是《vue3 + vite5 实战后台开发》演示项目</div>
       </div>
     </el-col>
-    <el-col :span="8" class="bg-light-50 flex-center flex-col">
-      <h2 class="font-bold text-3xl text-gray-800">欢迎回来</h2>
-      <div class="flex-center my-5 text-gray-300 space-x-2">
-        <span class="h-[1px]w-16 bg-gray-200"></span>
+    <el-col :lg="8" :md="12" class="right">
+      <h2 class="title">欢迎回来</h2>
+      <div>
+        <span class="line"></span>
         <span>账号密码登录</span>
-        <span class="h-[1px]w-16 bg-gray-200"></span>
+        <span class="line"></span>
       </div>
       <el-form
-        class="login-form"
-        ref="form"
+        ref="formRef"
         :rules="loginRules"
         :model="loginForm"
+        class="w-[250px]"
       >
-        <div class="admin-logo">
-          <img class="logo" src="../../assets/vue.svg" alt="logo" size-80px />
-          <h1 class="name">Vue3 Admin</h1>
-        </div>
         <el-form-item prop="username">
-          <el-input placeholder="请输入用户名" v-model="loginForm.username">
-            <template #prepend>
-              <span class="svg-container">
-                <svg-icon icon-name="ant-design:user-outlined"></svg-icon>
-              </span>
+          <el-input v-model="loginForm.username" placeholder="请输入用户名">
+            <template #prefix>
+              <el-icon><user /></el-icon>
+            </template>
+          </el-input>
+        </el-form-item>
+        <el-form-item prop="password">
+          <el-input
+            type="password"
+            v-model="loginForm.password"
+            placeholder="请输入密码"
+            show-password
+          >
+            <template #prefix>
+              <el-icon><lock /></el-icon>
             </template>
           </el-input>
         </el-form-item>
         <el-form-item>
-          <el-input
-            type="password"
-            placeholder="请输入密码"
-            autocomplete="on"
-            show-password
-            v-model="loginForm.password"
-            prop="password"
+          <el-button
+            round
+            color="#626aef"
+            class="w-[250px]"
+            type="primary"
+            @click="onSubmit"
+            :loading="loading"
+            >登 录</el-button
           >
-            <template #prepend>
-              <span class="svg-container">
-                <svg-icon icon-name="ant-design:lock-outlined"></svg-icon>
-              </span>
-            </template>
-          </el-input>
         </el-form-item>
-
-        <el-button type="primary" @click="handleLogin" w-full mb-30px
-          >登录</el-button
-        >
       </el-form>
     </el-col>
   </el-row>
-
-  <!-- <div class="login-container">
-    <el-form
-      class="login-form"
-      ref="form"
-      :rules="loginRules"
-      :model="loginForm"
-    >
-      <div class="admin-logo">
-        <img class="logo" src="../../assets/vue.svg" alt="logo" size-80px />
-        <h1 class="name">Vue3 Admin</h1>
-      </div>
-      <el-form-item prop="username">
-        <el-input placeholder="请输入用户名" v-model="loginForm.username">
-          <template #prepend>
-            <span class="svg-container">
-              <svg-icon icon-name="ant-design:user-outlined"></svg-icon>
-            </span>
-          </template>
-        </el-input>
-      </el-form-item>
-      <el-form-item>
-        <el-input
-          type="password"
-          placeholder="请输入密码"
-          autocomplete="on"
-          show-password
-          v-model="loginForm.password"
-          prop="password"
-        >
-          <template #prepend>
-            <span class="svg-container">
-              <svg-icon icon-name="ant-design:lock-outlined"></svg-icon>
-            </span>
-          </template>
-        </el-input>
-      </el-form-item>
-
-      <el-button type="primary" @click="handleLogin" w-full mb-30px
-        >登录</el-button
-      >
-    </el-form>
-  </div> -->
 </template>
 
-<script lang="ts" setup>
-// import {useCounterStore}
-// import { useUserStore } from '@/stores/user'
-import { useCounterStore } from '@/stores'
-const counter = useCounterStore()
-console.log('counter', counter)
+<script setup lang="ts">
+import { login } from '@/apis/user'
 import { FormInstance } from 'element-plus'
-// import { useRouteQuery } from '@/hooks/useRouteQuery'
-// const { login } = useUserStore()
-// const router = useRouter()
-// const { redirect, otherQuery } = useRouteQuery()
+import { ref, reactive, onMounted, onBeforeUnmount } from 'vue'
+const { proxy } = getCurrentInstance()!
 const loginState = reactive({
   loginForm: {
-    username: '',
-    password: ''
+    username: 'test',
+    password: '123456'
   },
   loginRules: {
     username: [{ required: true, trigger: 'blur', message: '请输入用户名' }],
     password: [{ required: true, trigger: 'blur', message: '请输入密码' }]
   }
 })
-const loginFormInstance = useTemplateRef<FormInstance>('form')
 const { loginForm, loginRules } = loginState
 
-const handleLogin = () => {
+const loginFormInstance = useTemplateRef<FormInstance>('formRef')
+const loading = ref(false)
+const onSubmit = () => {
   loginFormInstance.value?.validate(async (valid) => {
     if (valid) {
-      // await login(loginForm)
-      // 解析出一个重定向的路径  + 其他的查询参数
+      loading.value = true
+      try {
+        await login(loginForm)
+
+        proxy?.$message.success('登录成功')
+      } catch (error) {
+        proxy?.$message.error(`${error}`)
+      }
       // router.push({ path: redirect.value || '/', query: otherQuery.value })
     }
+
+    // store
+    //   .dispatch('login', form)
+    //   .then((res) => {
+    //     toast('登录成功')
+    //     router.push('/')
+    //   })
+    //   .finally(() => {
+    //     loading.value = false
+    //   })
   })
 }
+
+// 监听回车事件
+function onKeyUp(e: KeyboardEvent) {
+  if (e.key == 'Enter') onSubmit()
+}
+
+// 添加键盘监听
+onMounted(() => {
+  document.addEventListener('keyup', onKeyUp)
+})
+// 移除键盘监听
+onBeforeUnmount(() => {
+  document.removeEventListener('keyup', onKeyUp)
+})
 </script>
 
-<style scoped lang="scss">
+<style scoped>
 .login-container {
-  @apply min-h-screen w-full;
-
-  .login-form {
-    @apply w-500px mx-auto py50px;
-  }
-
-  .admin-logo {
-    @apply flex items-center justify-center my-20px;
-  }
+  @apply min-h-screen bg-indigo-500;
+}
+.login-container .left,
+.login-container .right {
+  @apply flex items-center justify-center;
+}
+.login-container .right {
+  @apply bg-light-50 flex-col;
+}
+.left > div > div:first-child {
+  @apply font-bold text-5xl text-light-50 mb-4;
+}
+.left > div > div:last-child {
+  @apply text-gray-200 text-sm;
+}
+.right .title {
+  @apply font-bold text-3xl text-gray-800;
+}
+.right > div {
+  @apply flex items-center justify-center my-5 text-gray-300 space-x-2;
+}
+.right .line {
+  @apply h-[1px] w-16 bg-gray-200;
 }
 </style>

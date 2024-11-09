@@ -29,7 +29,7 @@ const constantRoutes: RouteRecordRaw[] = [
     path: '/',
     name: 'layouts',
     component: () => import('@/layout/index.vue'),
-    redirect: '/dashboard',
+    // redirect: '/dashboard',
     children: layoutsRoutes
   }
 ]

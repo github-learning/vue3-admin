@@ -41,5 +41,26 @@ export default defineConfig({
     }),
 
     ElementPlus({})
-  ]
+  ],
+  server: {
+    // port: 3000,
+    proxy: {
+      '/dev-api': {
+        target: 'http://localhost:3000', // 代理到 NestJS 服务器
+        changeOrigin: true, // 是否修改请求的源头
+        rewrite: (path) => path.replace(/^\/dev-api/, '') // 可选：如果需要删除前缀
+        // rewrite: (path) => path.replace(/^\/dev-api/, '/api') // 可选：如果需要删除前缀
+      }
+    }
+  }
+  // server: {
+  //   port: 3000,
+  //   proxy: {
+  //     '/dev-api': {
+  //       target: 'http://localhost:3000',
+  //       changeOrigin: true,
+  //       rewrite: (path) => path.replace(/^\/dev-api/, '/api')
+  //     }
+  //   }
+  // }
 })
