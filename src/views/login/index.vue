@@ -56,6 +56,8 @@
 
 <script setup lang="ts">
 import { login } from '@/apis/user'
+import { router } from '@/router'
+import { setToken } from '@/utils'
 import { FormInstance } from 'element-plus'
 import { ref, reactive, onMounted, onBeforeUnmount } from 'vue'
 const { proxy } = getCurrentInstance()!
@@ -78,9 +80,16 @@ const onSubmit = () => {
     if (valid) {
       loading.value = true
       try {
-        await login(loginForm)
+        const data = await login(loginForm)
 
+        console.log(
+          '%c [  ]-85',
+          'font-size:13px; background:pink; color:#bf2c9f;',
+          data
+        )
         proxy?.$message.success('登录成功')
+        setToken(data.data.token)
+        router.push({ path: '/' })
       } catch (error) {
         proxy?.$message.error(`${error}`)
       }
