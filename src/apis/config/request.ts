@@ -24,12 +24,19 @@ service.interceptors.request.use(
 
 service.interceptors.response.use(
   (response) => {
+    console.log('response', response)
     // code
     const { code, message } = response.data
     if (code !== 200) {
       ElMessage.error(message)
       return Promise.reject(message)
     }
+
+    console.log(
+      '%c [  ]-35',
+      'font-size:13px; background:pink; color:#bf2c9f;',
+      response.data
+    )
     return response.data
   },
   (err) => {

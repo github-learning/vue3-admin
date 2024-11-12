@@ -10,12 +10,22 @@ export const layoutsRoutes: RouteRecordRaw[] = [
     component: () => import('@/views/dashboard/index.vue')
   },
   {
-    path: '/user',
-    name: 'User',
+    path: '/system',
+    name: 'System',
     meta: {
       title: '用户管理'
     },
-    component: () => import('@/views/user/index.vue')
+    component: () => import('@/views/system/index.vue'),
+    children: [
+      {
+        path: '/role',
+        name: 'role',
+        component: () => import('@/views/system/role/index.vue'),
+        meta: {
+          title: '角色管理'
+        }
+      }
+    ]
   }
 ]
 const constantRoutes: RouteRecordRaw[] = [
