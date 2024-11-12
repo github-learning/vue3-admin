@@ -6,6 +6,7 @@ import { createPinia } from 'pinia'
 import element from './plugins/element'
 // 注册持久化插件
 import piniaPluginPersistedstate from 'pinia-plugin-persistedstate'
+import './permission'
 const pinia = createPinia()
 // 如果您正在使用CDN引入，请删除下面一行。
 import * as ElementPlusIconsVue from '@element-plus/icons-vue'

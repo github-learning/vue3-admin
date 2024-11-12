@@ -16,6 +16,7 @@
     "axios": "^1.7.7",
     "element-plus": "^2.8.7",
     "normalize.css": "^8.0.1",
+    "nprogress": "^0.2.0",
     "pinia": "^2.2.5",
     "pinia-plugin-persistedstate": "^4.1.2",
     "unplugin-element-plus": "^0.8.0",
