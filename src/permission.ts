@@ -2,6 +2,7 @@ import { router } from '@/router'
 import NProgress from 'nprogress'
 import 'nprogress/nprogress.css'
 import { getToken } from '@/utils'
+NProgress.configure({ showSpinner: false })
 const whiteList = ['/login']
 router.beforeEach(async (to) => {
   // 获取用户信息
@@ -24,7 +25,12 @@ router.beforeEach(async (to) => {
       return true
     }
     return {
-      path: '/login'
+      path: '/login',
+      // 给予跳转后重定向参数
+      query: {
+        redirect: to.path,
+        ...to.query
+      }
     }
   }
 })

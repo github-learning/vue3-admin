@@ -58,9 +58,11 @@
 import { login } from '@/apis/user'
 import { router } from '@/router'
 import { setToken } from '@/utils'
+import { useRouteQuery } from '@/hooks/useRouteQuery'
 import { FormInstance } from 'element-plus'
 import { ref, reactive, onMounted, onBeforeUnmount } from 'vue'
 const { proxy } = getCurrentInstance()!
+const { redirect, otherQuery } = useRouteQuery()
 const loginState = reactive({
   loginForm: {
     username: 'test',
@@ -74,37 +76,27 @@ const loginState = reactive({
 const { loginForm, loginRules } = loginState
 
 const loginFormInstance = useTemplateRef<FormInstance>('formRef')
+
+const passwordRef = useTemplateRef<HTMLInputElement>('password')
+const usernameRef = useTemplateRef<HTMLInputElement>('username')
 const loading = ref(false)
 const onSubmit = () => {
   loginFormInstance.value?.validate(async (valid) => {
     if (valid) {
       loading.value = true
-      try {
-        const data = await login(loginForm)
-
-        console.log(
-          '%c [  ]-85',
-          'font-size:13px; background:pink; color:#bf2c9f;',
-          data
-        )
-        proxy?.$message.success('登录成功')
-        setToken(data.data.token)
-        router.push({ path: '/' })
-      } catch (error) {
-        proxy?.$message.error(`${error}`)
-      }
-      // router.push({ path: redirect.value || '/', query: otherQuery.value })
+      await login(loginForm)
+        .then((res) => {
+          proxy?.$message.success('登录成功')
+          setToken(res.data.token)
+          router.push({
+            path: redirect.value || '/',
+            query: otherQuery.value
+          })
+        })
+        .finally(() => {
+          loading.value = false
+        })
     }
-
-    // store
-    //   .dispatch('login', form)
-    //   .then((res) => {
-    //     toast('登录成功')
-    //     router.push('/')
-    //   })
-    //   .finally(() => {
-    //     loading.value = false
-    //   })
   })
 }
 
@@ -113,9 +105,15 @@ function onKeyUp(e: KeyboardEvent) {
   if (e.key == 'Enter') onSubmit()
 }
 
-// 添加键盘监听
 onMounted(() => {
+  // 添加键盘监听
   document.addEventListener('keyup', onKeyUp)
+  // 自动聚焦
+  if (loginState.loginForm.username === '') {
+    usernameRef.value?.focus()
+  } else if (loginState.loginForm.password === '') {
+    passwordRef.value?.focus()
+  }
 })
 // 移除键盘监听
 onBeforeUnmount(() => {

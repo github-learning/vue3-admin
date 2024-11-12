@@ -24,7 +24,7 @@ export interface ILoginResponseData {
   token: string
 }
 // 登录接口
-export const login = async (data: IUserLoginData) => {
+export const login = (data: IUserLoginData) => {
   return request.post('/auth/login', data)
 }
 
