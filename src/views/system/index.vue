@@ -30,6 +30,12 @@
       @size-change="handleSizeChange"
       @current-change="handleCurrentChange"
     />
+    <el-drawer
+      v-model="visible"
+      :title="panelTitle"
+      @close="handleClose"
+    ></el-drawer>
+
     <!-- <right-panel v-model="visible" :title="panelTitle">
       <editor-role
         :type="editType"
@@ -47,13 +53,22 @@
 
 <script setup>
 import { getRoles } from '@/apis/role'
-
+const visible = ref(false)
 // const pageNum = ref(0)
 // const pageSize = ref(10)
 const roles = ref([])
 const formatter = (row) => {
   return row.is_default ? '是' : '否'
 }
+const editType = ref(-1)
+const panelTitle = computed(() =>
+  editType.value == 1 ? '增加角色' : '修改角色'
+) //  添加还是修改
+const hanleAddRole = () => {
+  editType.value = 1
+  visible.value = true
+}
+
 const getRolesList = async () => {
   const data = await getRoles()
 
