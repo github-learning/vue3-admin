@@ -30,11 +30,13 @@
       @size-change="handleSizeChange"
       @current-change="handleCurrentChange"
     />
-    <el-drawer
-      v-model="visible"
-      :title="panelTitle"
-      @close="handleClose"
-    ></el-drawer>
+    <el-drawer v-model="visible" :title="panelTitle" @close="handleClose">
+      <editor-role
+        :type="editType"
+        :data="editData"
+        @submit="handleSubmit"
+      ></editor-role>
+    </el-drawer>
 
     <!-- <right-panel v-model="visible" :title="panelTitle">
       <editor-role
