@@ -2,7 +2,6 @@
   <div p-30px>
     <h2>角色管理</h2>
     <el-button @click="hanleAddRole">角色添加</el-button>
-
     <el-table :data="roles" style="width: 100%">
       <el-table-column prop="id" label="角色id" width="180" />
       <el-table-column prop="name" label="角色名称" width="180" />
@@ -30,15 +29,7 @@
       @size-change="handleSizeChange"
       @current-change="handleCurrentChange"
     />
-    <el-drawer v-model="visible" :title="panelTitle" @close="handleClose">
-      <editor-role
-        :type="editType"
-        :data="editData"
-        @submit="handleSubmit"
-      ></editor-role>
-    </el-drawer>
-
-    <!-- <right-panel v-model="visible" :title="panelTitle">
+    <right-panel v-model="visible" :title="panelTitle">
       <editor-role
         :type="editType"
         :data="editData"
@@ -49,41 +40,47 @@
       :role="roleData"
       v-model="roleMenuVisible"
       v-if="roleMenuVisible && roleData"
-    ></role-menu> -->
+    ></role-menu>
   </div>
 </template>
+<script lang="ts" setup>
+import { IRole } from '@/api/role'
+import { useRoleStore } from '@/stores/role'
 
-<script setup>
-import { getRoles } from '@/apis/role'
-const visible = ref(false)
-// const pageNum = ref(0)
-// const pageSize = ref(10)
-const roles = ref([])
-const formatter = (row) => {
+import { useRoleHelpers } from './roleHelpers'
+
+const roleData = ref<IRole | null>(null)
+const roleMenuVisible = ref(false)
+const handleRoleMenu = (row: IRole) => {
+  roleMenuVisible.value = true
+  roleData.value = row
+}
+
+// --------------------------
+const store = useRoleStore()
+const pageNum = ref(0)
+const pageSize = ref(10)
+const {
+  handleSubmit,
+  handleRemove,
+  handleEditRole,
+  hanleAddRole,
+  panelTitle,
+  editType,
+  visible,
+  editData
+} = useRoleHelpers({ pageNum, pageSize })
+const { count, roles } = toRefs(store.state)
+watchEffect(() => {
+  store.getRoles({ pageNum: pageNum.value, pageSize: pageSize.value })
+})
+const handleSizeChange = (val: number) => {
+  pageSize.value = val
+}
+const handleCurrentChange = (val: number) => {
+  pageNum.value = val - 1
+}
+const formatter = (row: IRole) => {
   return row.is_default ? '是' : '否'
 }
-const editType = ref(-1)
-const panelTitle = computed(() =>
-  editType.value == 1 ? '增加角色' : '修改角色'
-) //  添加还是修改
-const hanleAddRole = () => {
-  editType.value = 1
-  visible.value = true
-}
-
-const getRolesList = async () => {
-  const data = await getRoles()
-
-  console.log(
-    '%c [  ]-14',
-    'font-size:13px; background:pink; color:#bf2c9f;',
-    data
-  )
-  roles.value = data.data
-}
-onMounted(() => {
-  getRolesList()
-})
 </script>
-
-<style scoped></style>
