@@ -4,7 +4,7 @@ import vue from '@vitejs/plugin-vue'
 import AutoImport from 'unplugin-auto-import/vite'
 import Components from 'unplugin-vue-components/vite'
 import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
-// 1自动导入 ElementPlus 所需样式
+// 自动导入 ElementPlus 所需样式
 import ElementPlus from 'unplugin-element-plus/vite'
 // UnoCSS 原子化css
 import UnoCSS from 'unocss/vite'
