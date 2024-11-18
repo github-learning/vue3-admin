@@ -10,7 +10,7 @@ export interface IRole {
 
 export interface IRoleState {
   roles: IRole[]
-  count: number
+  total: number
 }
 export interface IRoleParams {
   pageNum: number
@@ -19,7 +19,7 @@ export interface IRoleParams {
 
 // 获取用户
 export const getRoles = (
-  params = { pageNum: 0, pageSize: 10 }
+  params = { pageNum: 1, pageSize: 10 }
 ): Promise<Api<IRoleState>> => {
   return service.get('/role', {
     params

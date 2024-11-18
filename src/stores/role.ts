@@ -10,14 +10,15 @@ type WithRoleParmas = IRole & IRoleParams
 export const useRoleStore = defineStore('role', () => {
   const state = reactive<IRoleState>({
     roles: [],
-    count: 0
+    total: 0
   })
 
   const getRoles = async (params: IRoleParams) => {
-    const res = await getRolesApi(params)
-    const { data } = res
-    state.roles = data.roles
-    state.count = data.count
+    const {
+      data: { roles, total }
+    } = await getRolesApi(params)
+    state.roles = roles
+    state.total = total
   }
 
   const addRole = async (data: WithRoleParmas) => {

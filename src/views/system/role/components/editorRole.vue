@@ -21,7 +21,7 @@
 </template>
 
 <script lang="ts" setup>
-import { IRole } from '@/api/role'
+import { IRole } from '@/apis/role'
 import { PropType } from 'vue'
 
 const editData = ref({

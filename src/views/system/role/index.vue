@@ -24,18 +24,18 @@
     <el-pagination
       :page-sizes="[1, 5, 10, 20]"
       layout="prev, pager, next, sizes, total"
-      :total="count"
+      :total="total"
       :page-size="pageSize"
       @size-change="handleSizeChange"
       @current-change="handleCurrentChange"
     />
-    <right-panel v-model="visible" :title="panelTitle">
+    <el-drawer v-model="visible" :title="panelTitle">
       <editor-role
         :type="editType"
         :data="editData"
         @submit="handleSubmit"
       ></editor-role>
-    </right-panel>
+    </el-drawer>
     <role-menu
       :role="roleData"
       v-model="roleMenuVisible"
@@ -44,7 +44,7 @@
   </div>
 </template>
 <script lang="ts" setup>
-import { IRole } from '@/api/role'
+import { IRole } from '@/apis/role'
 import { useRoleStore } from '@/stores/role'
 
 import { useRoleHelpers } from './roleHelpers'
@@ -58,7 +58,8 @@ const handleRoleMenu = (row: IRole) => {
 
 // --------------------------
 const store = useRoleStore()
-const pageNum = ref(0)
+const { total, roles } = toRefs(store.state)
+const pageNum = ref(1)
 const pageSize = ref(10)
 const {
   handleSubmit,
@@ -70,7 +71,6 @@ const {
   visible,
   editData
 } = useRoleHelpers({ pageNum, pageSize })
-const { count, roles } = toRefs(store.state)
 watchEffect(() => {
   store.getRoles({ pageNum: pageNum.value, pageSize: pageSize.value })
 })
