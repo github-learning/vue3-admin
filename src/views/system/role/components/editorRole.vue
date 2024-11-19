@@ -8,7 +8,7 @@
     </el-form-item>
     <el-form-item label="是否是默认角色 ">
       <el-switch
-        v-model="editData.is_default"
+        v-model="editData.isDefault"
         :active-value="1"
         :inactive-value="0"
       ></el-switch>
@@ -27,7 +27,7 @@ import { PropType } from 'vue'
 const editData = ref({
   name: '',
   description: '',
-  is_default: 0
+  isDefault: 0
 })
 
 const { data } = defineProps({
@@ -44,7 +44,7 @@ const { data } = defineProps({
 const defaultProps = {
   name: '',
   description: '',
-  is_default: 0
+  isDefault: 0
 }
 const resetForm = () => {
   editData.value = { ...defaultProps, ...data }

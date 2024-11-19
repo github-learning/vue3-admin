@@ -22,16 +22,23 @@ export const useRoleStore = defineStore('role', () => {
   }
 
   const addRole = async (data: WithRoleParmas) => {
+    // console.log('obj', data)
     const { pageNum, pageSize, ...obj } = data
+
+    console.log(
+      '%c [  ]-28',
+      'font-size:13px; background:pink; color:#bf2c9f;',
+      obj
+    )
     const res = await addRoleApi(obj)
-    if (res.code == 0) {
+    if (res.code === 200) {
       getRoles({ pageNum, pageSize })
     }
   }
   const updateRole = async (data: WithRoleParmas) => {
     const { pageNum, pageSize, ...obj } = data
     const res = await updateRoleApi(obj.id, obj)
-    if (res.code == 0) {
+    if (res.code === 200) {
       getRoles({ pageNum, pageSize })
     }
   }
@@ -39,7 +46,7 @@ export const useRoleStore = defineStore('role', () => {
   const removeRole = async (data: WithRoleParmas) => {
     const { pageNum, pageSize, id } = data
     const res = await removeRoleApi(id)
-    if (res.code == 0) {
+    if (res.code === 200) {
       getRoles({ pageNum, pageSize })
     }
   }

@@ -5,7 +5,7 @@ export interface IRole {
   id: number
   name: string
   description: string
-  is_default: number
+  isDefault: number
 }
 
 export interface IRoleState {
@@ -28,16 +28,12 @@ export const getRoles = (
 
 // 添加用户
 export const addRole = (data: IRole): Promise<Api> => {
-  return service.post('/role', {
-    data
-  })
+  return service.post('/role', data)
 }
 
 // 更新用户: Partial部分参数
 export const updateRole = (id: number, data: Partial<IRole>): Promise<Api> => {
-  return service.put('/role/' + id, {
-    data
-  })
+  return service.put('/role/' + id, data)
 }
 
 // 删除用户
