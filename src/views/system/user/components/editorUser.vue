@@ -49,7 +49,7 @@
 </template>
 
 <script lang="ts" setup>
-import { Profile } from '@/api/user'
+import { Profile } from '@/apis/user'
 import type { FormInstance, FormItemRule } from 'element-plus'
 import type { PropType } from 'vue'
 
@@ -67,10 +67,10 @@ const emit = defineEmits(['submit'])
 
 const editFormRef = ref<FormInstance | null>(null)
 const editData = ref<Partial<Profile>>({
-  username: '',
-  email: '',
-  mobile: '',
-  description: '',
+  username: 'test333',
+  mobile: '666666666666',
+  email: '11@qq.com',
+  description: '34',
   status: true
 })
 

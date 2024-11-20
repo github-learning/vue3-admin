@@ -64,7 +64,7 @@ export const useUserStore = defineStore('user', () => {
   const addUser = async (data: IProfileQuery) => {
     const { pageSize, pageNum, ...params } = data
     const res = await addUserApi(params)
-    if (res.code === 0) {
+    if (res.code === 200) {
       getAllUsers({
         pageSize,
         pageNum
@@ -75,7 +75,7 @@ export const useUserStore = defineStore('user', () => {
   const removeUser = async (data: IProfileQuery) => {
     const { pageSize, pageNum, id } = data
     const res = await removeUserApi(id)
-    if (res.code === 0) {
+    if (res.code === 200) {
       getAllUsers({
         pageSize,
         pageNum
@@ -86,7 +86,7 @@ export const useUserStore = defineStore('user', () => {
   const editUser = async (data: IProfileQuery) => {
     const { pageSize, pageNum, ...params } = data
     const res = await updateUserApi(params.id, params)
-    if (res.code === 0) {
+    if (res.code === 200) {
       getAllUsers({
         pageSize,
         pageNum

@@ -88,7 +88,7 @@ const store = useUserStore()
 // 用户列表
 const users = computed(() => store.state.users)
 // 分页相关状态
-const pageNum = ref(0)
+const pageNum = ref(1)
 const pageSize = ref(10)
 // 获取用户列表 支持分页
 const getUserList = () => {
@@ -130,9 +130,15 @@ const handleDeleteUser = async (index: number, row: Profile) => {
 const handleEditUser = (index: number, row: Profile) => {
   editType.value = 0
   editData.value = { ...row }
+
+  console.log(
+    '%c [  ]-134',
+    'font-size:13px; background:pink; color:#bf2c9f;',
+    row
+  )
   // 获取当前编辑用户 现有角色列表
-  editData.value.roleIds = row.roles.map((item) => item.id)
-  editData.value.roles = roles.value! // 所有角色列表
+  // editData.value.roleIds = row.roles.map((item) => item.id)
+  // editData.value.roles = roles.value! // 所有角色列表
   panelVisible.value = true
 }
 // 用户总条数

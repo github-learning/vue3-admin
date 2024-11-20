@@ -33,7 +33,7 @@ export const addRole = (data: IRole): Promise<Api> => {
 
 // 更新用户: Partial部分参数
 export const updateRole = (id: number, data: Partial<IRole>): Promise<Api> => {
-  return service.put('/role/' + id, data)
+  return service.patch('/role/' + id, data)
 }
 
 // 删除用户

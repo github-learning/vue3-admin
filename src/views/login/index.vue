@@ -65,8 +65,8 @@ const { proxy } = getCurrentInstance()!
 const { redirect, otherQuery } = useRouteQuery()
 const loginState = reactive({
   loginForm: {
-    username: 'test',
-    password: '123456'
+    username: 'test-1',
+    password: '123456-1'
   },
   loginRules: {
     username: [{ required: true, trigger: 'blur', message: '请输入用户名' }],

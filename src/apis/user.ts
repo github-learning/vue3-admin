@@ -69,8 +69,11 @@ export const removeUser = (id: number): Promise<Api> => {
 }
 // 添加用户
 export const addUser = (data: Profile): Promise<Api> => {
-  return request.post('/auth/register', data)
+  return request.post('/user', data)
 }
+// export const addUser = (data: Profile): Promise<Api> => {
+//   return request.post('/auth/register', data)
+// }
 // 编辑用户
 export const updateUser = (id: number, data: Profile): Promise<Api> => {
   return request.put(`/user/${id}`, data)

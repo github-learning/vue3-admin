@@ -1,10 +1,5 @@
-<!-- <template>
-  {{ $route.meta.title }}
-</template> -->
-
 <template>
   <div class="navbar" flex>
-    {{ $route.meta.title }}
     <!-- <hamburger
       @toggleCollapse="toggleSidebar"
       :collapse="sidebar.opened"
