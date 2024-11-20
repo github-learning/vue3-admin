@@ -21,11 +21,6 @@ export const useRoleHelpers = ({
     visible.value = true
   }
   const hanleAddRole = () => {
-    console.log(
-      '%c [  ]-25',
-      'font-size:13px; background:pink; color:#bf2c9f;',
-      111
-    )
     editType.value = 1
     editData.value = {} as IRole
     visible.value = true

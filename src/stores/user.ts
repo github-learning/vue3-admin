@@ -18,7 +18,7 @@ export const useUserStore = defineStore('user', () => {
   const state = reactive({
     token: '',
     users: [] as IUsers['users'], // 用户列表
-    count: 0, // 用户个数
+    total: 0, // 用户个数
     roles: [] as IRole[],
     userInfo: {} as Profile
   })
@@ -53,10 +53,11 @@ export const useUserStore = defineStore('user', () => {
 
   // 获取全部用户
   const getAllUsers = async (params: IUserQuery) => {
-    const res = await getUsersApi(params)
-    const { data } = res
+    const { data } = await getUsersApi(params)
+    // console.log('res', res)
+
     state.users = data.users
-    state.count = data.count
+    state.total = data.total
   }
 
   // 添加用户

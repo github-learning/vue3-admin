@@ -15,7 +15,6 @@ export const layoutsRoutes: RouteRecordRaw[] = [
     meta: {
       title: '用户管理'
     },
-    component: import('@/views/system/role/index.vue'),
     redirect: '/system/role',
     children: [
       {
@@ -24,6 +23,14 @@ export const layoutsRoutes: RouteRecordRaw[] = [
         component: () => import('@/views/system/role/index.vue'),
         meta: {
           title: '角色管理'
+        }
+      },
+      {
+        path: '/user',
+        name: 'user',
+        component: () => import('@/views/system/user/index.vue'),
+        meta: {
+          title: '用户管理2x'
         }
       }
     ]

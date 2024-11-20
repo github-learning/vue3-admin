@@ -69,13 +69,13 @@
         </div>
       </div>
     </div>
-    <right-panel v-model="panelVisible" :title="panelTitle" :size="330">
+    <el-drawer v-model="panelVisible" :title="panelTitle" :size="330">
       <editor-user
         :type="editType"
         :data="editData"
         @submit="handleSubmitUser"
       />
-    </right-panel>
+    </el-drawer>
   </div>
 </template>
 

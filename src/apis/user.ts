@@ -32,7 +32,7 @@ export const login = (
 
 export interface IUsers {
   users: Profile[]
-  count: number
+  total: number
 }
 // 查询参数
 export interface IUserQuery {

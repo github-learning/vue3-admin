@@ -7,7 +7,7 @@
       <el-table-column prop="name" label="角色名称" width="180" />
       <el-table-column prop="description" label="描述" />
       <el-table-column
-        prop="is_default"
+        prop="isDefault"
         label=" 默认角色"
         :formatter="formatter"
       />
@@ -81,6 +81,6 @@ const handleCurrentChange = (val: number) => {
   pageNum.value = val - 1
 }
 const formatter = (row: IRole) => {
-  return row.is_default ? '是' : '否'
+  return row.isDefault ? '是' : '否'
 }
 </script>
