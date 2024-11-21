@@ -6,7 +6,7 @@ import Components from 'unplugin-vue-components/vite'
 import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
 // 自动导入 ElementPlus 所需样式
 import ElementPlus from 'unplugin-element-plus/vite'
-// UnoCSS 原子化css
+// 1.UnoCSS 原子化css
 import UnoCSS from 'unocss/vite'
 
 const pathSrc = path.resolve(__dirname, 'src')
