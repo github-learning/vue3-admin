@@ -23,6 +23,7 @@
         <el-switch v-model="editData.status" />
       </el-form-item>
       <el-form-item label="角色分配" prop="roleIds">
+        {{ editData.roleIds }}
         <el-select multiple v-model="editData.roleIds" placeholder="请选择角色">
           <el-option
             v-for="item in editData.roles"

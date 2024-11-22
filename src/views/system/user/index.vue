@@ -80,13 +80,28 @@
 </template>
 
 <script lang="ts" setup>
+import { IRoleParams } from '@/apis/role'
 import type { IUserQuery, Profile } from '@/apis/user'
 import { useRoleStore } from '@/stores/role'
 import { IProfileQuery, useUserStore } from '@/stores/user'
 import { FormInstance } from 'element-plus'
 const store = useUserStore()
+const storeRole = useRoleStore()
 // 用户列表
 const users = computed(() => store.state.users)
+console.log(
+  '%c [ users ]-90',
+  'font-size:13px; background:pink; color:#bf2c9f;',
+  users
+)
+const roles = computed(() => storeRole.state.roles) // 角色
+
+console.log(
+  '%c [ roles ]-184',
+  'font-size:13px; background:pink; color:#bf2c9f;',
+  roles.value
+)
+
 // 分页相关状态
 const pageNum = ref(1)
 const pageSize = ref(10)
@@ -99,6 +114,13 @@ const getUserList = () => {
     // ... 搜索条件
   } as unknown as IUserQuery)
 }
+const getRolesList = () => {
+  storeRole.getRoles({
+    pageNum: pageNum.value,
+    pageSize: pageSize.value
+    // ... 搜索条件
+  } as unknown as IRoleParams)
+}
 // 格式化status
 const formatter = (row: Profile) => {
   return row.status ? '正常' : '禁用'
@@ -106,6 +128,7 @@ const formatter = (row: Profile) => {
 // 不使用watchEffect
 onMounted(() => {
   getUserList()
+  getRolesList()
 })
 // 删除用户
 const { proxy } = getCurrentInstance()!
@@ -137,8 +160,14 @@ const handleEditUser = (index: number, row: Profile) => {
     row
   )
   // 获取当前编辑用户 现有角色列表
-  // editData.value.roleIds = row.roles.map((item) => item.id)
-  // editData.value.roles = roles.value! // 所有角色列表
+  editData.value.roleIds = row?.roleIds && row.roleIds.map((item) => item.id)
+
+  // console.log(
+  //   '%c [  ]-165',
+  //   'font-size:13px; background:pink; color:#bf2c9f;',
+  //   editData.value.roleIds
+  // )
+  editData.value.roles = roles.value! // 所有角色列表
   panelVisible.value = true
 }
 // 用户总条数
@@ -177,9 +206,8 @@ const editType = ref(1)
 const panelTitle = computed(() =>
   editType.value === 1 ? '新增用户' : '编辑用户'
 )
-const storeRole = useRoleStore()
+
 storeRole.getRoles({ pageNum: pageNum.value, pageSize: pageSize.value })
-const roles = computed(() => storeRole.state.roles) // 角色
 
 const handleAddUser = () => {
   editType.value = 1
@@ -188,7 +216,9 @@ const handleAddUser = () => {
   editData.value.roleIds = [] // 所选角色id列表
   panelVisible.value = true
 }
-const editUser = async (data: IProfileQuery) => {
+const editUser = async (data) => {
+  // 删除 data 中的roles 属性
+  delete data.roles
   store.editUser({
     ...data,
     pageSize: pageSize.value,

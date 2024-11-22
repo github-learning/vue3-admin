@@ -32,11 +32,6 @@ service.interceptors.response.use(
       return Promise.reject(message)
     }
 
-    console.log(
-      '%c [  ]-35',
-      'font-size:13px; background:pink; color:#bf2c9f;',
-      response.data
-    )
     return response.data
   },
   (err) => {
