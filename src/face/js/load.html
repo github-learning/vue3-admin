@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div style="height: 800px">Scroll down to load images</div>
+    <div style="display: flex; flex-direction: column">
+      <img
+        data-src="https://picsum.photos/seed/unique/300/200"
+        alt="Lazy Image 1"
+        width="300"
+        height="200"
+      />
+      <img
+        data-src="https://picsum.photos/seed/unique/300/200"
+        alt="Lazy Image 2"
+        width="300"
+        height="200"
+      />
+      <img
+        data-src="https://picsum.photos/seed/unique/300/200"
+        alt="Lazy Image 3"
+        width="300"
+        height="200"
+      />
+    </div>
+
+    <div style="height: 800px">End of the page</div>
+  </body>
+  <script>
+    // 创建 IntersectionObserver 实例
+    const lazyLoad = new IntersectionObserver((entries, observer) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          // 图片进入视口
+          const img = entry.target
+          img.src = img.dataset.src // 设置真实图片路径
+          console.log(`图片加载完成: ${img.dataset.src}`)
+          observer.unobserve(img) // 停止监听已加载的图片
+        }
+      })
+    })
+
+    // 获取所有需要懒加载的图片
+    const images = document.querySelectorAll('img[data-src]')
+
+    // 开始监听每张图片
+    images.forEach((img) => lazyLoad.observe(img))
+  </script>
+</html>
