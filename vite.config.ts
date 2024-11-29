@@ -13,6 +13,7 @@ const pathSrc = path.resolve(__dirname, 'src')
 
 export default defineConfig(({ mode }) => {
   const env = loadEnv(mode, process.cwd())
+  console.log('env', env)
   return {
     resolve: {
       alias: {
