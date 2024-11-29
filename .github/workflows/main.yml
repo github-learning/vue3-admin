@@ -73,5 +73,5 @@ jobs:
           user_email: ${{ secrets.MY_USER_EMAIL }} # 通过 Secrets 配置
           commit_message: 自动部署
 
-      - name: Disable Jekyll
-        run: echo '' > ./dist/.nojekyll
+      # - name: Disable Jekyll
+      #   run: echo '' > ./dist/.nojekyll
