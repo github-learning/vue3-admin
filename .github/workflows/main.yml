@@ -1,3 +1,38 @@
+# name: Build and Deploy
+# on: # 监听 main 分支上的 push 事件
+#   push:
+#     branches:
+#       - main
+# jobs:
+#   build-and-deploy:
+#     runs-on: ubuntu-latest # 构建环境使用 ubuntu
+#     steps:
+#       # 下载源码
+#       # 这一步就是检出你的仓库下载里面的代码到runner 中，actions/checkout@v2 是官方自己造的轮子，直接拿来用就行
+#       - name: Checkout
+#         uses: actions/checkout@v2.3.1
+#         with:
+#           persist-credentials: false
+
+#       - name: Install and Build # 下载依赖 打包项目
+#         run: |
+#           npm install
+#           npm run build
+
+#       - name: Deploy # 将打包内容发布到 github page
+#         uses: peaceiris/actions-gh-pages@v3 # 使用别人写好的 actions
+#         with: # 自定义环境变量
+#           # 部署到 gh-pages 分支
+#           branch: gh-pages
+#           # 部署打包后的dist
+#           publish_dir: ./dist
+
+#           github_token: ${{ secrets.VUE_ADMIN }} # secert 名
+#           user_name: ${{secrets.MY_USER_NAME)}}
+#           user_email: ${{secrets.MY_USER_EMAIL)}}
+#           commit_message: 自动部署 # 部署时git 提交信息 自由填写
+
+
 name: Build and Deploy
 on: # 监听 main 分支上的 push 事件
   push:
@@ -7,10 +42,9 @@ jobs:
   build-and-deploy:
     runs-on: ubuntu-latest # 构建环境使用 ubuntu
     steps:
-    # 下载源码
-    # 这一步就是检出你的仓库下载里面的代码到runner 中，actions/checkout@v2 是官方自己造的轮子，直接拿来用就行
+      # 下载源码
       - name: Checkout
-        uses: actions/checkout@v2.3.1  
+        uses: actions/checkout@v2.3.1
         with:
           persist-credentials: false
 
@@ -20,16 +54,11 @@ jobs:
           npm run build
 
       - name: Deploy # 将打包内容发布到 github page
-        uses: peacriris/actoons-gh-pages@v3 # 使用别人写好的 actions
-        with:  # 自定义环境变量
-        # 部署到 gh-pages 分支
+        uses: peaceiris/actions-gh-pages@v3
+        with:
           branch: gh-pages
-          # 部署打包后的dist
-          publish_dir: ./dist 
-          
-          github_token: ${{ secrets.CICDDEMO }}  # secert 名
-          user_name: ${{secrets.MY_USER_NAME)}}
-          user_email: ${{secrets.MY_USER_EMAIL)}}
-          commit_message: 自动部署 # 部署时git 提交信息 自由填写
-          
-          
+          publish_dir: ./dist
+          github_token: ${{ secrets.VUE_ADMIN }} # secert 名
+          user_name: ${{ secrets.MY_USER_NAME }} # 通过 Secrets 配置
+          user_email: ${{ secrets.MY_USER_EMAIL }} # 通过 Secrets 配置
+          commit_message: 自动部署
