@@ -17,9 +17,7 @@ export default defineConfig({
       '@': pathSrc
     }
   },
-  // build: {
-  //   assetsDir: 'static' // 所有资源放在 /static 文件夹下
-  // },
+
   plugins: [
     vue(),
     UnoCSS(),
@@ -46,17 +44,16 @@ export default defineConfig({
     ElementPlus({})
   ],
 
-  // base: './' // 这里需要设置为你的仓库名称
-  base: './' // 替换为你的仓库名
-  // server: {
-  //   // port: 3000,
-  //   proxy: {
-  //     '/dev-api': {
-  //       target: 'http://localhost:3000', // 代理到 NestJS 服务器
-  //       changeOrigin: true, // 是否修改请求的源头
-  //       rewrite: (path) => path.replace(/^\/dev-api/, '') // 可选：如果需要删除前缀
-  //       // rewrite: (path) => path.replace(/^\/dev-api/, '/api') // 可选：如果需要删除前缀
-  //     }
-  //   }
-  // }
+  base: './',
+  server: {
+    // port: 3000,
+    proxy: {
+      '/dev-api': {
+        target: 'http://localhost:3000', // 代理到 NestJS 服务器
+        changeOrigin: true, // 是否修改请求的源头
+        rewrite: (path) => path.replace(/^\/dev-api/, '') // 可选：如果需要删除前缀
+        // rewrite: (path) => path.replace(/^\/dev-api/, '/api') // 可选：如果需要删除前缀
+      }
+    }
+  }
 })
