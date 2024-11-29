@@ -44,10 +44,10 @@ export default defineConfig({
     }),
 
     ElementPlus({})
-  ]
+  ],
 
   // base: './' // 这里需要设置为你的仓库名称
-  // base: './', // 替换为你的仓库名
+  base: './' // 替换为你的仓库名
   // server: {
   //   // port: 3000,
   //   proxy: {
