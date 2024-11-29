@@ -22,14 +22,8 @@ export const useRoleStore = defineStore('role', () => {
   }
 
   const addRole = async (data: WithRoleParmas) => {
-    // console.log('obj', data)
     const { pageNum, pageSize, ...obj } = data
 
-    console.log(
-      '%c [  ]-28',
-      'font-size:13px; background:pink; color:#bf2c9f;',
-      obj
-    )
     const res = await addRoleApi(obj)
     if (res.code === 200) {
       getRoles({ pageNum, pageSize })
