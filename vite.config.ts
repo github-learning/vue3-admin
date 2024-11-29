@@ -45,9 +45,9 @@ export default defineConfig(({ mode }) => {
 
       ElementPlus({})
     ],
-    base: env.VITE_BASE || '/'
+    // base: env.VITE_BASE || '/'
 
-    // base: '/vue3-admin', // 这里需要设置为你的仓库名称
+    base: '/vue3-admin' // 这里需要设置为你的仓库名称
     // base: './', // 替换为你的仓库名
     // server: {
     //   // port: 3000,
