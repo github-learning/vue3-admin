@@ -42,6 +42,7 @@ export default defineConfig({
 
     ElementPlus({})
   ],
+  base: '/vue3-admin/', // 这里需要设置为你的仓库名称
   server: {
     // port: 3000,
     proxy: {
