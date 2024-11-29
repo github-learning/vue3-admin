@@ -8,6 +8,16 @@
   </head>
   <body>
     <div id="app"></div>
-    <script type="module" src="/src/main.ts"></script>
+    <!-- <script type="module" src="/src/main.ts"></script> -->
+    <script>
+      // 动态生成脚本路径，根据是否是 GitHub Pages 环境调整路径
+      const base = window.location.pathname.includes('/vue3-admin/')
+        ? '/vue3-admin'
+        : ''
+      const script = document.createElement('script')
+      script.type = 'module'
+      script.src = `${base}/src/main.ts`
+      document.body.appendChild(script)
+    </script>
   </body>
 </html>
