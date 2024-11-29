@@ -42,6 +42,7 @@ service.interceptors.response.use(
       store.logout() // 移除token
       window.location.reload()
     }
+    ElMessage.error(err)
     return Promise.reject(err)
   }
 )
