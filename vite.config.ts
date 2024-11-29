@@ -17,9 +17,9 @@ export default defineConfig({
       '@': pathSrc
     }
   },
-  build: {
-    assetsDir: 'static' // 所有资源放在 /static 文件夹下
-  },
+  // build: {
+  //   assetsDir: 'static' // 所有资源放在 /static 文件夹下
+  // },
   plugins: [
     vue(),
     UnoCSS(),
@@ -44,10 +44,9 @@ export default defineConfig({
     }),
 
     ElementPlus({})
-  ],
-  // base: env.VITE_BASE || '/'
+  ]
 
-  base: './' // 这里需要设置为你的仓库名称
+  // base: './' // 这里需要设置为你的仓库名称
   // base: './', // 替换为你的仓库名
   // server: {
   //   // port: 3000,
