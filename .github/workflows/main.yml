@@ -40,3 +40,18 @@ jobs:
 
       # - name: Disable Jekyll
       #   run: echo '' > ./dist/.nojekyll
+#       ·-name:·发布到阿里云
+# uses:easingthemes/ssh-deployav2.1.1
+# env:
+# ·#私钥
+# SSH_PRIVATE_KEY:${{secrets.PRIVATE_KEY}
+# #:scp参数
+# ARGS:'-avzr.--delete'
+# #·源目录
+# SOURCE:·'dist'
+# #~服务器ip:换成你的服务器IP
+# REMOTE_HOST:${{secrets.REMOTE_HOST-}
+# #用户
+# REMOTE USER:·'root'
+# #目标地址
+# -TARGET:-'/wwww/wwwroot'
