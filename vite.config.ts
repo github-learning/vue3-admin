@@ -1,5 +1,5 @@
 import path from 'path'
-import { defineConfig, loadEnv } from 'vite'
+import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import AutoImport from 'unplugin-auto-import/vite'
 import Components from 'unplugin-vue-components/vite'
@@ -16,6 +16,9 @@ export default defineConfig({
     alias: {
       '@': pathSrc
     }
+  },
+  build: {
+    assetsDir: 'static' // 所有资源放在 /static 文件夹下
   },
   plugins: [
     vue(),
@@ -44,7 +47,7 @@ export default defineConfig({
   ],
   // base: env.VITE_BASE || '/'
 
-  base: '/vue3-admin' // 这里需要设置为你的仓库名称
+  base: './' // 这里需要设置为你的仓库名称
   // base: './', // 替换为你的仓库名
   // server: {
   //   // port: 3000,

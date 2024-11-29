@@ -60,6 +60,9 @@ jobs:
       - name: Build project
         run: npm run build
 
+      - name: Verify build output
+        run: cat dist/index.html
+
       - name: Deploy # 将打包内容发布到 github page
         uses: peaceiris/actions-gh-pages@v3
         with:
