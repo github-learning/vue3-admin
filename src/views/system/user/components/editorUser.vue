@@ -77,7 +77,7 @@ const editData = ref<Partial<Profile>>({
 
 // 验证规则
 const validateMobile = (
-  rule: unknown,
+  _rule: unknown,
   value: string,
   callback: (arg?: Error) => void
 ) => {

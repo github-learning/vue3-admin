@@ -43,10 +43,7 @@
               @click="handleEditUser(scope.$index, scope.row)"
               >编辑</el-button
             >
-            <el-button
-              size="small"
-              link
-              @click="handleDeleteUser(scope.$index, scope.row)"
+            <el-button size="small" link @click="handleDeleteUser(scope.row)"
               >删除</el-button
             >
           </template>
@@ -132,7 +129,7 @@ onMounted(() => {
 })
 // 删除用户
 const { proxy } = getCurrentInstance()!
-const handleDeleteUser = async (index: number, row: Profile) => {
+const handleDeleteUser = async (row: Profile) => {
   try {
     await proxy?.$confirm(`您确认要删除用户${row.username}吗？`, '删除确认', {
       type: 'warning'
@@ -150,7 +147,7 @@ const handleDeleteUser = async (index: number, row: Profile) => {
     })
   }
 }
-const handleEditUser = (index: number, row: Profile) => {
+const handleEditUser = (_index: number, row: Profile) => {
   editType.value = 0
   editData.value = { ...row }
 
@@ -160,7 +157,8 @@ const handleEditUser = (index: number, row: Profile) => {
     row
   )
   // 获取当前编辑用户 现有角色列表
-  editData.value.roleIds = row?.roleIds && row.roleIds.map((item) => item.id)
+  editData.value.roleIds = row?.roleIds
+  // editData.value.roleIds = row?.roleIds && row.roleIds.map((item) => item?.id)
 
   // console.log(
   //   '%c [  ]-165',
@@ -171,7 +169,7 @@ const handleEditUser = (index: number, row: Profile) => {
   panelVisible.value = true
 }
 // 用户总条数
-const total = computed(() => store.state.count)
+const total = computed(() => store.state.total)
 // 分页
 const handleSizeChange = (val: number) => {
   pageSize.value = val
@@ -216,9 +214,9 @@ const handleAddUser = () => {
   editData.value.roleIds = [] // 所选角色id列表
   panelVisible.value = true
 }
-const editUser = async (data) => {
+const editUser = async (data: Profile) => {
   // 删除 data 中的roles 属性
-  delete data.roles
+  // delete data.roles
   store.editUser({
     ...data,
     pageSize: pageSize.value,
