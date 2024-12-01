@@ -1,0 +1,20 @@
+{
+	"input": [
+		{
+			"fileName": "lang.xlsx",
+			"sheetNames": ["project1"]
+		},
+		{
+			"fileName": "im.xlsx",
+			"sheetNames": ["Sheet1"]
+		},
+		{
+			"fileName": "error-code.xlsx",
+			"sheetNames": ["Sheet1"]
+		}
+	],
+	"output": [
+		{ "key": "zh-CN", "value": "中文" },
+		{ "key": "en-US", "value": "英文" }
+	]
+}
