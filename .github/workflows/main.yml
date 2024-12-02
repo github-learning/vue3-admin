@@ -20,6 +20,18 @@ jobs:
       # 安装依赖
       - name: Install dependencies
         run: npm install
+        # 运行代码质量检查(只检测)
+      - name: Run ESLint and Prettier
+        # run: |
+        #   npx eslint . --fix
+        #   npx prettier --check .
+        run: |
+          npx eslint . --max-warnings=0
+          npx prettier --check .
+
+      # 运行测试
+      - name: Run tests
+        run: npm test
 
       # 打包项目
       - name: Build project
@@ -55,3 +67,16 @@ jobs:
 # REMOTE USER:·'root'
 # #目标地址
 # -TARGET:-'/wwww/wwwroot'
+
+# # 运行测试并生成覆盖率报告
+# - name: Run tests with coverage
+# run: npm run test
+
+# # 上传覆盖率报告到 Codecov
+# - name: Upload coverage to Codecov
+# uses: codecov/codecov-action@v3
+# with:
+#   token: ${{ secrets.CODECOV_TOKEN }}
+#   files: ./coverage/lcov.info
+#   flags: unittests
+#   name: Codecov-Example
