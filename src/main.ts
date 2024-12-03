@@ -19,6 +19,7 @@ for (const [key, component] of Object.entries(ElementPlusIconsVue)) {
 import 'virtual:uno.css'
 import { router } from './router'
 pinia.use(piniaPluginPersistedstate)
+xxx.xxx.ccc
 app.use(router)
 app.use(pinia)
 app.use(element)

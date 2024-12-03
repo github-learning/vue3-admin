@@ -26,5 +26,5 @@
     },
     "types": ["element-plus/global", "./auto-imports.d.ts", "./components.d.ts"]
   },
-  "include": ["src/**/*.ts", "src/**/*.tsx", "src/**/*.vue"]
+  "include": ["src/**/*.ts", "src/**/*.tsx", "src/**/*.vue", "src/utils/generateTree.js", "src/utils/generateTree.js"]
 }
