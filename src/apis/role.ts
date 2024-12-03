@@ -1,15 +1,16 @@
-import request from '@/apis/config/request'
+import service from '@/apis/config/request'
+import { Api } from './type'
 
 export interface IRole {
   id: number
   name: string
   description: string
-  is_default: number
+  isDefault: number
 }
 
 export interface IRoleState {
   roles: IRole[]
-  count: number
+  total: number
 }
 export interface IRoleParams {
   pageNum: number
@@ -17,27 +18,25 @@ export interface IRoleParams {
 }
 
 // 获取用户
-export const getRoles = (params = { pageNum: 0, pageSize: 10 }) => {
-  return request.get('/role', {
+export const getRoles = (
+  params = { pageNum: 1, pageSize: 10 }
+): Promise<Api<IRoleState>> => {
+  return service.get('/role', {
     params
   })
 }
 
 // 添加用户
-export const addRole = (data: IRole) => {
-  return request.post('/role', {
-    data
-  })
+export const addRole = (data: IRole): Promise<Api> => {
+  return service.post('/role', data)
 }
 
 // 更新用户: Partial部分参数
-export const updateRole = (id: number, data: Partial<IRole>) => {
-  return request.put('/role/' + id, {
-    data
-  })
+export const updateRole = (id: number, data: Partial<IRole>): Promise<Api> => {
+  return service.patch('/role/' + id, data)
 }
 
 // 删除用户
-export const removeRole = (id: number) => {
-  return request.delete('/role/' + id)
+export const removeRole = (id: number): Promise<Api> => {
+  return service.delete('/role/' + id)
 }

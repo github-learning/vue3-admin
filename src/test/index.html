@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Canvas 渲染引擎</title>
+    <style>
+      body {
+        margin: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+      }
+      #canvas {
+        border: 1px solid black;
+      }
+      #controls {
+        position: absolute;
+        top: 20px;
+        left: 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="controls">
+      <button id="startBtn">开始渲染</button>
+      <button id="stopBtn">停止渲染</button>
+    </div>
+
+    <canvas id="canvas" width="800" height="600"></canvas>
+
+    <script src="renderer.js"></script>
+  </body>
+</html>

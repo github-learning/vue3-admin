@@ -32,11 +32,6 @@ service.interceptors.response.use(
       return Promise.reject(message)
     }
 
-    console.log(
-      '%c [  ]-35',
-      'font-size:13px; background:pink; color:#bf2c9f;',
-      response.data
-    )
     return response.data
   },
   (err) => {
@@ -47,6 +42,7 @@ service.interceptors.response.use(
       store.logout() // 移除token
       window.location.reload()
     }
+    ElMessage.error(err)
     return Promise.reject(err)
   }
 )

@@ -1,5 +1,5 @@
 import { createRouter, createWebHashHistory, RouteRecordRaw } from 'vue-router'
-
+import Layout from '@/layout/index.vue'
 export const layoutsRoutes: RouteRecordRaw[] = [
   {
     path: '/dashboard',
@@ -15,7 +15,7 @@ export const layoutsRoutes: RouteRecordRaw[] = [
     meta: {
       title: '用户管理'
     },
-    component: () => import('@/views/system/index.vue'),
+    redirect: '/system/role',
     children: [
       {
         path: '/role',
@@ -23,6 +23,14 @@ export const layoutsRoutes: RouteRecordRaw[] = [
         component: () => import('@/views/system/role/index.vue'),
         meta: {
           title: '角色管理'
+        }
+      },
+      {
+        path: '/user',
+        name: 'user',
+        component: () => import('@/views/system/user/index.vue'),
+        meta: {
+          title: '用户管理2x'
         }
       }
     ]
@@ -38,7 +46,7 @@ const constantRoutes: RouteRecordRaw[] = [
   {
     path: '/',
     name: 'layouts',
-    component: () => import('@/layout/index.vue'),
+    component: Layout,
     // redirect: '/dashboard',
     children: layoutsRoutes
   }

@@ -4,6 +4,7 @@ import 'normalize.css/normalize.css'
 import { createApp } from 'vue'
 import { createPinia } from 'pinia'
 import element from './plugins/element'
+import directives from './directives/index'
 // 注册持久化插件
 import piniaPluginPersistedstate from 'pinia-plugin-persistedstate'
 import './permission'
@@ -22,5 +23,6 @@ pinia.use(piniaPluginPersistedstate)
 xxx.xxx.ccc
 app.use(router)
 app.use(pinia)
+app.use(directives)
 app.use(element)
 app.mount('#app')

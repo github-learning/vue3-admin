@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      /* 基础样式 */
+      body {
+        background-color: #222;
+        font-family: Arial, sans-serif;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+      }
+
+      /* 容器 */
+      .tab-container {
+        position: relative;
+        display: flex;
+        background-color: #1e1e1e;
+        width: 300px;
+        height: 50px;
+        border-radius: 12px;
+        overflow: hidden;
+      }
+
+      /* Tabs */
+      .tab {
+        flex: 1;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: relative;
+        cursor: pointer;
+        color: #aaa;
+        font-weight: bold;
+        z-index: 1;
+        transition: color 0.3s ease;
+      }
+
+      .tab.active {
+        color: #fff;
+      }
+
+      .tab span {
+        z-index: 2;
+      }
+
+      /* 背景高亮层 */
+      .tab-container::before {
+        content: '';
+        position: absolute;
+        width: 60%;
+        height: 100%;
+        background-color: #333;
+        z-index: 0;
+        clip-path: path(
+          'M 0 0 
+     Q 20 20, 40 0 
+     L 260 0 
+     Q 280 20, 300 0 
+     L 300 50 
+     L 0 50 Z'
+        );
+        transition: transform 0.3s ease;
+      }
+
+      /* Email 高亮 */
+      .tab.email.active ~ .tab-container::before {
+        transform: translateX(0%);
+      }
+
+      /* Phone 高亮 */
+      .tab.phone.active ~ .tab-container::before {
+        transform: translateX(100%);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="tab-container">
+      <div class="tab email active">
+        <span>Email</span>
+      </div>
+      <div class="tab phone">
+        <span>Phone</span>
+      </div>
+    </div>
+  </body>
+  <script>
+    const tabs = document.querySelectorAll('.tab')
+
+    tabs.forEach((tab) => {
+      tab.addEventListener('click', () => {
+        tabs.forEach((t) => t.classList.remove('active'))
+        tab.classList.add('active')
+      })
+    })
+  </script>
+</html>

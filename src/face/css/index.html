@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      /* 通用样式 */
+      body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+      }
+
+      .container {
+        display: flex;
+        height: 130vh; /* 高度可根据需要调整 */
+      }
+      .top {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 100px;
+        /* 径向浒变 */
+        background-image: radial-gradient(transparent 1px, #fff 1px);
+        /* 背景缩放 */
+        background-size: 4px 4px;
+        /* 元素后面区域 添加饱和度和模糊的效果*/
+        backdrop-filter: saturate(50x) blur(4px);
+      }
+
+      .left,
+      .right {
+        width: 200px; /* 固定宽度 */
+        background-color: lightblue;
+      }
+
+      .center {
+        flex: 1; /* 中间自适应 */
+        min-width: 100px;
+        background-color: lightgreen;
+        overflow: hidden; /* 防止内容溢出 */
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="top"></div>
+      <div class="left">Left</div>
+      <div class="center">Center</div>
+      <div class="right">Right</div>
+    </div>
+  </body>
+</html>
