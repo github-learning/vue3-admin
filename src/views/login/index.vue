@@ -49,6 +49,10 @@
             >登 录</el-button
           >
         </el-form-item>
+        <span class="text-slate-400 text-sm float-right m-2"
+          >还没有账号？ 请
+          <router-link to="register"> 点击这里注册 </router-link>
+        </span>
       </el-form>
     </el-col>
   </el-row>

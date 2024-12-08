@@ -3,7 +3,7 @@ import NProgress from 'nprogress'
 import 'nprogress/nprogress.css'
 import { getToken } from '@/utils'
 NProgress.configure({ showSpinner: false })
-const whiteList = ['/login']
+const whiteList = ['/login', '/register']
 router.beforeEach(async (to) => {
   // 获取用户信息
   NProgress.start()
