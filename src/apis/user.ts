@@ -19,9 +19,18 @@ export interface IUserLoginData {
   username: string
   password: string
 }
-
+export interface IUserRegisterData {
+  username: string
+  password: string
+  verPassword: string
+}
 export interface ILoginResponseData {
   token: string
+}
+
+export interface IRegisterResponseData {
+  id: string
+  username: string
 }
 // 登录接口
 export const login = (
@@ -29,7 +38,12 @@ export const login = (
 ): Promise<Api<ILoginResponseData>> => {
   return request.post('/auth/login', data)
 }
-
+// 注册接口
+export const register = (
+  data: IUserRegisterData
+): Promise<Api<IRegisterResponseData>> => {
+  return request.post('/auth/register', data)
+}
 export interface IUsers {
   users: Profile[]
   total: number

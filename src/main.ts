@@ -7,6 +7,7 @@ import element from './plugins/element'
 import directives from './directives/index'
 // 注册持久化插件
 import piniaPluginPersistedstate from 'pinia-plugin-persistedstate'
+import './style.css'
 import './permission'
 const pinia = createPinia()
 // 如果您正在使用CDN引入，请删除下面一行。

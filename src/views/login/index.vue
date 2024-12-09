@@ -49,6 +49,10 @@
             >登 录</el-button
           >
         </el-form-item>
+        <span class="text-slate-400 text-sm float-right m-2"
+          >还没有账号？ 请
+          <router-link to="register"> 点击这里注册 </router-link>
+        </span>
       </el-form>
     </el-col>
   </el-row>
@@ -121,30 +125,4 @@ onBeforeUnmount(() => {
 })
 </script>
 
-<style scoped>
-.login-container {
-  @apply min-h-screen bg-indigo-500;
-}
-.login-container .left,
-.login-container .right {
-  @apply flex items-center justify-center;
-}
-.login-container .right {
-  @apply bg-light-50 flex-col;
-}
-.left > div > div:first-child {
-  @apply font-bold text-5xl text-light-50 mb-4;
-}
-.left > div > div:last-child {
-  @apply text-gray-200 text-sm;
-}
-.right .title {
-  @apply font-bold text-3xl text-gray-800;
-}
-.right > div {
-  @apply flex items-center justify-center my-5 text-gray-300 space-x-2;
-}
-.right .line {
-  @apply h-[1px] w-16 bg-gray-200;
-}
-</style>
+<style scoped></style>
