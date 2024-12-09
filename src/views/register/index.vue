@@ -1,6 +1,12 @@
 <template>
   <el-row class="register-container">
-    <el-col :lg="8" :md="12" class="left">
+    <el-col :lg="16" :md="12" class="left">
+      <div>
+        <div>欢迎光临</div>
+        <div>此站点是《vue3 + vite5 实战后台开发》演示项目</div>
+      </div>
+    </el-col>
+    <el-col :lg="8" :md="12" class="right">
       <p class="title">用户注册</p>
       <div>
         <span class="line"></span>
@@ -61,13 +67,11 @@
             注册
           </el-button>
         </el-form-item>
+        <span class="text-slate-400 text-sm float-right m-2"
+          >已有帐号？返回
+          <router-link to="login"> 登陆 </router-link>
+        </span>
       </el-form>
-    </el-col>
-    <el-col :lg="16" :md="12" class="right">
-      <div>
-        <div>欢迎光临</div>
-        <div>此站点是《vue3 + vite5 实战后台开发》演示项目</div>
-      </div>
     </el-col>
   </el-row>
 </template>
@@ -143,30 +147,4 @@ const submitForm = (formEl: FormInstance | undefined) => {
 }
 </script>
 
-<style lang="scss" scoped>
-.register-container {
-  @apply min-h-screen bg-indigo-500;
-}
-.register-container .left,
-.register-container .right {
-  @apply flex items-center justify-center;
-}
-.register-container .left {
-  @apply bg-light-50 flex-col;
-}
-.right > div > div:first-child {
-  @apply font-bold text-5xl text-light-50 mb-4;
-}
-.right > div > div:last-child {
-  @apply text-gray-200 text-sm;
-}
-.left .title {
-  @apply font-bold text-3xl text-gray-800;
-}
-.left > div {
-  @apply flex items-center justify-center my-5 text-gray-300 space-x-2;
-}
-.left .line {
-  @apply h-[1px] w-16 bg-gray-200;
-}
-</style>
+<style lang="scss" scoped></style>
