@@ -30,6 +30,8 @@ service.interceptors.response.use(
     if (code !== 200) {
       ElMessage.error(message)
       return Promise.reject(message)
+    } else {
+      ElMessage.success(message)
     }
 
     return response.data

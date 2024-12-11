@@ -46,7 +46,7 @@
         <el-form-item prop="verPassword">
           <el-input
             type="password"
-            v-model.number="registerFormData.verPassword"
+            v-model="registerFormData.verPassword"
             placeholder="请确认密码"
             show-password
           >
@@ -81,8 +81,6 @@ import { useRouter } from 'vue-router'
 import { reactive, ref } from 'vue'
 import type { FormInstance, FormRules } from 'element-plus'
 import { register } from '@/apis/user'
-import { sleep } from '@/utils/helpers'
-const { proxy } = getCurrentInstance()!
 
 const ruleFormRef = ref<FormInstance>()
 const loading = ref(false)
@@ -125,19 +123,10 @@ const submitForm = (formEl: FormInstance | undefined) => {
     if (valid) {
       loading.value = true
       await register(registerFormData)
-        .then(async (res) => {
-          proxy?.$message.success(res.message)
-          await sleep()
+        .then(() => {
           router.push({
             path: '/login'
           })
-        })
-        .catch(() => {
-          for (const key in registerFormData) {
-            if (Object.prototype.hasOwnProperty.call(registerFormData, key)) {
-              registerFormData[key] = ''
-            }
-          }
         })
         .finally(() => {
           loading.value = false
