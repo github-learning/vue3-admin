@@ -78,7 +78,7 @@ const handleSizeChange = (val: number) => {
   pageSize.value = val
 }
 const handleCurrentChange = (val: number) => {
-  pageNum.value = val - 1
+  pageNum.value = val
 }
 const formatter = (row: IRole) => {
   return row.isDefault ? '是' : '否'

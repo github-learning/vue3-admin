@@ -24,13 +24,15 @@ service.interceptors.request.use(
 
 service.interceptors.response.use(
   (response) => {
-    console.log('response', response)
-    // code
     const { code, message } = response.data
     if (code !== 200) {
       ElMessage.error(message)
       return Promise.reject(message)
     }
+    // 这里不用刻意做提示，所有成功都提示，不太友好。只针对特别的操作做提示
+    //  else {
+    //   ElMessage.success(message)
+    // }
 
     return response.data
   },

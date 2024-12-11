@@ -30,7 +30,7 @@ export const layoutsRoutes: RouteRecordRaw[] = [
         name: 'user',
         component: () => import('@/views/system/user/index.vue'),
         meta: {
-          title: '用户管理2x'
+          title: '用户管理'
         }
       }
     ]
