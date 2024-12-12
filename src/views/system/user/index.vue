@@ -176,7 +176,7 @@ const handleSizeChange = (val: number) => {
   getUserList()
 }
 const handleCurrentChange = (val: number) => {
-  pageNum.value = val - 1 // 页码后端是从0开始的
+  pageNum.value = val // 页码后端是从1开始的
   getUserList()
 }
 
