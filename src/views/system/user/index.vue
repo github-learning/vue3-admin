@@ -151,21 +151,12 @@ const handleEditUser = (_index: number, row: Profile) => {
   editType.value = 0
   editData.value = { ...row }
 
-  console.log(
-    '%c [  ]-134',
-    'font-size:13px; background:pink; color:#bf2c9f;',
-    row
-  )
+  // TODO 角色分配处理
   // 获取当前编辑用户 现有角色列表
-  editData.value.roleIds = row?.roleIds
-  // editData.value.roleIds = row?.roleIds && row.roleIds.map((item) => item?.id)
+  editData.value.roleIds = [1]
+  editData.value.status = Boolean(editData.value.status)
 
-  // console.log(
-  //   '%c [  ]-165',
-  //   'font-size:13px; background:pink; color:#bf2c9f;',
-  //   editData.value.roleIds
-  // )
-  editData.value.roles = roles.value! // 所有角色列表
+  // editData.value.roles = roles.value! // 所有角色列表
   panelVisible.value = true
 }
 // 用户总条数
@@ -215,8 +206,6 @@ const handleAddUser = () => {
   panelVisible.value = true
 }
 const editUser = async (data: Profile) => {
-  // 删除 data 中的roles 属性
-  // delete data.roles
   store.editUser({
     ...data,
     pageSize: pageSize.value,
@@ -227,6 +216,7 @@ const editUser = async (data: Profile) => {
   panelVisible.value = false
 }
 const handleSubmitUser = (data: Profile) => {
+  data.status = Number(data.status)
   if (editType.value === 1) {
     // 新增
     addNewUser(data)

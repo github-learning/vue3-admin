@@ -8,7 +8,7 @@ export interface Profile {
   email: string
   mobile: string
   isSuper: boolean
-  status: boolean
+  status: boolean | number
   avatar: string
   description: string
   roles: IRole[]
@@ -85,9 +85,7 @@ export const removeUser = (id: number): Promise<Api> => {
 export const addUser = (data: Profile): Promise<Api> => {
   return request.post('/user', data)
 }
-// export const addUser = (data: Profile): Promise<Api> => {
-//   return request.post('/auth/register', data)
-// }
+
 // 编辑用户
 export const updateUser = (id: number, data: Profile): Promise<Api> => {
   return request.put(`/user/${id}`, data)
