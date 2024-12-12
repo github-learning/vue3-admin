@@ -1,17 +1,17 @@
 <template>
   <el-container class="common-layout">
-    <el-aside :width="aside" class="aside">
+    <el-aside :width="asideStyle" class="aside">
       <div class="flex flex-col h-full">
         <div class="flex items-center">
-          <img src="../assets/logo.png" alt="" class="w-[60px] ml-2" />
-          <span> KKKAdmin</span>
+          <img src="@/assets/logo.png" alt="" class="w-[60px] ml-2" />
+          <span>KKKAdmin</span>
         </div>
         <layout-menu class="grow" />
       </div>
     </el-aside>
     <el-container>
       <el-header class="border-b-solid border-1 border-[var(--color-border)]">
-        <layout-header v-model="isDispaly"></layout-header>
+        <layout-header v-model="isDisPlay"></layout-header>
       </el-header>
       <el-main style="background-color: var(--color-bg)">
         <el-scrollbar>
@@ -27,9 +27,9 @@
 </template>
 
 <script setup lang="ts">
-const isDispaly = ref(true)
-const aside = computed<string>(() => {
-  return isDispaly.value ? '12.5em' : '0em'
+const isDisPlay = ref(true)
+const asideStyle = computed<string>(() => {
+  return isDisPlay.value ? '12.5em' : '0'
 })
 </script>
 
@@ -50,8 +50,5 @@ const aside = computed<string>(() => {
     display: flex;
     align-items: center;
   }
-  // .el-main {
-  // 	padding: 1.25rem;
-  // }
 }
 </style>

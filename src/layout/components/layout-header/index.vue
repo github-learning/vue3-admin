@@ -1,23 +1,14 @@
-<!-- <template>
-  {{ $route.meta.title }}
-</template> -->
-
 <template>
   <div class="navbar" flex items-center px-2 justify-between>
-    <!-- {{ $route.meta.title }} -->
-    <!-- <hamburger
-      @toggleCollapse="toggleSidebar"
-      :collapse="sidebar.opened"
-    ></hamburger> -->
     <button
       type="button"
-      @click="isDispaly = !isDispaly"
+      @click="isDisPlay = !isDisPlay"
       class="border-none bg-transparent h-8 w-8 flex justify-center items-center hover:bg-slate-200 rounded-md cursor-pointer mr-2"
     >
-      <el-icon :size="20" color="var(--color-icon)" v-show="isDispaly">
+      <el-icon :size="20" color="var(--color-icon)" v-show="isDisPlay">
         <Fold />
       </el-icon>
-      <el-icon :size="20" color="var(--color-icon)" v-show="!isDispaly">
+      <el-icon :size="20" color="var(--color-icon)" v-show="!isDisPlay">
         <Expand />
       </el-icon>
     </button>
@@ -33,7 +24,7 @@
       <svg-icon
         icon-name="ant-design:setting-outlined"
         size-2em
-        @click="openShowSetting"
+        @click="emit('showSetting', true)"
       ></svg-icon>
 
       <avatar></avatar>
@@ -41,24 +32,16 @@
   </div>
 </template>
 
+<script lang="ts" setup>
+const isDisPlay = defineModel()
+
+const emit = defineEmits<{
+  (event: 'showSetting', isShow: boolean): void
+}>()
+</script>
+
 <style scoped lang="scss">
 .navbar {
   @apply h-[var(--navbar-height)] w-full;
 }
 </style>
-
-<script lang="ts" setup>
-// import { useAppStore } from '@/stores/app'
-// 在解构的时候要考虑值是不是对象，如果非对象解构出来就 丧失响应式了
-// const { toggleSidebar, sidebar } = useAppStore()
-
-const isDispaly = defineModel()
-
-const emit = defineEmits<{
-  (event: 'showSetting', isShow: boolean): void
-}>()
-
-const openShowSetting = () => {
-  emit('showSetting', true)
-}
-</script>
