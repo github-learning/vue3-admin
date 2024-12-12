@@ -76,6 +76,7 @@ const editData = ref<Partial<Profile>>({
   mobile: '',
   email: '',
   description: '',
+  roleIds: [],
   status: true
 })
 
@@ -141,6 +142,12 @@ watchEffect(() => {
     // 移除之前表单效验结果
     editFormRef.value?.clearValidate()
     editData.value = { ...defaultProps, ...props.data }
+
+    console.log(
+      '%c [  ]-146',
+      'font-size:13px; background:pink; color:#bf2c9f;',
+      editData.value
+    )
   }
 })
 

@@ -8,5 +8,5 @@ export const useReloadPage = () => {
       proxy?.$message.warning('已经取消了刷新')
     }
   }
-  return reloadPage
+  return { reloadPage }
 }
