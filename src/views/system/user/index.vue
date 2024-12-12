@@ -24,7 +24,7 @@
       </el-form-item>
       <el-form-item>
         <el-button type="primary" @click="handleSubmitQuery">查询</el-button>
-        <el-button type="default" @click="handleResetFeilds">重置</el-button>
+        <el-button type="default" @click="handleResetFields">重置</el-button>
       </el-form-item>
     </el-form>
     <div class="user-list">
@@ -70,6 +70,7 @@
       <editor-user
         :type="editType"
         :data="editData"
+        :roles="roles"
         @submit="handleSubmitUser"
       />
     </el-drawer>
@@ -86,22 +87,11 @@ const store = useUserStore()
 const storeRole = useRoleStore()
 // 用户列表
 const users = computed(() => store.state.users)
-console.log(
-  '%c [ users ]-90',
-  'font-size:13px; background:pink; color:#bf2c9f;',
-  users
-)
-const roles = computed(() => storeRole.state.roles) // 角色
-
-console.log(
-  '%c [ roles ]-184',
-  'font-size:13px; background:pink; color:#bf2c9f;',
-  roles.value
-)
 
 // 分页相关状态
 const pageNum = ref(1)
 const pageSize = ref(10)
+const roles = ref()
 // 获取用户列表 支持分页
 const getUserList = () => {
   store.getAllUsers({
@@ -111,18 +101,22 @@ const getUserList = () => {
     // ... 搜索条件
   } as unknown as IUserQuery)
 }
-const getRolesList = () => {
-  storeRole.getRoles({
+const getRolesList = async () => {
+  await storeRole.getRoles({
     pageNum: pageNum.value,
     pageSize: pageSize.value
     // ... 搜索条件
   } as unknown as IRoleParams)
 }
+
+watchEffect(() => {
+  roles.value = storeRole.state.roles
+})
 // 格式化status
 const formatter = (row: Profile) => {
   return row.status ? '正常' : '禁用'
 }
-// 不使用watchEffect
+
 onMounted(() => {
   getUserList()
   getRolesList()
@@ -151,12 +145,9 @@ const handleEditUser = (_index: number, row: Profile) => {
   editType.value = 0
   editData.value = { ...row }
 
-  // TODO 角色分配处理
   // 获取当前编辑用户 现有角色列表
-  editData.value.roleIds = [1]
+  editData.value.roleIds = row?.roleIds
   editData.value.status = Boolean(editData.value.status)
-
-  // editData.value.roles = roles.value! // 所有角色列表
   panelVisible.value = true
 }
 // 用户总条数
@@ -183,8 +174,9 @@ const handleSubmitQuery = () => {
 
 // 重置
 const queryFormRef = useTemplateRef<FormInstance | null>('queryFormRef')
-const handleResetFeilds = () => {
-  ;(queryFormRef.value as FormInstance).resetFields()
+const handleResetFields = () => {
+  const formInstance = queryFormRef.value as FormInstance
+  formInstance.resetFields()
   getUserList()
 }
 
@@ -196,12 +188,11 @@ const panelTitle = computed(() =>
   editType.value === 1 ? '新增用户' : '编辑用户'
 )
 
-storeRole.getRoles({ pageNum: pageNum.value, pageSize: pageSize.value })
+// storeRole.getRoles({ pageNum: pageNum.value, pageSize: pageSize.value })
 
 const handleAddUser = () => {
   editType.value = 1
   editData.value = {} as Profile
-  editData.value.roles = roles.value // 所有角色列表
   editData.value.roleIds = [] // 所选角色id列表
   panelVisible.value = true
 }

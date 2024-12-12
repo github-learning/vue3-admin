@@ -26,7 +26,7 @@
         {{ editData.roleIds }}
         <el-select multiple v-model="editData.roleIds" placeholder="请选择角色">
           <el-option
-            v-for="item in editData.roles"
+            v-for="item in roles"
             :key="item.id"
             :label="item.name"
             :value="item.id"
@@ -50,6 +50,7 @@
 </template>
 
 <script lang="ts" setup>
+import { IRole } from '@/apis/role'
 import { Profile } from '@/apis/user'
 import type { FormInstance, FormItemRule } from 'element-plus'
 import type { PropType } from 'vue'
@@ -62,6 +63,9 @@ const props = defineProps({
   },
   data: {
     type: Object as PropType<Profile>
+  },
+  roles: {
+    type: Object as PropType<IRole[]>
   }
 })
 const emit = defineEmits(['submit'])

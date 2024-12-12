@@ -1,6 +1,6 @@
 import request from '@/apis/config/request'
 import { Api } from './type'
-import { IRole } from './role'
+// import { IRole } from './role'
 
 export interface Profile {
   id: number
@@ -11,7 +11,7 @@ export interface Profile {
   status: boolean | number
   avatar: string
   description: string
-  roles: IRole[]
+  // roles: IRole[]
   roleIds?: number[] // 修改用户的时候，后端接受只要id
 }
 
