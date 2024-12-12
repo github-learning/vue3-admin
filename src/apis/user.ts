@@ -1,6 +1,6 @@
 import request from '@/apis/config/request'
 import { Api } from './type'
-import { IRole } from './role'
+// import { IRole } from './role'
 
 export interface Profile {
   id: number
@@ -8,10 +8,10 @@ export interface Profile {
   email: string
   mobile: string
   isSuper: boolean
-  status: boolean
+  status: boolean | number
   avatar: string
   description: string
-  roles: IRole[]
+  // roles: IRole[]
   roleIds?: number[] // 修改用户的时候，后端接受只要id
 }
 
@@ -85,9 +85,7 @@ export const removeUser = (id: number): Promise<Api> => {
 export const addUser = (data: Profile): Promise<Api> => {
   return request.post('/user', data)
 }
-// export const addUser = (data: Profile): Promise<Api> => {
-//   return request.post('/auth/register', data)
-// }
+
 // 编辑用户
 export const updateUser = (id: number, data: Profile): Promise<Api> => {
   return request.put(`/user/${id}`, data)

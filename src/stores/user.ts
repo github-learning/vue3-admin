@@ -54,7 +54,6 @@ export const useUserStore = defineStore('user', () => {
   // 获取全部用户
   const getAllUsers = async (params: IUserQuery) => {
     const { data } = await getUsersApi(params)
-    // console.log('res', res)
 
     state.users = data.users
     state.total = data.total
@@ -85,6 +84,7 @@ export const useUserStore = defineStore('user', () => {
 
   const editUser = async (data: IProfileQuery) => {
     const { pageSize, pageNum, ...params } = data
+
     const res = await updateUserApi(params.id, params)
     if (res.code === 200) {
       getAllUsers({
