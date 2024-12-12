@@ -1,0 +1,12 @@
+[data-theme='light'] {
+  --color-bg: #f1f3f6;
+  --color-main: #ffffff;
+  --color-btn: #fbfbfb;
+  --color-btn-active: #2469f0;
+  --color-btn-active-hover: #0f55df;
+  --color-border: #e4e4e7;
+  --color-border-hover: #278df2;
+  --color-border-active: #2469f0;
+  --color-border-active-hover: #0f55df;
+  --color-icon: #5b5e60;
+}

@@ -9,6 +9,7 @@ import directives from './directives/index'
 import piniaPluginPersistedstate from 'pinia-plugin-persistedstate'
 import './style.css'
 import './permission'
+import './style/index.css'
 const pinia = createPinia()
 // 如果您正在使用CDN引入，请删除下面一行。
 import * as ElementPlusIconsVue from '@element-plus/icons-vue'
@@ -21,7 +22,7 @@ for (const [key, component] of Object.entries(ElementPlusIconsVue)) {
 import 'virtual:uno.css'
 import { router } from './router'
 pinia.use(piniaPluginPersistedstate)
-
+window.document.documentElement.setAttribute('data-theme', 'light')
 app.use(router)
 app.use(pinia)
 app.use(directives)
