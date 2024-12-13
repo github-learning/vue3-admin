@@ -27,7 +27,7 @@ export const useMenuStore = defineStore('menu', () => {
   })
   const getAllMenuList = async () => {
     const res = await getAllMenus()
-    if (res.code == 0) {
+    if (res.code === 200) {
       const { data } = res
       state.menuList = data
       state.menuTreeData = generateTree(data)
@@ -36,7 +36,7 @@ export const useMenuStore = defineStore('menu', () => {
 
   const appendMenu = async (data: ITreeItemData) => {
     const res = await addMenu(data)
-    if (res.code == 0) {
+    if (res.code === 200) {
       const node = { ...res.data }
       state.menuList.push(node)
       state.menuTreeData = generateTree(state.menuList)
@@ -47,7 +47,7 @@ export const useMenuStore = defineStore('menu', () => {
 
   const removeMenu = async (data: ITreeItemData) => {
     const res = await removeMenuById(data.id)
-    if (res.code == 0) {
+    if (res.code === 200) {
       const idx = state.menuList.findIndex((menu) => menu.id === data.id)
       state.menuList.splice(idx, 1)
       state.menuTreeData = generateTree(state.menuList)
@@ -66,13 +66,13 @@ export const useMenuStore = defineStore('menu', () => {
     })
     // 批量更新
     const res = await updateBulkMenuApi(menus)
-    if (res.code == 0) {
+    if (res.code == 200) {
       return true
     }
   }
   const updateMenu = async (data: Partial<MenuData>) => {
     const res = await updateMenuById(Number(data.id), data)
-    if (res.code === 0) {
+    if (res.code === 200) {
       await getAllMenuList()
       return true
     }
@@ -80,7 +80,7 @@ export const useMenuStore = defineStore('menu', () => {
 
   const getAllMenuListByAdmin = async () => {
     const res = await getAllMenus()
-    if (res.code == 0) {
+    if (res.code == 200) {
       const { data } = res
       state.authMenuList = data
       state.authMenuTreeData = generateTree(data, true)
@@ -89,7 +89,7 @@ export const useMenuStore = defineStore('menu', () => {
 
   const getMenuListByRoles = async (roles: number[]) => {
     const res = await getRoleAccessByRoles(roles)
-    if (res.code == 0) {
+    if (res.code == 200) {
       const { data } = res
       const access = data.access
       state.authMenuList = access

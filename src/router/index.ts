@@ -32,6 +32,14 @@ export const layoutsRoutes: RouteRecordRaw[] = [
         meta: {
           title: '用户管理'
         }
+      },
+      {
+        path: '/menu',
+        name: 'menu',
+        component: () => import('@/views/system/menu/index.vue'),
+        meta: {
+          title: '菜单管理'
+        }
       }
     ]
   }

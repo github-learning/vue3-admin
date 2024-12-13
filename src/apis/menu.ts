@@ -1,4 +1,4 @@
-import service from './config/request'
+import request from './config/request'
 import { Api } from './type'
 
 export interface MenuData {
@@ -12,24 +12,33 @@ export interface MenuData {
 }
 
 export const getAllMenus = (): Promise<Api<MenuData[]>> => {
-  return service.get('/access/menu')
+  return request.get('/menu')
 }
 
 export const removeMenuById = (id: number): Promise<Api<MenuData[]>> => {
-  return service.delete('/access/menu/' + id)
+  return request.delete('/menu/' + id)
 }
 
 export const addMenu = (data: MenuData): Promise<Api<MenuData>> => {
-  return service.post('/access/menu', data)
+  return request.post('/menu', data)
 }
-
+/**
+ * 单个修改
+ * @param id
+ * @param data
+ * @returns
+ */
 export const updateMenuById = (
   id: number,
   data: Partial<MenuData>
 ): Promise<Api<MenuData[]>> => {
-  return service.put('/access/menu/' + id, data)
+  return request.put('/menu/' + id, data)
 }
-
+/**
+ * 批量修复 patch
+ * @param data
+ * @returns
+ */
 export const updateBulkMenu = (data: Partial<MenuData>[]): Promise<Api> => {
-  return service.patch('/access/menu/update', { access: data })
+  return request.patch('/menu/update', { access: data })
 }

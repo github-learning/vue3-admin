@@ -25,12 +25,12 @@ import { layoutsRoutes } from '@/router'
 .sidebar-el-menu {
   min-height: 100%;
 }
-::v-deep .el-menu .el-menu-item:hover {
+:deep(.el-menu .el-menu-item:hover) {
   outline: 0 !important;
   background-color: #f4f4f5;
 }
 
-::v-deep .el-sub-menu__title:hover {
+:deep(.el-sub-menu__title:hover) {
   background-color: #f4f4f5 !important;
 }
 </style>

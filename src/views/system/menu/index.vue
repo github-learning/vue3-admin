@@ -53,7 +53,14 @@ import { MenuData } from '@/apis/menu'
 import { useReloadPage } from '@/hooks/useReloadPage'
 import { ITreeItemData, useMenuStore } from '@/stores/menu'
 import type Node from 'element-plus/es/components/tree/src/model/node'
-
+//TODO
+/**
+ * 1. 路由 根据父级渲染匹配
+ * 2. 解决tree 二级目录的问题
+ * 3. 新增顶级菜单
+ * 4. 增加子级菜单
+ * 5. 为角色分配权限
+ */
 const handleUpdateEdit = async (data: Partial<MenuData>) => {
   // debugger
   const r = await store.updateMenu(data)
@@ -83,6 +90,12 @@ const handleNodeDrop = () => {
 const { reloadPage } = useReloadPage()
 const store = useMenuStore()
 const menus = computed(() => store.state.menuTreeData)
+
+console.log(
+  '%c [menus  ]-87',
+  'font-size:13px; background:pink; color:#bf2c9f;',
+  menus.value
+)
 store.getAllMenuList()
 
 const defaultProps = {
