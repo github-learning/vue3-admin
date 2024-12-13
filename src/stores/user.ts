@@ -27,8 +27,8 @@ export const useUserStore = defineStore('user', () => {
   const getUserInfo = async () => {
     const res = await getUserInfoApi()
     if (res.code === 0) {
-      const { roles, ...info } = res.data
-      state.roles = roles
+      const { ...info } = res.data
+
       state.userInfo = info as Profile
     }
   }

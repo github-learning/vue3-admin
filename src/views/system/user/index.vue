@@ -146,7 +146,7 @@ const handleEditUser = (_index: number, row: Profile) => {
   editData.value = { ...row }
 
   // 获取当前编辑用户 现有角色列表
-  editData.value.roleIds = row?.roleIds
+  editData.value.roleIds = row?.roleIds?.map((v) => Number(v))
   editData.value.status = Boolean(editData.value.status)
   panelVisible.value = true
 }
