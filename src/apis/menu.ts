@@ -7,8 +7,8 @@ export interface MenuData {
   path: string
   icon: string
   name: string
-  sort_id: number
-  parent_id: number
+  sortId: number
+  parentId: number
 }
 
 export const getAllMenus = (): Promise<Api<MenuData[]>> => {
