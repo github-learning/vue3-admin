@@ -40,11 +40,14 @@
         :data="editData!"
         @updateEdit="handleUpdateEdit"
       />
-      <span v-if="editData == null">从菜单列表选择一项后，进行编辑</span>
+
+      <span v-if="Object.keys(editData).length === 0"
+        >从菜单列表选择一项后，进行编辑</span
+      >
     </el-card>
-    <right-panel v-model="panelVisible" :title="panelTitle" :size="330">
+    <el-drawer v-model="panelVisible" :title="panelTitle" :size="330">
       <add-menu @submit="submitMenuForm"></add-menu>
-    </right-panel>
+    </el-drawer>
   </div>
 </template>
 
@@ -71,16 +74,11 @@ const handleUpdateEdit = async (data: Partial<MenuData>) => {
 }
 // 拖拽节点
 const allowDrag = (draggingNode: Node) => {
-  return (
-    draggingNode.data.parent_id !== 0 || draggingNode.data.parent_id != null
-  )
+  return draggingNode.data.parentId !== 0 || draggingNode.data.parentId != null
 }
 type DropType = 'prev' | 'inner' | 'next'
 const allowDrop = (draggingNode: Node, dropNode: Node, type: DropType) => {
-  if (
-    draggingNode.data.parent_id === 0 ||
-    draggingNode.data.parent_id == null
-  ) {
+  if (draggingNode.data.parentId === 0 || draggingNode.data.parentId == null) {
     return type !== 'inner'
   }
 }
@@ -129,15 +127,15 @@ const resetStatus = () => {
 
 const genMenuSortId = (list: ITreeItemData[]) => {
   if (list && list.length) {
-    return list[list.length - 1].sort_id + 1
+    return list[list.length - 1].sortId + 1
   }
   return 0
 }
 
 const handleAddRootMenu = async (data: MenuData) => {
-  // parent_id , sord_id
-  data.parent_id = 0
-  data.sort_id = genMenuSortId(menus.value) // 根节点是根据 所有的父节点来计算的， 儿子是根据爸爸有几个儿子来算的
+  // parentId , sord_id
+  data.parentId = 0
+  data.sortId = genMenuSortId(menus.value) // 根节点是根据 所有的父节点来计算的， 儿子是根据爸爸有几个儿子来算的
   let res = await store.appendMenu(data)
   if (res) {
     proxy?.$message.success('根菜单添加成功了')
@@ -149,8 +147,8 @@ const genChild = (data: MenuData) => {
   if (!parent.children) {
     parent.children = []
   }
-  data.sort_id = genMenuSortId(parent.children)
-  data.parent_id = parent.id
+  data.sortId = genMenuSortId(parent.children)
+  data.parentId = parent.id
   return data
 }
 const handleChildRootMenu = async (data: MenuData) => {

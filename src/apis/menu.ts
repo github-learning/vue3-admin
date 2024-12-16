@@ -40,5 +40,5 @@ export const updateMenuById = (
  * @returns
  */
 export const updateBulkMenu = (data: Partial<MenuData>[]): Promise<Api> => {
-  return request.patch('/menu/update', { access: data })
+  return request.patch('/menu', { access: data })
 }
