@@ -58,7 +58,7 @@ const handleSubmit = async () => {
   const selectKeys = [...keys, ...halfKeys]
 
   const res = await allocRoleAccess(role.id, selectKeys as number[])
-  if (res.code === 0) {
+  if (res.code === 200) {
     proxy?.$message.success('权限分配成功')
     reloadPage()
   }
