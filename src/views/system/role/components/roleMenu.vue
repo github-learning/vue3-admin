@@ -58,7 +58,7 @@ const handleSubmit = async () => {
   const selectKeys = [...keys, ...halfKeys]
 
   const res = await allocRoleAccess(role.id, selectKeys as number[])
-  if (res.code === 0) {
+  if (res.code === 200) {
     proxy?.$message.success('权限分配成功')
     reloadPage()
   }
@@ -86,8 +86,13 @@ watch(
 const getRoleAccessList = async () => {
   checkStrictly.value = true // 先解除关系
   const res = await getRoleAccess(role.id)
-  if (res.code === 0) {
-    const access = res.data.map((item) => item.access_id)
+  if (res.code === 200) {
+    console.log(
+      '%c [  ]-91',
+      'font-size:13px; background:pink; color:#bf2c9f;',
+      res
+    )
+    const access = res.data.map((item) => item.accessId)
     menuTree.value?.setCheckedKeys(access)
     setTimeout(() => {
       checkStrictly.value = false

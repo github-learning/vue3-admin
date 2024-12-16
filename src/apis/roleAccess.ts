@@ -4,8 +4,8 @@ import { Api } from './type'
 
 export interface IRoleAccess {
   id: number
-  access_id: number
-  role_id: number
+  accessId: number
+  roleId: number
 }
 
 export type IRoleAccessList = IRoleAccess[]
