@@ -57,7 +57,7 @@ export const useMenuStore = defineStore('menu', () => {
 
   const updateBulkMenu = async () => {
     // 1.更新sortId
-    state.menuTreeData.forEach((menu, idx) => (menu.sort_id = idx))
+    state.menuTreeData.forEach((menu, idx) => (menu.sortId = idx))
     // 2.删除子节点
     const menus = state.menuTreeData.map((menu) => {
       const temp = { ...menu }
