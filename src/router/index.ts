@@ -8,41 +8,41 @@ export const layoutsRoutes: RouteRecordRaw[] = [
       title: '数据面板'
     },
     component: () => import('@/views/dashboard/index.vue')
-  },
-  {
-    path: '/system',
-    name: 'System',
-    meta: {
-      title: '用户管理'
-    },
-    redirect: '/system/role',
-    children: [
-      {
-        path: '/role',
-        name: 'role',
-        component: () => import('@/views/system/role/index.vue'),
-        meta: {
-          title: '角色管理'
-        }
-      },
-      {
-        path: '/user',
-        name: 'user',
-        component: () => import('@/views/system/user/index.vue'),
-        meta: {
-          title: '用户管理'
-        }
-      },
-      {
-        path: '/menu',
-        name: 'menu',
-        component: () => import('@/views/system/menu/index.vue'),
-        meta: {
-          title: '菜单管理'
-        }
-      }
-    ]
   }
+  // {
+  //   path: '/system',
+  //   name: 'System',
+  //   meta: {
+  //     title: '用户管理'
+  //   },
+  //   redirect: '/system/role',
+  //   children: [
+  //     {
+  //       path: '/system/role',
+  //       name: 'role',
+  //       component: () => import('@/views/system/role/index.vue'),
+  //       meta: {
+  //         title: '角色管理'
+  //       }
+  //     },
+  //     {
+  //       path: '/system/user',
+  //       name: 'user',
+  //       component: () => import('@/views/system/user/index.vue'),
+  //       meta: {
+  //         title: '用户管理'
+  //       }
+  //     },
+  //     {
+  //       path: '/system/menu',
+  //       name: 'menu',
+  //       component: () => import('@/views/system/menu/index.vue'),
+  //       meta: {
+  //         title: '菜单管理'
+  //       }
+  //     }
+  //   ]
+  // }
 ]
 const constantRoutes: RouteRecordRaw[] = [
   {

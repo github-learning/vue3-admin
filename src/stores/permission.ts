@@ -47,19 +47,21 @@ export const usePermissionStore = defineStore('permission', () => {
     // const rolesNames = computed(() =>
     //   userStore.state.roles.map((item) => item.name)
     // )
-    // const roleIds = computed(() => userStore.state.roles.map((item) => item.id))
-    if (userStore.state.roleIds.map((v) => Number(v)).includes(1)) {
+    const roleIds = computed(() =>
+      userStore.state.roleIds.map((v) => Number(v))
+    )
+    if (roleIds.value.includes(1)) {
       accessMenuRoutes = asyncRoutes // 添加了动态的组件
       // 去生成一个菜单， 根据角色来生成
       await menuStore.getAllMenuListByAdmin()
       return accessMenuRoutes
     } else {
-      return ''
+      // return ''
       // await menuStore.getMenuListByRoles(roleIds.value)
       // // 筛选所需要加载的路由
       // const menus = menuStore.state.authMenuList
       // accessMenuRoutes = filterAsyncRoutes(menus, asyncRoutes)
-      // return accessMenuRoutes
+      return accessMenuRoutes
     }
   }
   return {

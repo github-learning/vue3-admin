@@ -15,9 +15,15 @@
 </template>
 <script setup lang="ts">
 import { RouteRecordRaw } from 'vue-router'
-defineProps<{
+const props = defineProps<{
   menuData: RouteRecordRaw[]
 }>()
+
+console.log(
+  '%c [ props ]-23',
+  'font-size:13px; background:pink; color:#bf2c9f;',
+  props.menuData
+)
 
 defineOptions({
   name: 'MenuTree'
