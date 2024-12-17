@@ -20,15 +20,17 @@ export const useUserStore = defineStore('user', () => {
     users: [] as IUsers['users'], // 用户列表
     total: 0, // 用户个数
     roles: [] as IRole[],
-    userInfo: {} as Profile
+    userInfo: {} as Profile,
+    roleIds: [] as number[]
   })
 
   // const tagsViewStore = useTagsView()
   const getUserInfo = async () => {
     const res = await getUserInfoApi()
-    if (res.code === 0) {
-      const { ...info } = res.data
+    if (res.code === 200) {
+      const { roleIds, ...info } = res.data
 
+      state.roleIds = roleIds || []
       state.userInfo = info as Profile
     }
   }
