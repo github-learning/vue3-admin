@@ -7,6 +7,7 @@ import element from './plugins/element'
 import directives from './directives/index'
 // 注册持久化插件
 import piniaPluginPersistedstate from 'pinia-plugin-persistedstate'
+import router from './router'
 import './style.css'
 import './permission'
 import './style/index.css'
@@ -20,7 +21,7 @@ for (const [key, component] of Object.entries(ElementPlusIconsVue)) {
   app.component(key, component)
 }
 import 'virtual:uno.css'
-import { router } from './router'
+
 pinia.use(piniaPluginPersistedstate)
 window.document.documentElement.setAttribute('data-theme', 'light')
 app.use(router)

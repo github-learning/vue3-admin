@@ -39,11 +39,6 @@ export const usePermissionStore = defineStore('permission', () => {
   const menuStore = useMenuStore()
   let accessMenuRoutes: RouteRecordRaw[] = []
   const generateRoutes = async () => {
-    console.log(
-      '%c [  ]-44',
-      'font-size:13px; background:pink; color:#bf2c9f;',
-      userStore.state.roleIds
-    )
     // const rolesNames = computed(() =>
     //   userStore.state.roles.map((item) => item.name)
     // )
@@ -51,6 +46,11 @@ export const usePermissionStore = defineStore('permission', () => {
       userStore.state.roleIds.map((v) => Number(v))
     )
     if (roleIds.value.includes(1)) {
+      console.log(
+        '%c [ asyncRoutes ]-50',
+        'font-size:13px; background:pink; color:#bf2c9f;',
+        asyncRoutes
+      )
       accessMenuRoutes = asyncRoutes // 添加了动态的组件
       // 去生成一个菜单， 根据角色来生成
       await menuStore.getAllMenuListByAdmin()
