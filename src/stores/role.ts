@@ -17,6 +17,12 @@ export const useRoleStore = defineStore('role', () => {
     const {
       data: { roles, total }
     } = await getRolesApi(params)
+
+    console.log(
+      '%c [  ]-21',
+      'font-size:13px; background:pink; color:#bf2c9f;',
+      roles
+    )
     state.roles = roles
     state.total = total
   }

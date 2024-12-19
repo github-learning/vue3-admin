@@ -12,6 +12,7 @@ export interface Profile {
   avatar: string
   description: string
   // roles: IRole[]
+  // roleIds?: string[] // 修改用户的时候，后端接受只要id
   roleIds?: number[] // 修改用户的时候，后端接受只要id
 }
 

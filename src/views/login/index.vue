@@ -60,7 +60,7 @@
 
 <script setup lang="ts">
 import { login } from '@/apis/user'
-import { router } from '@/router'
+import router from '@/router'
 import { setToken } from '@/utils'
 import { useRouteQuery } from '@/hooks/useRouteQuery'
 import { FormInstance } from 'element-plus'

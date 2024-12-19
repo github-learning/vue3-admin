@@ -6,11 +6,19 @@ export type ITreeItemDataWithMenuData = ITreeItemData & {
 }
 
 export type IMap = Record<number, ITreeItemDataWithMenuData>
-export const generateTree = (list: MenuData[]) => {
+export const generateTree = (list: MenuData[], withMeta: boolean = false) => {
   const map = new Map()
   const tree: ITreeItemDataWithMenuData[] = []
   list.forEach((element) => {
-    map.set(element.id, { ...element, children: [] })
+    const node = { ...element, children: [] } as ITreeItemDataWithMenuData
+    if (withMeta) {
+      node.meta = {
+        title: element.title,
+        icon: element.icon
+      }
+    }
+    map.set(element.id, node)
+    // map.set(element.id, { ...element, children: [] })
   })
 
   list.forEach((item) => {
