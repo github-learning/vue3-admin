@@ -5,7 +5,7 @@ import { getToken } from '@/utils'
 import { useUserStore } from './stores'
 import { usePermissionStore } from './stores/permission'
 NProgress.configure({ showSpinner: false })
-const whiteList = ['/login', '/register']
+// const whiteList = ['/login', '/register']
 
 // router.beforeEach(async (to) => {
 //   // 获取用户信息
@@ -80,12 +80,12 @@ const whiteList = ['/login', '/register']
 // const whiteList = ['/login']
 // 远程路由是否加载
 
+const whiteList = ['/login']
 router.beforeEach(async (to) => {
   NProgress.start()
   const hasToken = getToken()
   const userStore = useUserStore()
   const permissionStore = usePermissionStore()
-
   if (hasToken) {
     //  用token换用户信息
     if (to.path === '/login') {
@@ -106,16 +106,19 @@ router.beforeEach(async (to) => {
         // const roles = userStore.state.roles // 稍后用角色来生成菜单树
         const routes = await permissionStore.generateRoutes()
         routes.forEach(router.addRoute) // 内部添加到映射表中
-        // 继续当前导航，不显式跳转
-        // 确保目标路由存在后继续导航
+        // 如果目标路由未匹配，则重新导航
         if (to.matched.length === 0) {
           return { path: to.fullPath, replace: true }
         }
+
         NProgress.done()
         return true
-        // return router.push(to.path)
-      } catch {
-        // return true
+      } catch (e) {
+        console.log(
+          '%c [  ]-112',
+          'font-size:13px; background:pink; color:#bf2c9f;',
+          e
+        )
         userStore.logout()
         NProgress.done()
         return '/login?redirect=' + to.path
@@ -136,3 +139,5 @@ router.beforeEach(async (to) => {
     }
   }
 })
+
+// return router.push(to.path)

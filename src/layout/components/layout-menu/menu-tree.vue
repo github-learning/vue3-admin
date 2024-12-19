@@ -1,6 +1,6 @@
 <template>
   <template v-for="(item, index) in menuData">
-    <el-sub-menu v-if="item.children" :key="index" :index="item.path">
+    <el-sub-menu v-if="item.children?.length" :key="index" :index="item.path">
       <template #title>
         <span class="menu-item-title"> {{ item.meta?.title }}</span>
       </template>
