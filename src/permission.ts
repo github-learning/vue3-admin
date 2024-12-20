@@ -107,9 +107,16 @@ router.beforeEach(async (to) => {
         const routes = await permissionStore.generateRoutes()
         routes.forEach(router.addRoute) // 内部添加到映射表中
         // 如果目标路由未匹配，则重新导航
+
+        console.log(
+          '%c [  ]-111',
+          'font-size:13px; background:pink; color:#bf2c9f;',
+          to
+        )
         if (to.matched.length === 0) {
           return { path: to.fullPath, replace: true }
         }
+        // return router.push(to.path)
 
         NProgress.done()
         return true

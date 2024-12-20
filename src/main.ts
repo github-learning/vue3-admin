@@ -5,6 +5,8 @@ import { createApp } from 'vue'
 import { createPinia } from 'pinia'
 import element from './plugins/element'
 import directives from './directives/index'
+
+import Particles from 'particles.vue3' // 引入
 // 注册持久化插件
 import piniaPluginPersistedstate from 'pinia-plugin-persistedstate'
 import router from './router'
@@ -26,6 +28,7 @@ pinia.use(piniaPluginPersistedstate)
 window.document.documentElement.setAttribute('data-theme', 'light')
 app.use(router)
 app.use(pinia)
+app.use(Particles)
 app.use(directives)
 app.use(element)
 app.mount('#app')
