@@ -109,7 +109,7 @@ router.beforeEach(async (to) => {
         // 如果目标路由未匹配，则重新导航
 
         console.log(
-          '%c [  ]-111',
+          '%c [ to ]-111',
           'font-size:13px; background:pink; color:#bf2c9f;',
           to
         )
