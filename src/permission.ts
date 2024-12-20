@@ -116,16 +116,11 @@ router.beforeEach(async (to) => {
         if (to.matched.length === 0) {
           return { path: to.fullPath, replace: true }
         }
-        // return router.push(to.path)
+        // return router.push(txo.path)
 
         NProgress.done()
         return true
-      } catch (e) {
-        console.log(
-          '%c [  ]-112',
-          'font-size:13px; background:pink; color:#bf2c9f;',
-          e
-        )
+      } catch {
         userStore.logout()
         NProgress.done()
         return '/login?redirect=' + to.path

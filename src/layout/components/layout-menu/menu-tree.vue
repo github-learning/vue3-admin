@@ -43,6 +43,6 @@ defineOptions({
 </script>
 <style lang="scss" scoped>
 .menu-item a {
-  @apply color-[--el-menu-text-color] w-400;
+  @apply color-[--el-menu-text-color] fw-400;
 }
 </style>
