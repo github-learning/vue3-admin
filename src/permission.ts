@@ -107,18 +107,20 @@ router.beforeEach(async (to) => {
         const routes = await permissionStore.generateRoutes()
         routes.forEach(router.addRoute) // 内部添加到映射表中
         // 如果目标路由未匹配，则重新导航
+
+        console.log(
+          '%c [  ]-111',
+          'font-size:13px; background:pink; color:#bf2c9f;',
+          to
+        )
         if (to.matched.length === 0) {
           return { path: to.fullPath, replace: true }
         }
+        // return router.push(txo.path)
 
         NProgress.done()
         return true
-      } catch (e) {
-        console.log(
-          '%c [  ]-112',
-          'font-size:13px; background:pink; color:#bf2c9f;',
-          e
-        )
+      } catch {
         userStore.logout()
         NProgress.done()
         return '/login?redirect=' + to.path

@@ -9,7 +9,7 @@
         <router-link to="/profile/index">
           <el-dropdown-item>个人设置</el-dropdown-item>
         </router-link>
-        <el-dropdown-item divided @click="logout">
+        <el-dropdown-item divided>
           <span block @click="logout">退出登录</span>
         </el-dropdown-item>
       </el-dropdown-menu>

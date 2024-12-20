@@ -91,9 +91,8 @@ export const useMenuStore = defineStore('menu', () => {
     const res = await getRoleAccessByRoles(roles)
     if (res.code == 200) {
       const { data } = res
-      const access = data.access
-      state.authMenuList = access
-      state.authMenuTreeData = generateTree(access, true)
+      state.authMenuList = data
+      state.authMenuTreeData = generateTree(data, true)
     }
   }
 

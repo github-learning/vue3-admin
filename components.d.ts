@@ -52,5 +52,6 @@ declare module 'vue' {
     RoleMenu: typeof import('./src/views/system/role/components/roleMenu.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
+    SidebarItemLink: typeof import('./src/layout/components/layout-menu/sidebar-item-link.vue')['default']
   }
 }

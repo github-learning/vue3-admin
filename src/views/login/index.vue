@@ -77,6 +77,7 @@ const loginState = reactive({
     password: [{ required: true, trigger: 'blur', message: '请输入密码' }]
   }
 })
+
 const { loginForm, loginRules } = loginState
 
 const loginFormInstance = useTemplateRef<FormInstance>('formRef')
@@ -85,7 +86,7 @@ const passwordRef = useTemplateRef<HTMLInputElement>('password')
 const usernameRef = useTemplateRef<HTMLInputElement>('username')
 const loading = ref(false)
 const onSubmit = () => {
-  loginFormInstance.value?.validate(async (valid) => {
+  loginFormInstance.value?.validate(async (valid: boolean) => {
     if (valid) {
       loading.value = true
       await login(loginForm)
