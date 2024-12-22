@@ -42,6 +42,14 @@ export const constantRoutes: RouteRecordRaw[] = [
     component: () => import('@/views/login/index.vue')
   },
   {
+    path: '/register',
+    name: 'Register',
+    meta: {
+      hidden: true
+    },
+    component: () => import('@/views/register/index.vue')
+  },
+  {
     path: '/profile',
     component: Layout,
     name: 'profile',
@@ -65,7 +73,7 @@ export const asyncRoutes: RouteRecordRaw[] = [
     redirect: '/documentation/index',
     children: [
       {
-        path: 'index',
+        path: '/documentation/index',
         name: 'documentation',
         component: () => import('@/views/documentation/index.vue'),
         meta: {
@@ -81,7 +89,7 @@ export const asyncRoutes: RouteRecordRaw[] = [
     redirect: '/guide/index',
     children: [
       {
-        path: 'index',
+        path: '/guide/index',
         name: 'guide',
         component: () => import('@/views/guide/index.vue'),
         meta: {
