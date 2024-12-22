@@ -16,6 +16,7 @@ function generateRoutes(
       route.children = generateRoutes(route.children, routesPath)
     }
 
+    // 如果自己匹配成功，需要将自己放进去，如果儿子匹配成功也要放入
     if (
       routesPath.includes(routePath) ||
       (route.children && route.children.length >= 1)
