@@ -1,3 +1,3 @@
 export const isExternal = (path: string): boolean => {
-  return /http?/.test(path)
+  return /^(https?):/.test(path)
 }

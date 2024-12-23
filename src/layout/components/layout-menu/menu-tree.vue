@@ -8,27 +8,31 @@
   <template v-for="(item, index) in menuData">
     <el-sub-menu v-if="item.children?.length" :key="index" :index="item.path">
       <template #title>
-        <span class="menu-item-title"> {{ item.meta?.title }}</span>
+        <span> {{ item.meta?.title }}</span>
       </template>
       <MenuTree :key="index" :menu-data="item.children"></MenuTree>
     </el-sub-menu>
-    <el-menu-item v-else :key="item.path" :index="item.path" class="menu-item">
-      <template #title>
-        <!-- 如果是外链，使用 a 标签包裹 -->
-        <span v-if="item.meta?.link" class="menu-item-title">
-          <!-- <a :href="item.meta?.link" target="_blank">{{ item.meta?.title }}</a> -->
-        </span>
 
-        <!-- 如果不是外链，使用正常的内部链接 -->
-        <span v-else class="menu-item-title">{{ item.meta?.title }}</span>
-        <span class="menu-item-title">{{ item.meta?.title }}</span>
+    <!-- 判断是否是 HTTP 链接 -->
+    <template v-else-if="isExternal(item.path)">
+      <el-menu-item :key="item.path" class="menu-item">
+        <a :href="item.path" target="_blank" rel="noopener noreferrer">
+          {{ item.meta?.title }}
+        </a>
+      </el-menu-item>
+    </template>
+
+    <el-menu-item v-else :key="item.path" :index="item.path">
+      <template #title>
+        <span>{{ item.meta?.title }}</span>
       </template>
     </el-menu-item>
   </template>
 </template>
 <script setup lang="ts">
 import { RouteRecordRaw } from 'vue-router'
-// import SidebarItemLink from './SidebarItemLink.vue'
+
+import { isExternal } from '@/utils/validate'
 const props = defineProps<{
   menuData: RouteRecordRaw[]
 }>()
@@ -43,4 +47,8 @@ defineOptions({
   name: 'MenuTree'
 })
 </script>
-<style></style>
+<style lang="scss" scoped>
+.menu-item a {
+  @apply color-[--el-menu-text-color] fw-400;
+}
+</style>

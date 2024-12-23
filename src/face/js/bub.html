@@ -1,0 +1,27 @@
+<div id="parent">
+  <button id="child">Click me</button>
+</div>
+
+<script>
+    document.getElementById('parent').addEventListener('click', () => {
+      console.log('Parent clicked')
+    })
+
+    document.getElementById('child').addEventListener('click', (event) => {
+      console.log('Child clicked')
+      // event.stopPropagation() // 如果取消冒泡，父元素的事件将不会触发
+    })
+    /**
+     *事件冒泡是指当一个事件发生时，它会按照从事件的目标元素（事件触发点）逐层向上传递到最外层的父元素（如 document 或 window）的过程。这个机制是浏览器事件模型的一部分。
+     *
+     *
+     * 事件委托
+  事件委托是一种利用事件冒泡的机制，将子元素的事件绑定到父元素上，从而通过父元素监听所有子元素的事件。这种方式可以减少事件绑定数量，提高性能，特别适用于动态生成的元素。
+
+  原理
+  子元素的事件冒泡到父元素。
+  父元素通过 event.target 判断实际触发事件的子元素。
+     *
+     *
+     * /
+</script>

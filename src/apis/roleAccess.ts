@@ -20,7 +20,7 @@ export const allocRoleAccess = (id: number, data: number[]): Promise<Api> => {
     access: data
   })
 }
-
+// 根据角色ids 获取权限
 export const getRoleAccessByRoles = (roles: number[]): Promise<Api<never>> => {
   return request.post(`/role_access/role/access`, {
     roles
