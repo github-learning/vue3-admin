@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      #watermark-container {
+        position: relative;
+        width: 100%;
+        height: 100vh;
+        background-color: #f0f0f0;
+        background-image: repeating-linear-gradient(
+            rgba(200, 200, 200, 0.3) 0,
+            rgba(200, 200, 200, 0.3) 1px,
+            transparent 1px,
+            transparent 20px
+          ),
+          repeating-linear-gradient(
+            90deg,
+            rgba(200, 200, 200, 0.3) 0,
+            rgba(200, 200, 200, 0.3) 1px,
+            transparent 1px,
+            transparent 20px
+          );
+      }
+      .content {
+        padding: 20px;
+        font-size: 18px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="watermark-container">
+      <div class="content">这是内容部分，有水印效果。</div>
+    </div>
+  </body>
+</html>
