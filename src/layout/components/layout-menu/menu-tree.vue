@@ -1,4 +1,10 @@
 <template>
+  <!-- v-if="filteredChildren.length <= 1 && !item.meta?.alwaysShow" -->
+  <!-- <sidebar-item-link :to="item.path">
+    <el-menu-item :index="item.path">
+      <template #title>{{ item.meta?.title }}</template>
+    </el-menu-item>
+  </sidebar-item-link> -->
   <template v-for="(item, index) in menuData">
     <el-sub-menu v-if="item.children?.length" :key="index" :index="item.path">
       <template #title>
