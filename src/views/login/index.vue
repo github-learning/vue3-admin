@@ -1,4 +1,4 @@
-<template>
+<!-- <template>
   <el-row class="login-container">
     <el-col :lg="16" :md="12" class="left">
       <div>
@@ -126,4 +126,91 @@ onBeforeUnmount(() => {
 })
 </script>
 
-<style scoped></style>
+<style scoped></style> -->
+
+<template>
+  <ProTable
+    :queryFields="queryFields"
+    :tableColumns="tableColumns"
+    :fetchData="fetchData"
+  >
+    <template #status="{ scope }">
+      <el-tag :type="scope.row.status === 1 ? 'success' : 'danger'">
+        {{ scope.row.status === 1 ? '启用' : '禁用' }}
+      </el-tag>
+    </template>
+    <template #action="{ scope }">
+      <el-button type="text" size="small" @click="editRow(scope.row)"
+        >编辑</el-button
+      >
+      <el-button type="text" size="small" @click="deleteRow(scope.row)"
+        >删除</el-button
+      >
+    </template>
+  </ProTable>
+</template>
+
+<script>
+export default {
+  setup() {
+    const queryFields = [
+      {
+        label: '名称',
+        prop: 'name',
+        component: 'el-input',
+        props: { placeholder: '请输入名称' }
+      },
+      {
+        label: '状态',
+        prop: 'status',
+        component: 'el-select',
+        props: {
+          options: [
+            { label: '启用', value: 1 },
+            { label: '禁用', value: 0 }
+          ]
+        }
+      }
+    ]
+
+    const tableColumns = [
+      { label: '编号', prop: 'id', width: '80' },
+      { label: '名称', prop: 'name' },
+      { label: '状态', prop: 'status', slot: 'status' },
+      { label: '创建时间', prop: 'createdAt', sortable: true }
+    ]
+    // ...filters
+    const fetchData = async ({ page, pageSize }) => {
+      // 模拟 API 数据
+      return new Promise((resolve) => {
+        setTimeout(() => {
+          const total = 50
+          const data = Array.from({ length: pageSize }, (_, index) => ({
+            id: (page - 1) * pageSize + index + 1,
+            name: `示例${(page - 1) * pageSize + index + 1}`,
+            status: Math.random() > 0.5 ? 1 : 0,
+            createdAt: new Date().toLocaleDateString()
+          }))
+          resolve({ data, total })
+        }, 1000)
+      })
+    }
+
+    const editRow = (row) => {
+      console.log('编辑行:', row)
+    }
+
+    const deleteRow = (row) => {
+      console.log('删除行:', row)
+    }
+
+    return {
+      queryFields,
+      tableColumns,
+      fetchData,
+      editRow,
+      deleteRow
+    }
+  }
+}
+</script>
