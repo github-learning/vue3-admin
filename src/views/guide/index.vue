@@ -4,11 +4,12 @@
       :query-fields="queryFields"
       :table-columns="tableColumns"
       :data="fetchData"
+      stripe
     />
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 // 查询条件配置
 const queryFields = [
   {
@@ -53,13 +54,26 @@ const tableColumns = [
   {
     label: '状态',
     prop: 'status',
-    render: 'StatusTag', // 自定义渲染组件
+    // render: 'StatusTag', // 自定义渲染组件
     width: '100'
   },
   {
-    label: '操作',
-    render: 'ActionButtons', // 自定义操作列
-    width: '200'
+    title: '操作',
+    width: '180px',
+    dataIndex: 'action',
+    fixed: 'right'
+    // render(_, row) {
+    //   return (
+    //     <div>
+    //       <el-button type="text" onClick={() => handleEdit(row)}>
+    //         编辑
+    //       </el-button>
+    //       <el-button type="text" onClick={() => handleDelete(row)}>
+    //         删除
+    //       </el-button>
+    //     </div>
+    //   )
+    // }
   }
 ]
 

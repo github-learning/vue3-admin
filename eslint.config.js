@@ -60,5 +60,6 @@ export default [
       // semi: 1
     },
   },
-  prettierRecommended // 覆盖掉eslint的规范
+  prettierRecommended, // 覆盖掉eslint的规范
+  
 ];
