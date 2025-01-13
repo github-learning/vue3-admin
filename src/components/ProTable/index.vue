@@ -37,6 +37,27 @@
         :label="column.label"
         :width="column.width"
       >
+        <template #default="scope">
+          <!-- 优先处理 render 函数 -->
+          <div v-if="column.render">
+            22
+            {{ column.render(_, scope.row) }}
+          </div>
+
+          <!-- 默认显示 -->
+          <span v-else>
+            {{ scope.row[column.prop] }}
+          </span>
+        </template>
+        <!-- 优先处理插槽 -->
+        <!-- <template v-if="column.slot" #default="scope">
+          <slot :name="column.slot" :scope="scope" />
+        </template> -->
+
+        <!-- 支持 render 函数 -->
+        <!-- <template v-else-if="column.render" #default="scope">
+          <component :is="column.render" :scope="scope" />
+        </template> -->
       </el-table-column>
     </el-table>
 

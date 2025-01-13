@@ -5,6 +5,7 @@
     "module": "ESNext",
     "lib": ["ES2020", "DOM", "DOM.Iterable"],
     "skipLibCheck": true,
+     "jsxImportSource": "vue",  // 确保这行存在，指向 Vue 的 JSX 语法
 
     /* Bundler mode */
     "moduleResolution": "Bundler",

@@ -5,11 +5,12 @@
       :table-columns="tableColumns"
       :data="fetchData"
       stripe
-    />
+    >
+    </ProTable>
   </div>
 </template>
 
-<script setup lang="ts">
+<script setup>
 // 查询条件配置
 const queryFields = [
   {
@@ -54,28 +55,19 @@ const tableColumns = [
   {
     label: '状态',
     prop: 'status',
-    // render: 'StatusTag', // 自定义渲染组件
     width: '100'
   },
   {
     title: '操作',
     width: '180px',
     dataIndex: 'action',
-    fixed: 'right'
-    // render(_, row) {
-    //   return (
-    //     <div>
-    //       <el-button type="text" onClick={() => handleEdit(row)}>
-    //         编辑
-    //       </el-button>
-    //       <el-button type="text" onClick={() => handleDelete(row)}>
-    //         删除
-    //       </el-button>
-    //     </div>
-    //   )
-    // }
+    fixed: 'right',
+    render() {
+      return 11
+    }
   }
 ]
+//   <el-button>22</el-button>
 
 // 模拟请求数据的方法
 const fetchData = ref([
