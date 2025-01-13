@@ -14,7 +14,7 @@ import { fileURLToPath } from 'url'
 
 import { visualizer } from 'rollup-plugin-visualizer'
 //gizp 压缩
-import ViteCompression from 'vite-plugin-compression'
+// import ViteCompression from 'vite-plugin-compression'
 // br 压缩
 // import brotli from 'rollup-plugin-brotli'
 
@@ -81,7 +81,7 @@ export default defineConfig({
     //   ext: '.gz',
     //   algorithm: 'gzip'
     // }),
-    brotli(),
+    // brotli(),
     // 其他插件...
     visualizer({
       filename: './dist/stats.html', // Path to output file
@@ -148,3 +148,16 @@ export default defineConfig({
   //   sourcemap: true
   // }
 })
+
+// 每个文件都会被构建，chunk 数量多，同域名对资源加载数量有限制，chunk 数量多，导致同域名加载时间更长，每个限制一般是6个，后面的
+// css 拆的细，会阻塞dom的渲染，会放在header 同步下载
+// 白屏时间，hash 缓存，不能最大限度的缓存，都要加载全部
+// 如果小于chunk / 合并
+// 缓存（单个链接）和 按需加载，
+// 每个页面只需要 加载自己需要的：而不是 all in one
+// 业务代码最大程度的按需加载 /
+// html2canvas , 只有极少数的页面使用了，所以我们要单独处理
+// 外链的处理  /
+// 不到1kb 的也要分成一个chunk ， 不合适，所以要进行合并，用的很少，提出来
+// 用的三方库特别多，用外链的形式，这样就不用打包了，
+// 看依赖的频率，外链，extrenal
