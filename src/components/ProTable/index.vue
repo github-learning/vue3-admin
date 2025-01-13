@@ -1,6 +1,5 @@
 <template>
   <div>
-    <!-- 查询表单 -->
     <el-form
       :model="form"
       ref="queryForm"
@@ -24,29 +23,23 @@
       </el-row>
     </el-form>
 
-    <!-- 表格 -->
     <el-table
-      :data="tableData"
+      :data="data"
       :loading="loading"
       border
       style="width: 100%"
-      @sort-change="handleSortChange"
+      v-bind="$attrs"
     >
       <el-table-column
         v-for="column in tableColumns"
         :key="column.prop"
         :prop="column.prop"
         :label="column.label"
-        :sortable="column.sortable"
         :width="column.width"
       >
-        <template #default="scope">
-          <component :is="column.render" :scope="scope" />
-        </template>
       </el-table-column>
     </el-table>
 
-    <!-- 分页 -->
     <el-pagination
       v-if="pagination.total > 0"
       style="margin-top: 20px; text-align: right"
@@ -62,7 +55,7 @@
 </template>
 
 <script setup>
-const props = defineProps({
+defineProps({
   queryFields: {
     type: Array,
     default: () => []
@@ -71,59 +64,20 @@ const props = defineProps({
     type: Array,
     default: () => []
   },
-  fetchData: {
-    type: Function,
-    required: true
+  data: {
+    type: Array,
+    default: () => []
   }
 })
 
 const form = reactive({})
-const tableData = ref([])
+
 const loading = ref(false)
 const pagination = reactive({
   currentPage: 1,
   pageSize: 10,
   total: 0
 })
-
-const handleQuery = async () => {
-  pagination.currentPage = 1 // 重置到第一页
-  await fetchTableData()
-}
-
-const handleReset = () => {
-  Object.keys(form).forEach((key) => (form[key] = ''))
-  handleQuery()
-}
-
-const handleSortChange = ({ prop, order }) => {
-  console.log('排序字段:', prop, '排序顺序:', order)
-  fetchTableData()
-}
-
-const handlePageChange = async (page) => {
-  pagination.currentPage = page
-  await fetchTableData()
-}
-
-const handlePageSizeChange = async (size) => {
-  pagination.pageSize = size
-  await fetchTableData()
-}
-
-const fetchTableData = async () => {
-  loading.value = true
-  const { data, total } = await props.fetchData({
-    ...form,
-    page: pagination.currentPage,
-    pageSize: pagination.pageSize
-  })
-  tableData.value = data
-  pagination.total = total
-  loading.value = false
-}
-
-watch(() => [pagination.currentPage, pagination.pageSize], fetchTableData)
 </script>
 
 <style scoped>

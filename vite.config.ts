@@ -13,6 +13,8 @@ import UnoCSS from 'unocss/vite'
 import { fileURLToPath } from 'url'
 
 import { visualizer } from 'rollup-plugin-visualizer'
+import vueJsx from '@vitejs/plugin-vue-jsx'
+
 //gizp 压缩
 // import ViteCompression from 'vite-plugin-compression'
 // br 压缩
@@ -91,6 +93,7 @@ export default defineConfig({
     }),
 
     vue(),
+    vueJsx(),
     UnoCSS(),
     AutoImport({
       // api
