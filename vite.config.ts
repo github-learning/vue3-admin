@@ -41,8 +41,8 @@ export default defineConfig({
         experimentalMinChunkSize: 20 * 1024, // experimentalLogSideEffects | 有一些存在函数副作用，所以虽然配置了最小chunk, 但是会影响tree-shaking, 不会和并
         // 第三方库，
         format: 'esm',
-        chunkFileNames: 'static/js/[chunk]-[hash].js', // 代码分割完的文件名
-        entryFileNames: 'static/js/[entry]-[hash].js', // 入口文件
+        chunkFileNames: 'static/js/[name]-[hash].js', // 代码分割完的文件名
+        entryFileNames: 'static/js/[name]-[hash].js', // 入口文件
         assetFileNames: 'static/[ext]/[name]-[hash].[ext]' // 静态资源
 
         //chunk 多了会怎么样 ？
