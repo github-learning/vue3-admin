@@ -25,8 +25,9 @@
     </el-form>
 
     <!-- 表格 -->
+
     <el-table
-      :data="tableData"
+      :data="data"
       :loading="loading"
       border
       style="width: 100%"
@@ -40,9 +41,9 @@
         :sortable="column.sortable"
         :width="column.width"
       >
-        <template #default="scope">
+        <!-- <template #default="scope">
           <component :is="column.render" :scope="scope" />
-        </template>
+        </template> -->
       </el-table-column>
     </el-table>
 
@@ -62,7 +63,7 @@
 </template>
 
 <script setup>
-const props = defineProps({
+defineProps({
   queryFields: {
     type: Array,
     default: () => []
@@ -71,14 +72,14 @@ const props = defineProps({
     type: Array,
     default: () => []
   },
-  fetchData: {
-    type: Function,
-    required: true
+  data: {
+    type: Array,
+    default: () => []
   }
 })
 
 const form = reactive({})
-const tableData = ref([])
+
 const loading = ref(false)
 const pagination = reactive({
   currentPage: 1,
@@ -112,15 +113,20 @@ const handlePageSizeChange = async (size) => {
 }
 
 const fetchTableData = async () => {
-  loading.value = true
-  const { data, total } = await props.fetchData({
-    ...form,
-    page: pagination.currentPage,
-    pageSize: pagination.pageSize
-  })
-  tableData.value = data
-  pagination.total = total
-  loading.value = false
+  // loading.value = true
+  // const { data, total } = await props.fetchData({
+  //   ...form,
+  //   page: pagination.currentPage,
+  //   pageSize: pagination.pageSize
+  // })
+  // tableData.value = data
+  // console.log(
+  //   '%c [  ]-123',
+  //   'font-size:13px; background:pink; color:#bf2c9f;',
+  //   tableData.value
+  // )
+  // pagination.total = total
+  // loading.value = false
 }
 
 watch(() => [pagination.currentPage, pagination.pageSize], fetchTableData)
