@@ -70,7 +70,7 @@ const allowDrag = (draggingNode: Node) => {
   return draggingNode.data.parentId !== 0 || draggingNode.data.parentId != null
 }
 type DropType = 'prev' | 'inner' | 'next'
-const allowDrop = (draggingNode: Node, dropNode: Node, type: DropType) => {
+const allowDrop = (draggingNode: Node, _dropNode: Node, type: DropType) => {
   if (draggingNode.data.parentId === 0 || draggingNode.data.parentId == null) {
     return type !== 'inner'
   }
