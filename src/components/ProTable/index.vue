@@ -37,17 +37,19 @@
         :label="column.label"
         :width="column.width"
       >
-        <template #default="scope">
-          <!-- 优先处理 render 函数 -->
-          <div v-if="column.render">
-            22
-            {{ column.render(_, scope.row) }}
-          </div>
+        <template #default="scope" v-if="$slots[column.dataIndex]">
+          <slot :name="column.dataIndex" v-bind="scope"> </slot>
+          <!-- Prefer render function -->
+          <!-- <div v-if="column.render">
+            {{ column.render(null, scope.row) }}
+          </div> -->
 
-          <!-- 默认显示 -->
-          <span v-else>
+          <!-- Default display -->
+
+          <!-- <span v-if="column.slot">
+            11
             {{ scope.row[column.prop] }}
-          </span>
+          </span> -->
         </template>
         <!-- 优先处理插槽 -->
         <!-- <template v-if="column.slot" #default="scope">

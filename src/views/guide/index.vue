@@ -6,6 +6,14 @@
       :data="fetchData"
       stripe
     >
+      <template #status="{ row }">
+        <span :style="{ color: row.status == 'active' ? 'red' : 'green' }">{{
+          row.status
+        }}</span>
+      </template>
+      <template #action="{ row }">
+        <button @click="handleAction(row)">操作按钮</button>
+      </template>
     </ProTable>
   </div>
 </template>
@@ -55,16 +63,17 @@ const tableColumns = [
   {
     label: '状态',
     prop: 'status',
+    dataIndex: 'status',
     width: '100'
   },
   {
     title: '操作',
     width: '180px',
     dataIndex: 'action',
-    fixed: 'right',
-    render() {
-      return 11
-    }
+    fixed: 'right'
+    // render() {
+    //   return <div>22</div>
+    // }
   }
 ]
 //   <el-button>22</el-button>
@@ -75,4 +84,12 @@ const fetchData = ref([
   { name: '李四', status: 'inactive' },
   { name: '王五', status: 'active' }
 ])
+
+const handleAction = (raw) => {
+  console.log(
+    '%c [  ]-85',
+    'font-size:13px; background:pink; color:#bf2c9f;',
+    raw
+  )
+}
 </script>
