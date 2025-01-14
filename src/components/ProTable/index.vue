@@ -37,28 +37,16 @@
         :label="column.label"
         :width="column.width"
       >
-        <template #default="scope" v-if="$slots[column.dataIndex]">
-          <slot :name="column.dataIndex" v-bind="scope"> </slot>
-          <!-- Prefer render function -->
-          <!-- <div v-if="column.render">
-            {{ column.render(null, scope.row) }}
-          </div> -->
-
-          <!-- Default display -->
-
-          <!-- <span v-if="column.slot">
-            11
-            {{ scope.row[column.prop] }}
-          </span> -->
+        <template #default="{ row }">
+          <span v-if="column.render">
+            {{ column.render(row) }}
+          </span>
+          <span v-else>
+            {{ row[column.prop] }}
+          </span>
         </template>
-        <!-- 优先处理插槽 -->
-        <!-- <template v-if="column.slot" #default="scope">
-          <slot :name="column.slot" :scope="scope" />
-        </template> -->
-
-        <!-- 支持 render 函数 -->
-        <!-- <template v-else-if="column.render" #default="scope">
-          <component :is="column.render" :scope="scope" />
+        <!-- <template #default="scope" v-if="$slots[column.dataIndex]">
+          <slot :name="column.dataIndex" v-bind="scope"> </slot>
         </template> -->
       </el-table-column>
     </el-table>

@@ -6,19 +6,20 @@
       :data="fetchData"
       stripe
     >
-      <template #status="{ row }">
+      <!-- <template #status="{ row }">
         <span :style="{ color: row.status == 'active' ? 'red' : 'green' }">{{
           row.status
         }}</span>
       </template>
       <template #action="{ row }">
         <button @click="handleAction(row)">操作按钮</button>
-      </template>
+      </template> -->
     </ProTable>
   </div>
 </template>
 
 <script setup>
+// lang="jsx"
 // 查询条件配置
 const queryFields = [
   {
@@ -60,19 +61,42 @@ const tableColumns = [
     prop: 'name',
     width: '150'
   },
+  // {
+  //   label: '状态',
+  //   prop: 'status',
+  //   dataIndex: 'status',
+  //   width: '100'
+  // },
+  // {
+  //   title: '操作',
+  //   width: '180px',
+  //   dataIndex: 'action',
+  //   fixed: 'right'
+  // }
   {
     label: '状态',
     prop: 'status',
-    dataIndex: 'status',
-    width: '100'
+    width: '150',
+    render: (row) => (row.status === 'active' ? '🟢 Active' : '🔴 Inactive')
   },
   {
-    title: '操作',
-    width: '180px',
-    dataIndex: 'action',
-    fixed: 'right'
+    label: '操作',
+    prop: 'action',
+    width: '180',
+    render: () => '操作 '
     // render() {
-    //   return <div>22</div>
+    //   return (
+    //     <div>
+    //       <button onClick={() => console.log('按钮点击')}>操作按钮</button>
+    //     </div>
+    //   )
+    // }
+    // render: (row) => '<button>操作按钮</button>'
+    // render: (row) => {
+    //   const rowData = { ...row } // 解包以去除响应式特性
+    //   console.log(JSON.stringify(rowData))
+    //   return <button onClick={() => handleAction(rowData)}>操作按钮</button>
+    //return <button onClick={() => handleAction(row)}>操作按钮</button>
     // }
   }
 ]
@@ -85,11 +109,11 @@ const fetchData = ref([
   { name: '王五', status: 'active' }
 ])
 
-const handleAction = (raw) => {
-  console.log(
-    '%c [  ]-85',
-    'font-size:13px; background:pink; color:#bf2c9f;',
-    raw
-  )
-}
+// const handleAction = (raw) => {
+//   console.log(
+//     '%c [  ]-85',
+//     'font-size:13px; background:pink; color:#bf2c9f;',
+//     raw
+//   )
+// }
 </script>
