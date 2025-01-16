@@ -111,7 +111,8 @@ export default defineConfig({
         'src/components',
         'src/layout/components',
         'src/views/**/components'
-      ]
+      ],
+      include: [/\.vue$/, /\.jsx$/]
     }),
     ElementPlus({})
     // sentryVitePlugin({

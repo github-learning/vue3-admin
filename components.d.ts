@@ -49,7 +49,6 @@ declare module 'vue' {
     LayoutMenu: typeof import('./src/layout/components/layout-menu/index.vue')['default']
     MenuTree: typeof import('./src/layout/components/layout-menu/menu-tree.vue')['default']
     Navbar: typeof import('./src/layout/components/Navbar.vue')['default']
-    ProTable: typeof import('./src/components/ProTable/index.vue')['default']
     RoleMenu: typeof import('./src/views/system/role/components/roleMenu.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
