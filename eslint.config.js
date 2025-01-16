@@ -37,7 +37,11 @@ export default [
   // 6. 检测 vue 中的 ts 代码采用 tsparser
   {
     files: ["**/*.vue"],
-    languageOptions: { parserOptions: { parser: tseslint.parser } },
+    languageOptions: { parserOptions: { 
+      parser: tseslint.parser, 
+      ecmaFeatures: {
+       jsx: true, // 启用 JSX 支持
+    }, } },
   },
   // 7. ignores 配置
   {
