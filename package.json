@@ -58,7 +58,7 @@
   },
   "lint-staged": {
     "src/**/*.{js,cjs,ts,vue}": [
-      ""
+      "npm run lint:fix"
     ],
     "src/**/*.{html,json,css,scss}": [
       "npx prettier --write"
