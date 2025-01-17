@@ -48,10 +48,14 @@ declare module 'vue' {
     LayoutHeader: typeof import('./src/layout/components/layout-header/index.vue')['default']
     LayoutMenu: typeof import('./src/layout/components/layout-menu/index.vue')['default']
     MenuTree: typeof import('./src/layout/components/layout-menu/menu-tree.vue')['default']
+    MyInput: typeof import('./src/components/MyInput/index.vue')['default']
     Navbar: typeof import('./src/layout/components/Navbar.vue')['default']
+    Pagination: typeof import('./src/components/ProTable/components/Pagination.vue')['default']
+    ProTable: typeof import('./src/components/ProTable/index.vue')['default']
     RoleMenu: typeof import('./src/views/system/role/components/roleMenu.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
+    Search: typeof import('./src/components/ProTable/components/search.vue')['default']
     SidebarItemLink: typeof import('./src/layout/components/layout-menu/SidebarItemLink.vue')['default']
   }
 }

@@ -1,9 +1,16 @@
 <template>
   <proTable :table-columns="tableColumns" :data="fetchData" stripe />
+  <el-button @click="focusHandler">聚焦</el-button>
+  <my-input v-model="msg" ref="myInputRef">
+    <template #prepend>Prepend</template>
+    <template #append>Append</template>
+  </my-input>
 </template>
 
 <script setup lang="jsx">
-import proTable from '@/components/ProTable'
+const myInputRef = ref()
+
+import proTable from '@/components/ProTable/index.vue'
 
 // 表格列配置
 
@@ -42,4 +49,15 @@ const fetchData = ref([
   { name: 'Item 1', status: 'Active', action: '' },
   { name: 'Item 2', status: 'Inactive', action: '' }
 ])
+
+const msg = ref('')
+
+const focusHandler = () => {
+  console.log(
+    '%c [  ]-57',
+    'font-size:13px; background:pink; color:#bf2c9f;',
+    myInputRef.value
+  )
+  myInputRef.value.focus()
+}
 </script>

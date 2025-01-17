@@ -37,11 +37,15 @@ export default [
   // 6. 检测 vue 中的 ts 代码采用 tsparser
   {
     files: ["**/*.vue"],
-    languageOptions: { parserOptions: { 
-      parser: tseslint.parser, 
-      ecmaFeatures: {
-       jsx: true, // 启用 JSX 支持
-    }, } },
+    languageOptions: {
+      parserOptions: {
+        parser: 'vue-eslint-parser', // 使用 vue-eslint-parser 解析 Vue 3 文件
+        // parser: tseslint.parser,
+        ecmaFeatures: {
+          jsx: true, // 启用 JSX 支持
+        },
+      }
+    },
   },
   // 7. ignores 配置
   {
@@ -61,9 +65,11 @@ export default [
     rules: {
       "no-console": "warn", // 参照下方实例图
       "vue/multi-word-component-names": "off",
+      "no-unused-vars": ["warn"],
+      '@typescript-eslint/no-unused-vars': ['warn'], // 设置为 warning
       // semi: 1
     },
   },
   prettierRecommended, // 覆盖掉eslint的规范
-  
+
 ];
