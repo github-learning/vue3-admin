@@ -39,8 +39,7 @@ export default [
     files: ["**/*.vue"],
     languageOptions: {
       parserOptions: {
-        parser: 'vue-eslint-parser', // 使用 vue-eslint-parser 解析 Vue 3 文件
-        // parser: tseslint.parser,
+        parser: tseslint.parser,
         ecmaFeatures: {
           jsx: true, // 启用 JSX 支持
         },
