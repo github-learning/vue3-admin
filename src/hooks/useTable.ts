@@ -1,6 +1,7 @@
 import { reactive, computed, toRefs } from 'vue'
 
 /**
+ *
  * @description table 页面操作方法封装
  * @param {Function} api 获取表格数据 api 方法 (必传)
  * @param {Object} initParam 获取数据初始化参数 (非必传，默认为{})
@@ -54,6 +55,7 @@ export const useTable = (
    * @return void
    * */
   const getTableList = async () => {
+    console.log('我是获取表格数据的方法')
     if (!api) return
     // try {
     //   // 先把初始化参数和分页参数放到总参数里面
