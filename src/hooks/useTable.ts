@@ -2,7 +2,7 @@ import { reactive, computed, toRefs } from 'vue'
 
 /**
  *
- * @description table 页面操作方法封装
+ * @description table 页面操作方法封 装
  * @param {Function} api 获取表格数据 api 方法 (必传)
  * @param {Object} initParam 获取数据初始化参数 (非必传，默认为{})
  * @param {Boolean} isPageable 是否有分页 (非必传，默认为true)
@@ -64,10 +64,10 @@ export const useTable = (
     //     initParam,
     //     isPageable ? pageParam.value : {}
     //   )
-    //   let { data } = await api({
-    //     ...state.searchInitParam,
-    //     ...state.totalParam
-    //   })
+    // let { data } = await api({
+    //   ...state.searchInitParam,
+    //   ...state.totalParam
+    // })
     //   dataCallBack && (data = dataCallBack(data))
     //   state.tableData = isPageable ? data.list : data
     //   // 解构后台返回的分页数据 (如果有分页更新分页信息)
