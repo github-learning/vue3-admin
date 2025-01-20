@@ -13,4 +13,21 @@
   ></el-pagination>
 </template>
 
-<script setup></script>
+<script setup lang="ts" name="Pagination">
+
+
+
+interface Pageable {
+  pageNum: number;
+  pageSize: number;
+  total: number;
+}
+
+interface PaginationProps {
+  pageable: Pageable;
+  handleSizeChange: (size: number) => void;
+  handleCurrentChange: (currentPage: number) => void;
+}
+
+defineProps<PaginationProps>();
+</script>

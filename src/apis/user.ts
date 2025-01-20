@@ -46,7 +46,7 @@ export const register = (
   return request.post('/auth/register', data)
 }
 export interface IUsers {
-  users: Profile[]
+  list: Profile[]
   total: number
 }
 // 查询参数
@@ -76,6 +76,10 @@ export const getUsers = (params: IUserQuery): Promise<Api<IUsers>> => {
       mobile
     }
   })
+}
+// by hooks ony get user api
+export const getUserList = (params: IUserQuery): Promise<Api<IUsers>> => {
+  return request.get('/user', { params })
 }
 
 // 删除用户

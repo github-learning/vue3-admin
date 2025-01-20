@@ -1,5 +1,17 @@
 <template>
-  <proTable :table-columns="tableColumns" :data="fetchData" stripe />
+  <!-- <proTable :table-columns="tableColumns" :data="fetchData" stripe /> -->
+  <ProTable
+    ref="proTable"
+    title="用户列表"
+    highlight-current-row
+    :columns="tableColumns"
+    :request-api="getUserList"
+  ></ProTable>
+  <!-- :row-class-name="tableRowClassName"
+    :span-method="objectSpanMethod"
+    :show-summary="true"
+    :summary-method="getSummaries"
+    @row-click="rowClick" -->
   <el-button @click="focusHandler">聚焦</el-button>
   <my-input v-model="msg" ref="myInputRef">
     <template #prepend>Prepend</template>
@@ -10,6 +22,11 @@
 <script setup lang="jsx">
 const myInputRef = ref()
 
+import { useUserStore } from '@/stores/user'
+// getUsers
+import { getUserList } from '@/apis/user'
+const userStore = useUserStore()
+
 import proTable from '@/components/ProTable/index.vue'
 
 // 表格列配置
@@ -17,8 +34,16 @@ import proTable from '@/components/ProTable/index.vue'
 const tableColumns = ref([
   {
     label: '名称',
-    prop: 'name',
+    prop: 'username',
     width: '150'
+  },
+  {
+    label: '描述',
+    prop: 'description'
+  },
+  {
+    label: '手机',
+    prop: 'phone'
   },
   {
     label: '状态',

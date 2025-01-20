@@ -45,6 +45,8 @@ export const useTable = (
         pageSize: state.pageable.pageSize
       }
     },
+    //   pageNum?: number
+    // pageSize?: number
     set: (newVal: unknown) => {
       console.log('我是分页更新之后的值', newVal)
     }
@@ -55,28 +57,34 @@ export const useTable = (
    * @return void
    * */
   const getTableList = async () => {
-    console.log('我是获取表格数据的方法')
+    console.log('我是获取表格数据的方法', state)
+    console.log('api', api)
+    console.log('pageParam', pageParam.value)
     if (!api) return
-    // try {
-    //   // 先把初始化参数和分页参数放到总参数里面
-    //   Object.assign(
-    //     state.totalParam,
-    //     initParam,
-    //     isPageable ? pageParam.value : {}
-    //   )
-    // let { data } = await api({
-    //   ...state.searchInitParam,
-    //   ...state.totalParam
-    // })
-    //   dataCallBack && (data = dataCallBack(data))
-    //   state.tableData = isPageable ? data.list : data
-    //   // 解构后台返回的分页数据 (如果有分页更新分页信息)
-    //   if (isPageable) {
-    //     state.pageable.total = data.total
-    //   }
-    // } catch (error) {
-    //   requestError && requestError(error)
-    // }
+    console.log('111')
+    try {
+      // 先把初始化参数和分页参数放到总参数里面
+      Object.assign(
+        state.totalParam,
+        initParam,
+        isPageable ? pageParam.value : {}
+      )
+
+      let { data } = await api({
+        ...state.searchInitParam,
+        ...state.totalParam
+      })
+      console.log('data', data)
+      dataCallBack && (data = dataCallBack(data))
+      state.tableData = isPageable ? data.list : data
+
+      // 解构后台返回的分页数据 (如果有分页更新分页信息)
+      if (isPageable) {
+        state.pageable.total = data.total
+      }
+    } catch (error) {
+      requestError && requestError(error)
+    }
   }
 
   // /**
