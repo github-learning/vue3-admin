@@ -8,7 +8,7 @@ import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
 // import { sentryVitePlugin } from '@sentry/vite-plugin'
 // 1自动导入 ElementPlus 所需样式
 import ElementPlus from 'unplugin-element-plus/vite'
-// 1.UnoCSS 原子化css
+// UnoCSS 原子化css
 import UnoCSS from 'unocss/vite'
 import { fileURLToPath } from 'url'
 
