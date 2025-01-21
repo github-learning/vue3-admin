@@ -43,7 +43,8 @@ const tableColumns = ref([
   },
   {
     label: '手机',
-    prop: 'phone'
+    prop: 'phone',
+    dataIndex: 'phone'
   },
   {
     label: '状态',

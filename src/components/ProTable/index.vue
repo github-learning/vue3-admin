@@ -4,7 +4,14 @@
     <component :is="item" v-bind="props" />
   </div> -->
 
-  <tableColumn v-bind="props" :data="processTableData"></tableColumn>
+  <SearchForm
+    v-show="isShowSearch"
+    :search="_search"
+    :reset="_reset"
+    :columns="searchColumns"
+  ></SearchForm>
+  <!-- :columns="searchColumns"  -->
+  <TableColumn v-bind="props" :data="processTableData"></TableColumn>
   <Pagination
     v-if="pagination"
     :pageable="pageable"
@@ -14,12 +21,12 @@
 </template>
 
 <script setup lang="ts">
-// import search from './components/search.vue'
 import { useTable } from '@/hooks/useTable'
-import tableColumn from './components/tableColumn'
+import TableColumn from './components/tableColumn'
+import SearchForm from './components/searchForm.vue'
+import Pagination from './components/Pagination.vue'
 
 import { ColumnProps } from './model'
-import Pagination from './components/Pagination.vue'
 
 export interface ProTableProps {
   columns: ColumnProps[] // 列配置项  ==> 必传
@@ -67,7 +74,8 @@ const {
   props.dataCallback,
   props.requestError
 )
-
+// 是否显示搜索模块
+const isShowSearch = ref(true)
 // 处理表格数据
 const processTableData = computed(() => {
   if (!props.data) return tableData.value
@@ -77,6 +85,73 @@ const processTableData = computed(() => {
     pageable.value.pageSize * pageable.value.pageNum
   )
 })
+
+// 处理表单字段配置
+// !column.hideInSearch &&
+// 	column.dataIndex &&
+// 	column.dataIndex !== 'action'
+const searchColumns = computed(() =>
+  props.columns
+    .filter(
+      (col) => !col.hideInSearch && col.dataIndex && col.dataIndex !== 'adction'
+    ) // 仅保留有表单类型的字段
+    .map(
+      ({
+        dataIndex,
+
+        valueType,
+        valueEnum,
+        defaultValue,
+        dateOptions
+      }) => ({
+        dataIndex,
+        valueType,
+        valueEnum,
+        defaultValue,
+        dateOptions
+      })
+    )
+)
+
+console.log(
+  '%c [  ]-116',
+  'font-size:13px; background:pink; color:#bf2c9f;',
+  searchColumns.value
+)
+
+// 过滤需要搜索的配置项 && 排序
+// const searchColumns = computed(() => {
+//   return flatColumns.value
+//     ?.filter(item => item.search?.el || item.search?.render)
+//     .sort((a, b) => a.search!.order! - b.search!.order!);
+// });
+
+// // 设置 搜索表单默认排序 && 搜索表单项的默认值
+// searchColumns.value?.forEach((column, index) => {
+//   column.search!.order = column.search?.order ?? index + 2;
+//   const key = column.search?.key ?? handleProp(column.prop!);
+//   const defaultValue = column.search?.defaultValue;
+//   if (defaultValue !== undefined && defaultValue !== null) {
+//     searchParam.value[key] = defaultValue;
+//     searchInitParam.value[key] = defaultValue;
+//   }
+// });
+
+// 定义 emit 事件
+const emit = defineEmits<{
+  search: []
+  reset: []
+}>()
+
+const _search = () => {
+  search()
+  emit('search')
+}
+
+const _reset = () => {
+  reset()
+  emit('reset')
+}
 
 // 初始化表格数据 && 拖拽排序
 onMounted(() => {

@@ -10,6 +10,7 @@ declare module 'vue' {
     AddMenu: typeof import('./src/views/system/menu/components/addMenu.vue')['default']
     Avatar: typeof import('./src/components/Avatar/index.vue')['default']
     BreadCrumb: typeof import('./src/layout/components/layout-header/breadCrumb.vue')['default']
+    Edit: typeof import('./src/components/ProTable/components/searchForm.vue')['default']
     EditorMenu: typeof import('./src/views/system/menu/components/editorMenu.vue')['default']
     EditorRole: typeof import('./src/views/system/role/components/editorRole.vue')['default']
     EditorUser: typeof import('./src/views/system/user/components/editorUser.vue')['default']
@@ -44,6 +45,7 @@ declare module 'vue' {
     ElTableColumn: typeof import('element-plus/es')['ElTableColumn']
     ElTooltip: typeof import('element-plus/es')['ElTooltip']
     ElTree: typeof import('element-plus/es')['ElTree']
+    Form: typeof import('./src/components/ProTable/components/form.vue')['default']
     HelloWorld: typeof import('./src/components/HelloWorld.vue')['default']
     LayoutHeader: typeof import('./src/layout/components/layout-header/index.vue')['default']
     LayoutMenu: typeof import('./src/layout/components/layout-menu/index.vue')['default']
@@ -55,7 +57,8 @@ declare module 'vue' {
     RoleMenu: typeof import('./src/views/system/role/components/roleMenu.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
-    Search: typeof import('./src/components/ProTable/components/search.vue')['default']
+    Search: typeof import('./src/components/ProTable/components/form.vue')['default']
+    SearchForm: typeof import('./src/components/ProTable/components/searchForm.vue')['default']
     SidebarItemLink: typeof import('./src/layout/components/layout-menu/SidebarItemLink.vue')['default']
   }
 }

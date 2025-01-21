@@ -83,7 +83,13 @@ export interface ColumnProps<T = any>
   fieldNames?: FieldNamesProps // 指定 label && value && children 的 key 值
   headerRender?: (scope: HeaderRenderScope<T>) => VNode // 自定义表头内容渲染（tsx语法）
   render?: (scope: RenderScope<T>) => VNode | string // 自定义单元格内容渲染（tsx语法）
-  _children?: ColumnProps<T>[] // 多级表头
+  _children?: ColumnProps<T>[] // 多级表头,
+  dataIndex: string
+  dateOptions: () => {}
+  valueType: string
+  hideInSearch: boolean
+  valueEnum: () => {}
+  defaultValue: () => {}
 }
 
 export type ProTableInstance = Omit<
