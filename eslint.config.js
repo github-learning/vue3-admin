@@ -64,11 +64,11 @@ export default [
     rules: {
       "no-console": "warn", // 参照下方实例图
       "vue/multi-word-component-names": "off",
-      "no-unused-vars": ["warn"],
+      "no-unused-vars": ["warn"], // 未使用的变量
       '@typescript-eslint/no-unused-vars': ['warn'], // 设置为 warning
-      '@typescript-eslint/no-explicit-any': 'off', // 允许使用 any
+      '@typescript-eslint/no-explicit-any': 'warn', // 允许使用 any
       '@typescript-eslint/no-empty-object-type': 'off',  //  {} 类型而不触发错误
-      '@typescript-eslint/no-unused-expressions': "off" // 未使用的表达式
+      '@typescript-eslint/no-unused-expressions': "warn" // 未使用的表达式
     },
   },
   prettierRecommended, // 覆盖掉eslint的规范
