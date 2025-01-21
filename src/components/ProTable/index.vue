@@ -90,9 +90,7 @@ const processTableData = computed(() => {
 })
 
 // 处理表单字段配置
-// !column.hideInSearch &&
-// 	column.dataIndex &&
-// 	column.dataIndex !== 'action'
+
 const searchColumns = computed(() =>
   props.columns
     .filter(
@@ -141,15 +139,8 @@ console.log(
 //   }
 // });
 
-// 定义 emit 事件
-// const emit = defineEmits<{
-//   search
-//   reset
-// }>()
-
-const toSearch = (params: any) => {
+const toSearch = () => {
   search()
-  // emit('search', params)
 }
 
 // console.log(

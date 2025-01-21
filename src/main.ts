@@ -1,4 +1,3 @@
-// import './style.css'
 import 'normalize.css/normalize.css'
 
 import { createApp } from 'vue'
@@ -11,9 +10,8 @@ import Particles from 'particles.vue3' // 引入
 // 注册持久化插件
 import piniaPluginPersistedstate from 'pinia-plugin-persistedstate'
 import router from './router'
-import './style.sass'
 import './permission'
-import './style/index.css'
+import './style/index.scss'
 const pinia = createPinia()
 // 如果您正在使用CDN引入，请删除下面一行。
 import * as ElementPlusIconsVue from '@element-plus/icons-vue'
