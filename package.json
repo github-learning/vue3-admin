@@ -25,7 +25,8 @@
     "pinia-plugin-persistedstate": "^4.1.2",
     "unplugin-element-plus": "^0.8.0",
     "vue": "^3.5.13",
-    "vue-router": "^4.5.0"
+    "vue-router": "^4.5.0",
+    "mitt": "^3.0.1"
   },
   "devDependencies": {
     "@commitlint/cli": "^19.5.0",

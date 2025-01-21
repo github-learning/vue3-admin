@@ -94,6 +94,6 @@ const onReset = () => {
     _searchParam.value[column.dataIndex] =
       column.defaultValue !== undefined ? column.defaultValue : null
   })
-  emit('reset', { ..._searchParam })
+  emit('reset')
 }
 </script>

@@ -6,8 +6,8 @@
 
   <SearchForm
     v-show="isShowSearch"
-    @search="toSearch"
-    :reset="_reset"
+    @search="search()"
+    @reset="reset()"
     :columns="searchColumns"
     :search-param="searchParam"
   ></SearchForm>
@@ -138,21 +138,6 @@ console.log(
 //     searchInitParam.value[key] = defaultValue;
 //   }
 // });
-
-const toSearch = () => {
-  search()
-}
-
-// console.log(
-//   '%c [  ]-159',
-//   'font-size:13px; background:pink; color:#bf2c9f;',
-//   toSearch()
-// )
-
-const _reset = () => {
-  reset()
-  // emit('reset')
-}
 
 // 初始化表格数据 && 拖拽排序
 onMounted(() => {
