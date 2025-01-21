@@ -56,7 +56,7 @@ export type FieldNamesProps = {
   children?: string
 }
 
-export type RenderScope<T> = {
+export type RenderScope<T = any> = {
   row: T
   $index: number
   column: TableColumnCtx<T>
@@ -90,6 +90,8 @@ export interface ColumnProps<T = any>
   hideInSearch: boolean
   valueEnum: () => {}
   defaultValue: () => {}
+  placeholder: ''
+  prop: ''
 }
 
 export type ProTableInstance = Omit<

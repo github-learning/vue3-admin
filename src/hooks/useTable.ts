@@ -8,14 +8,32 @@ import { reactive, computed, toRefs } from 'vue'
  * @param {Boolean} isPageable 是否有分页 (非必传，默认为true)
  * @param {Function} dataCallBack 对后台返回的数据进行处理的方法 (非必传)
  * */
+
+interface State {
+  tableData: unknown[]
+  pageable: {
+    pageNum: number
+    pageSize: number
+    total: number
+  }
+  searchParam: Record<string, unknown> // 定义 searchParam 为任意键值对对象
+  searchInitParam: Record<string, unknown>
+  totalParam: Record<string, unknown>
+}
+
+interface ApiResponse {
+  data: unknown // 根据实际情况修改类型
+  [key: string]: unknown
+}
+
 export const useTable = (
-  api?: (params: unknown) => Promise<unknown>,
+  api?: (params: unknown) => Promise<ApiResponse>,
   initParam: object = {},
   isPageable: boolean = true,
   dataCallBack?: (data: unknown) => unknown,
   requestError?: (error: unknown) => void
 ) => {
-  const state = reactive({
+  const state: State = reactive({
     // 表格数据
     tableData: [],
     // 分页数据
@@ -94,7 +112,7 @@ export const useTable = (
   const updatedTotalParam = () => {
     state.totalParam = {}
     // 处理查询参数，可以给查询参数加自定义前缀操作
-    let nowSearchParam = {}
+    const nowSearchParam: Record<string, any> = {}
     // 防止手动清空输入框携带参数（这里可以自定义查询参数前缀）
 
     console.log(
@@ -102,7 +120,7 @@ export const useTable = (
       'font-size:13px; background:pink; color:#bf2c9f;',
       state.searchParam
     )
-    for (let key in state.searchParam) {
+    for (const key in state.searchParam) {
       // 某些情况下参数为 false/0 也应该携带参数
       if (
         state.searchParam[key] ||

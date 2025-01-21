@@ -66,7 +66,9 @@ export default [
       "vue/multi-word-component-names": "off",
       "no-unused-vars": ["warn"],
       '@typescript-eslint/no-unused-vars': ['warn'], // 设置为 warning
-      // semi: 1
+      '@typescript-eslint/no-explicit-any': 'off', // 允许使用 any
+      '@typescript-eslint/no-empty-object-type': 'off',  //  {} 类型而不触发错误
+      '@typescript-eslint/no-unused-expressions': "off" // 未使用的表达式
     },
   },
   prettierRecommended, // 覆盖掉eslint的规范

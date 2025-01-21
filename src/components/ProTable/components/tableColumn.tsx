@@ -2,11 +2,12 @@ import { defineComponent } from 'vue'
 import { ElTable, ElTableColumn } from 'element-plus'
 // import { useTable } from '@/hooks/useTable'
 import notDataImage from '@/assets/images/notData.png' // 采用 import 语法引入图片
+import { ColumnProps, RenderScope } from '../model'
 // const { handleSizeChange, handleCurrentChange } = useTable()
 export default defineComponent({
   props: {
     columns: {
-      type: Array,
+      type: Array as PropType<ColumnProps[]>,
       required: true
     },
     data: {
@@ -41,7 +42,7 @@ export default defineComponent({
                 width={column.width}
               >
                 {{
-                  default: (scope) => {
+                  default: (scope: RenderScope) => {
                     const { row } = scope
                     return column.render ? column.render(row) : row[column.prop]
                   }
