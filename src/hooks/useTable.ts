@@ -1,5 +1,5 @@
 import { reactive, computed, toRefs } from 'vue'
-
+import { useGlobalDialog } from '@/hooks/globalDialog'
 /**
  *
  * @description table 页面操作方法封 装
@@ -154,11 +154,18 @@ export const useTable = (
    * @return void
    * */
   const reset = () => {
-    state.pageable.pageNum = 1
-    // 重置搜索表单的时，如果有默认搜索参数，则重置默认的搜索参数
-    state.searchParam = { ...state.searchInitParam }
-    // updatedTotalParam()
-    getTableList()
+    console.log(
+      '%c [  ]-158',
+      'font-size:13px; background:pink; color:#bf2c9f;',
+      111
+    )
+    useGlobalDialog(() => {
+      state.pageable.pageNum = 1
+      // 重置搜索表单的时，如果有默认搜索参数，则重置默认的搜索参数
+      state.searchParam = { ...state.searchInitParam }
+      // updatedTotalParam()
+      getTableList()
+    })
   }
 
   /**
