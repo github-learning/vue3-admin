@@ -1,16 +1,56 @@
 <template>
-  <el-form :model="formValue" @submit.prevent="onSubmit" inline>
+  <el-form :model="formValue" inline>
     <template v-for="column in columns" :key="column.dataIndex">
       <el-form-item :label="column.label">
-        <!-- <el-input v-model="column.dataIndex" placeholder="请输入"></el-input> -->
-        {{ formValue }}
-        <component
-          :is="getComponentType(column.valueType)"
-          v-model="formValue[column.dataIndex]"
-          v-bind="getComponentProps(column)"
-        >
-          {{ column.dataIndex }}
-        </component>
+        <template v-if="column.valueType === 'select'">
+          <el-select
+            v-model="formValue[column.dataIndex]"
+            :placeholder="column.placeholder || '请选择'"
+          >
+            <el-option
+              v-for="(label, value) in getValueEnum(column)"
+              :key="value"
+              :label="label"
+              :value="value"
+            />
+          </el-select>
+        </template>
+        <template v-else-if="column.valueType === 'multiple'">
+          <el-select
+            v-model="formValue[column.dataIndex]"
+            :placeholder="column.placeholder || '请选择'"
+            multiple
+          >
+            <el-option
+              v-for="(label, value) in getValueEnum(column)"
+              :key="value"
+              :label="label"
+              :value="value"
+            />
+          </el-select>
+        </template>
+        <template v-else-if="column.valueType === 'date'">
+          <el-date-picker
+            v-model="formValue[column.dataIndex]"
+            type="date"
+            :placeholder="column.placeholder || '请选择日期'"
+            v-bind="column.dateOptions || {}"
+          />
+        </template>
+        <template v-else-if="column.valueType === 'range'">
+          <el-date-picker
+            v-model="formValue[column.dataIndex]"
+            type="daterange"
+            :placeholder="column.placeholder || '请选择日期范围'"
+            v-bind="column.dateOptions || {}"
+          />
+        </template>
+        <template v-else>
+          <el-input
+            v-model="formValue[column.dataIndex]"
+            :placeholder="column.placeholder || '请输入'"
+          />
+        </template>
       </el-form-item>
     </template>
     <el-form-item>
@@ -21,9 +61,8 @@
 </template>
 
 <script setup>
-import { reactive } from 'vue'
+import { reactive, watch } from 'vue'
 
-// 传入的表单列配置
 const props = defineProps({
   columns: {
     type: Array,
@@ -32,10 +71,13 @@ const props = defineProps({
 })
 
 console.log(
-  '%c [  ]-30',
+  '%c [  ]-73',
   'font-size:13px; background:pink; color:#bf2c9f;',
-  props.columns
+  props.label
 )
+
+const emit = defineEmits(['search1', 'reset'])
+
 // 动态初始化表单数据
 const formValue = reactive({})
 
@@ -46,10 +88,10 @@ const initializeFormValue = () => {
   })
 }
 
-// 初始化 formValue
+// 初始化表单值
 initializeFormValue()
 
-// 监听 columns 的变化并重新初始化表单数据
+// 监听 columns 的变化
 watch(
   () => props.columns,
   () => {
@@ -58,75 +100,28 @@ watch(
   { immediate: true, deep: true }
 )
 
-// 根据 valueType 返回对应的组件类型
-const getComponentType = (valueType) => {
-  switch (valueType) {
-    case 'select':
-      return 'el-select'
-    case 'multiple':
-      return 'el-select'
-    case 'date':
-      return 'el-date-picker'
-    case 'range':
-      return 'el-date-picker'
-    default:
-      return 'el-input'
+// 获取下拉选项
+const getValueEnum = (column) => {
+  const { valueEnum } = column
+  if (typeof valueEnum === 'function') {
+    return valueEnum()
   }
-}
-
-// 根据 column 配置生成对应组件的属性
-const getComponentProps = (column) => {
-  const { valueType, valueEnum, dateOptions, placeholder } = column
-
-  const baseProps = { placeholder: placeholder || '请输入' }
-
-  if (valueType === 'select' || valueType === 'multiple') {
-    const options =
-      typeof valueEnum === 'function'
-        ? Object.entries(valueEnum()).map(([value, label]) => ({
-            label,
-            value
-          }))
-        : Object.entries(valueEnum || {}).map(([value, label]) => ({
-            label,
-            value
-          }))
-
-    return {
-      ...baseProps,
-      multiple: valueType === 'multiple',
-      options
-    }
-  }
-
-  if (valueType === 'date') {
-    return {
-      ...baseProps,
-      type: 'date',
-      ...dateOptions
-    }
-  }
-
-  if (valueType === 'range') {
-    return {
-      ...baseProps,
-      type: 'daterange',
-      ...dateOptions
-    }
-  }
-
-  return baseProps
+  return valueEnum || {}
 }
 
 // 提交表单
 const onSubmit = () => {
-  console.log('提交搜索表单: ', formValue)
+  console.log('搜索表单提交: ', formValue)
+  // emit('search1')
+  emit('search1', formValue)
 }
 
 // 重置表单
 const onReset = () => {
-  Object.keys(formValue).forEach((key) => {
-    formValue[key] = undefined
+  props.columns.forEach((column) => {
+    formValue[column.dataIndex] =
+      column.defaultValue !== undefined ? column.defaultValue : null
   })
+  emit('reset', { ...formValue })
 }
 </script>

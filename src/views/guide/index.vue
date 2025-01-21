@@ -35,7 +35,8 @@ const tableColumns = ref([
   {
     label: '名称',
     prop: 'username',
-    width: '150'
+    width: '150',
+    dataIndex: 'username'
   },
   {
     label: '描述',
@@ -43,8 +44,8 @@ const tableColumns = ref([
   },
   {
     label: '手机',
-    prop: 'phone',
-    dataIndex: 'phone'
+    prop: 'mobile',
+    dataIndex: 'mobile'
   },
   {
     label: '状态',

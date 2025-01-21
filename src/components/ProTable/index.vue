@@ -6,10 +6,11 @@
 
   <SearchForm
     v-show="isShowSearch"
-    :search="_search"
+    :search1="toSearch"
     :reset="_reset"
     :columns="searchColumns"
   ></SearchForm>
+
   <!-- :columns="searchColumns"  -->
   <TableColumn v-bind="props" :data="processTableData"></TableColumn>
   <Pagination
@@ -27,6 +28,7 @@ import SearchForm from './components/searchForm.vue'
 import Pagination from './components/Pagination.vue'
 
 import { ColumnProps } from './model'
+import { constantRoutes } from '@/router'
 
 export interface ProTableProps {
   columns: ColumnProps[] // 列配置项  ==> 必传
@@ -63,7 +65,7 @@ const {
   searchParam,
   searchInitParam,
   getTableList,
-  search,
+  // search,
   reset,
   handleSizeChange,
   handleCurrentChange
@@ -98,12 +100,13 @@ const searchColumns = computed(() =>
     .map(
       ({
         dataIndex,
-
+        label,
         valueType,
         valueEnum,
         defaultValue,
         dateOptions
       }) => ({
+        label,
         dataIndex,
         valueType,
         valueEnum,
@@ -138,19 +141,30 @@ console.log(
 // });
 
 // 定义 emit 事件
-const emit = defineEmits<{
-  search: []
-  reset: []
-}>()
+// const emit = defineEmits<{
+//   search
+//   reset
+// }>()
 
-const _search = () => {
-  search()
-  emit('search')
+const toSearch = (params: any) => {
+  console.log(
+    '%c [  ]-150',
+    'font-size:13px; background:pink; color:#bf2c9f;',
+    params
+  )
+  // search()
+  // emit('search', params)
 }
+
+// console.log(
+//   '%c [  ]-159',
+//   'font-size:13px; background:pink; color:#bf2c9f;',
+//   toSearch()
+// )
 
 const _reset = () => {
   reset()
-  emit('reset')
+  // emit('reset')
 }
 
 // 初始化表格数据 && 拖拽排序
