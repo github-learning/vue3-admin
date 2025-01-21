@@ -11,7 +11,7 @@ import Particles from 'particles.vue3' // 引入
 // 注册持久化插件
 import piniaPluginPersistedstate from 'pinia-plugin-persistedstate'
 import router from './router'
-import './style.css'
+import './style.sass'
 import './permission'
 import './style/index.css'
 const pinia = createPinia()
