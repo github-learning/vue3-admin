@@ -6,10 +6,12 @@
 
   <SearchForm
     v-show="isShowSearch"
-    :search1="toSearch"
+    @search="toSearch"
     :reset="_reset"
     :columns="searchColumns"
+    :search-param="searchParam"
   ></SearchForm>
+  xx{{ searchParam }}
 
   <!-- :columns="searchColumns"  -->
   <TableColumn v-bind="props" :data="processTableData"></TableColumn>
@@ -28,7 +30,6 @@ import SearchForm from './components/searchForm.vue'
 import Pagination from './components/Pagination.vue'
 
 import { ColumnProps } from './model'
-import { constantRoutes } from '@/router'
 
 export interface ProTableProps {
   columns: ColumnProps[] // 列配置项  ==> 必传
@@ -65,7 +66,7 @@ const {
   searchParam,
   searchInitParam,
   getTableList,
-  // search,
+  search,
   reset,
   handleSizeChange,
   handleCurrentChange
@@ -147,12 +148,7 @@ console.log(
 // }>()
 
 const toSearch = (params: any) => {
-  console.log(
-    '%c [  ]-150',
-    'font-size:13px; background:pink; color:#bf2c9f;',
-    params
-  )
-  // search()
+  search()
   // emit('search', params)
 }
 
