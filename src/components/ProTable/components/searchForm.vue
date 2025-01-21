@@ -1,0 +1,127 @@
+<template>
+  <el-form :model="formValue" inline>
+    <template v-for="column in columns" :key="column.dataIndex">
+      <el-form-item :label="column.label">
+        <template v-if="column.valueType === 'select'">
+          <el-select
+            v-model="formValue[column.dataIndex]"
+            :placeholder="column.placeholder || '请选择'"
+          >
+            <el-option
+              v-for="(label, value) in getValueEnum(column)"
+              :key="value"
+              :label="label"
+              :value="value"
+            />
+          </el-select>
+        </template>
+        <template v-else-if="column.valueType === 'multiple'">
+          <el-select
+            v-model="formValue[column.dataIndex]"
+            :placeholder="column.placeholder || '请选择'"
+            multiple
+          >
+            <el-option
+              v-for="(label, value) in getValueEnum(column)"
+              :key="value"
+              :label="label"
+              :value="value"
+            />
+          </el-select>
+        </template>
+        <template v-else-if="column.valueType === 'date'">
+          <el-date-picker
+            v-model="formValue[column.dataIndex]"
+            type="date"
+            :placeholder="column.placeholder || '请选择日期'"
+            v-bind="column.dateOptions || {}"
+          />
+        </template>
+        <template v-else-if="column.valueType === 'range'">
+          <el-date-picker
+            v-model="formValue[column.dataIndex]"
+            type="daterange"
+            :placeholder="column.placeholder || '请选择日期范围'"
+            v-bind="column.dateOptions || {}"
+          />
+        </template>
+        <template v-else>
+          <el-input
+            v-model="formValue[column.dataIndex]"
+            :placeholder="column.placeholder || '请输入'"
+          />
+        </template>
+      </el-form-item>
+    </template>
+    <el-form-item>
+      <el-button type="primary" @click="onSubmit">搜索</el-button>
+      <el-button @click="onReset">重置</el-button>
+    </el-form-item>
+  </el-form>
+</template>
+
+<script setup>
+import { reactive, watch } from 'vue'
+
+const props = defineProps({
+  columns: {
+    type: Array,
+    required: true
+  }
+})
+
+console.log(
+  '%c [  ]-73',
+  'font-size:13px; background:pink; color:#bf2c9f;',
+  props.label
+)
+
+const emit = defineEmits(['search1', 'reset'])
+
+// 动态初始化表单数据
+const formValue = reactive({})
+
+const initializeFormValue = () => {
+  props.columns.forEach((column) => {
+    formValue[column.dataIndex] =
+      column.defaultValue !== undefined ? column.defaultValue : null
+  })
+}
+
+// 初始化表单值
+initializeFormValue()
+
+// 监听 columns 的变化
+watch(
+  () => props.columns,
+  () => {
+    initializeFormValue()
+  },
+  { immediate: true, deep: true }
+)
+
+// 获取下拉选项
+const getValueEnum = (column) => {
+  const { valueEnum } = column
+  if (typeof valueEnum === 'function') {
+    return valueEnum()
+  }
+  return valueEnum || {}
+}
+
+// 提交表单
+const onSubmit = () => {
+  console.log('搜索表单提交: ', formValue)
+  // emit('search1')
+  emit('search1', formValue)
+}
+
+// 重置表单
+const onReset = () => {
+  props.columns.forEach((column) => {
+    formValue[column.dataIndex] =
+      column.defaultValue !== undefined ? column.defaultValue : null
+  })
+  emit('reset', { ...formValue })
+}
+</script>

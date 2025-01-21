@@ -5,6 +5,9 @@
     "module": "ESNext",
     "lib": ["ES2020", "DOM", "DOM.Iterable"],
     "skipLibCheck": true,
+    "jsx": "preserve",
+    "jsxImportSource": "vue",
+
 
     /* Bundler mode */
     "moduleResolution": "Bundler",
@@ -12,7 +15,7 @@
     "isolatedModules": true,
     "moduleDetection": "force",
     "noEmit": true,
-    "jsx": "preserve",
+    
 
     /* Linting */
     "strict": true,
@@ -26,5 +29,5 @@
     },
     "types": ["element-plus/global", "./auto-imports.d.ts", "./components.d.ts", "@sentry/types"]
   },
-  "include": ["src/**/*.ts", "src/**/*.tsx", "src/**/*.vue", "src/utils/generateTree.js", "src/utils/generateTree.js"]
+  "include": ["src/**/*.ts", "src/**/*.tsx", "src/**/*.vue", "src/utils/generateTree.js", "src/utils/generateTree.js", "src/components/ProTable/index.vue", "src/hooks/useTable.js"]
 }

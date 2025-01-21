@@ -1,86 +1,90 @@
 <template>
-  <div>
-    <ProTable
-      :query-fields="queryFields"
-      :table-columns="tableColumns"
-      :data="fetchData"
-      stripe
-    />
-  </div>
+  <!-- <proTable :table-columns="tableColumns" :data="fetchData" stripe /> -->
+  <ProTable
+    ref="proTable"
+    title="用户列表"
+    highlight-current-row
+    :columns="tableColumns"
+    :request-api="getUserList"
+  ></ProTable>
+  <!-- :row-class-name="tableRowClassName"
+    :span-method="objectSpanMethod"
+    :show-summary="true"
+    :summary-method="getSummaries"
+    @row-click="rowClick" -->
+  <el-button @click="focusHandler">聚焦</el-button>
+  <my-input v-model="msg" ref="myInputRef">
+    <template #prepend>Prepend</template>
+    <template #append>Append</template>
+  </my-input>
 </template>
 
-<script setup lang="ts">
-// 查询条件配置
-const queryFields = [
-  {
-    label: '名称',
-    prop: 'name',
-    component: 'el-input',
-    props: {
-      placeholder: '请输入名称'
-    }
-  },
-  {
-    label: '状态',
-    prop: 'status',
-    component: 'el-select',
-    props: {
-      placeholder: '请选择状态',
-      options: [
-        { value: 'active', label: '启用' },
-        { value: 'inactive', label: '停用' }
-      ]
-    }
-  },
-  {
-    label: '创建时间',
-    prop: 'createdAt',
-    component: 'el-date-picker',
-    props: {
-      type: 'daterange',
-      startPlaceholder: '开始日期',
-      endPlaceholder: '结束日期'
-    }
-  }
-]
+<script setup lang="jsx">
+const myInputRef = ref()
+
+import { useUserStore } from '@/stores/user'
+// getUsers
+import { getUserList } from '@/apis/user'
+const userStore = useUserStore()
+
+import proTable from '@/components/ProTable/index.vue'
 
 // 表格列配置
-const tableColumns = [
+
+const tableColumns = ref([
   {
     label: '名称',
-    prop: 'name',
-    width: '150'
+    prop: 'username',
+    width: '150',
+    dataIndex: 'username'
+  },
+  {
+    label: '描述',
+    prop: 'description'
+  },
+  {
+    label: '手机',
+    prop: 'mobile',
+    dataIndex: 'mobile'
   },
   {
     label: '状态',
     prop: 'status',
-    // render: 'StatusTag', // 自定义渲染组件
-    width: '100'
+    width: '150',
+    render: (row) => {
+      return (
+        <span style={{ color: row.status == 'Active' ? 'red' : 'green' }}>
+          {row.status}
+        </span>
+      )
+    }
   },
   {
-    title: '操作',
-    width: '180px',
-    dataIndex: 'action',
-    fixed: 'right'
-    // render(_, row) {
-    //   return (
-    //     <div>
-    //       <el-button type="text" onClick={() => handleEdit(row)}>
-    //         编辑
-    //       </el-button>
-    //       <el-button type="text" onClick={() => handleDelete(row)}>
-    //         删除
-    //       </el-button>
-    //     </div>
-    //   )
-    // }
+    label: '操作',
+    prop: 'action',
+    width: '180',
+    render: (row) => {
+      const handleAction = (row) => {
+        console.log(row)
+      }
+      return <el-button onClick={() => handleAction(row)}>操作按钮</el-button>
+    }
   }
-]
-
-// 模拟请求数据的方法
-const fetchData = ref([
-  { name: '张三', status: 'active' },
-  { name: '李四', status: 'inactive' },
-  { name: '王五', status: 'active' }
 ])
+
+const fetchData = ref([
+  { name: 'Item 1', status: 'Active', action: '' },
+  { name: 'Item 2', status: 'Inactive', action: '' }
+])
+
+const msg = ref('')
+
+const focusHandler = () => {
+  console.log(
+    '%c [  ]-57',
+    'font-size:13px; background:pink; color:#bf2c9f;',
+    myInputRef.value
+  )
+  myInputRef.value.focus()
+}
 </script>
