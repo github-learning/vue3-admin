@@ -22,7 +22,6 @@
 </template>
 
 <script setup lang="jsx">
-import { Cellphone } from '@element-plus/icons-vue'
 const myInputRef = ref()
 
 import { useUserStore } from '@/stores/user'

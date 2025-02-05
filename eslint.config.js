@@ -68,7 +68,8 @@ export default [
       '@typescript-eslint/no-unused-vars': ['warn'], // 设置为 warning
       '@typescript-eslint/no-explicit-any': 'warn', // 允许使用 any
       '@typescript-eslint/no-empty-object-type': 'off',  //  {} 类型而不触发错误
-      '@typescript-eslint/no-unused-expressions': "warn" // 未使用的表达式
+      '@typescript-eslint/no-unused-expressions': "warn", // 未使用的表达式,
+      'no-undef': 'off', // 禁用 no-undef 规则
     },
   },
   prettierRecommended, // 覆盖掉eslint的规范
