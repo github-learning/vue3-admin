@@ -45,6 +45,7 @@ declare module 'vue' {
     ElSwitch: typeof import('element-plus/es')['ElSwitch']
     ElTable: typeof import('element-plus/es')['ElTable']
     ElTableColumn: typeof import('element-plus/es')['ElTableColumn']
+    ElTag: typeof import('element-plus/es')['ElTag']
     ElTooltip: typeof import('element-plus/es')['ElTooltip']
     ElTree: typeof import('element-plus/es')['ElTree']
     Form: typeof import('./src/components/ProTable/components/form.vue')['default']
@@ -62,5 +63,8 @@ declare module 'vue' {
     Search: typeof import('./src/components/ProTable/components/form.vue')['default']
     SearchForm: typeof import('./src/components/ProTable/components/searchForm.vue')['default']
     SidebarItemLink: typeof import('./src/layout/components/layout-menu/SidebarItemLink.vue')['default']
+  }
+  export interface ComponentCustomProperties {
+    vLoading: typeof import('element-plus/es')['ElLoadingDirective']
   }
 }

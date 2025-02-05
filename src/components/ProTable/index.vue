@@ -11,10 +11,13 @@
     :columns="searchColumns"
     :search-param="searchParam"
   ></SearchForm>
-  xx{{ searchParam }}
 
-  <!-- :columns="searchColumns"  -->
-  <TableColumn v-bind="props" :data="processTableData"></TableColumn>
+  <TableColumn
+    v-bind="props"
+    :data="processTableData"
+    v-loading="!processTableData || !processTableData.length"
+  ></TableColumn>
+
   <Pagination
     v-if="pagination"
     :pageable="pageable"
