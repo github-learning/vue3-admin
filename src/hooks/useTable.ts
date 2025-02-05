@@ -93,8 +93,10 @@ export const useTable = (
         ...state.totalParam
       })
       console.log('data', data)
-      dataCallBack && (data = dataCallBack(data))
-      state.tableData = isPageable ? data.list : data
+      setTimeout(() => {
+        dataCallBack && (data = dataCallBack(data))
+        state.tableData = isPageable ? data.list : data
+      }, 1000)
 
       // 解构后台返回的分页数据 (如果有分页更新分页信息)
       if (isPageable) {

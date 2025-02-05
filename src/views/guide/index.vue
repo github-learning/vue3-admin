@@ -22,6 +22,7 @@
 </template>
 
 <script setup lang="jsx">
+import { Cellphone } from '@element-plus/icons-vue'
 const myInputRef = ref()
 
 import { useUserStore } from '@/stores/user'
@@ -38,7 +39,10 @@ const tableColumns = ref([
     label: '名称',
     prop: 'username',
     width: '150',
-    dataIndex: 'username'
+    dataIndex: 'username',
+    render: (row) => {
+      return <el-tag type="primary">{row.username}</el-tag>
+    }
   },
   {
     label: '描述',
@@ -47,7 +51,19 @@ const tableColumns = ref([
   {
     label: '手机',
     prop: 'mobile',
-    dataIndex: 'mobile'
+    dataIndex: 'mobile',
+    render: (row) => {
+      return (
+        <>
+          {row.mobile ? (
+            <el-icon>
+              <Cellphone />
+            </el-icon>
+          ) : null}{' '}
+          {row.mobile}
+        </>
+      )
+    }
   },
   {
     label: '状态',
