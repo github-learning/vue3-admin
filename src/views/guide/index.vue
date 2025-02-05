@@ -64,12 +64,26 @@ const tableColumns = ref([
   {
     label: '操作',
     prop: 'action',
-    width: '180',
+    width: '280',
     render: (row) => {
       const handleAction = (row) => {
-        console.log(row)
+        console.log(
+          '%c [ row ]-71',
+          'font-size:13px; background:pink; color:#bf2c9f;',
+          row
+        )
       }
-      return <el-button onClick={() => handleAction(row)}>操作按钮</el-button>
+      return (
+        <>
+          <el-button type="primary" onClick={() => handleAction(row)}>
+            新增
+          </el-button>
+          <el-button onClick={() => handleAction(row)}>编辑</el-button>
+          <el-button type="danger" onClick={() => handleAction(row)}>
+            删除
+          </el-button>
+        </>
+      )
     }
   }
 ])
