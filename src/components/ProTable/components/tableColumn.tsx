@@ -28,51 +28,35 @@ export default defineComponent({
     return () => (
       <div>
         <ElTable data={props.data} border>
-          {props.data.length === 0 ? (
-            <div class="table-empty">
-              <img src={notDataImage} alt="notData" />
-              <div>暂无数据</div>
-            </div>
-          ) : (
-            props.columns.map((column) => (
-              <ElTableColumn
-                key={column.prop}
-                prop={column.prop}
-                label={column.label}
-                width={column.width}
-              >
-                {{
-                  default: (scope: RenderScope) => {
-                    const { row } = scope
-                    return column.render ? column.render(row) : row[column.prop]
-                  }
-                }}
-              </ElTableColumn>
-            ))
-          )}
+          {{
+            // 使用 #empty 插槽设置空数据时的内容
+            empty: () => (
+              <div class="table-empty">
+                <img src={notDataImage} alt="notData" />
+                <div>暂无数据</div>
+              </div>
+            ),
+            default: () =>
+              props.columns.map((column) => (
+                <ElTableColumn
+                  key={column.prop}
+                  prop={column.prop}
+                  label={column.label}
+                  width={column.width}
+                >
+                  {{
+                    default: (scope: RenderScope) => {
+                      const { row } = scope
+                      return column.render
+                        ? column.render(row)
+                        : row[column.prop]
+                    }
+                  }}
+                </ElTableColumn>
+              ))
+          }}
         </ElTable>
       </div>
     )
-
-    {
-      /* <ElPagination
-          current-page={pageable.currentPage}
-          page-size={pageable.pageSize}
-          page-sizes={[5, 10, 15, 20]}
-          total={pageable.total}
-          layout="total, sizes, prev, pager, next, jumper"
-          // 使用 update 事件
-          onUpdate:page-size={(size) => {
-            pageable.pageSize = size
-            handleSizeChange(size)
-          }}
-          onUpdate:current-page={(page) => {
-            pageable.currentPage = page
-            handleCurrentChange(page)
-          }}
-        /> */
-    }
-    //   </div>
-    // )
   }
 })
