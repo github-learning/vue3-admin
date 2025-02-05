@@ -1,9 +1,9 @@
 import { defineComponent } from 'vue'
-import { ElLoading, ElTable, ElTableColumn } from 'element-plus'
+import { ElTable, ElTableColumn } from 'element-plus'
 // import { useTable } from '@/hooks/useTable'
 import notDataImage from '@/assets/images/notData.png' // 采用 import 语法引入图片
 import { ColumnProps, RenderScope } from '../model'
-// const { handleSizeChange, handleCurrentChange } = useTable()
+
 export default defineComponent({
   props: {
     columns: {

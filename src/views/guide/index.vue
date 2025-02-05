@@ -1,5 +1,4 @@
 <template>
-  <!-- <proTable :table-columns="tableColumns" :data="fetchData" stripe /> -->
   <div class="table-box">
     <ProTable
       ref="proTable"
@@ -9,11 +8,7 @@
       :request-api="getUserList"
     ></ProTable>
   </div>
-  <!-- :row-class-name="tableRowClassName"
-    :span-method="objectSpanMethod"
-    :show-summary="true"
-    :summary-method="getSummaries"
-    @row-click="rowClick" -->
+
   <el-button @click="focusHandler">聚焦</el-button>
   <my-input v-model="msg" ref="myInputRef">
     <template #prepend>Prepend</template>
