@@ -9,6 +9,7 @@ declare module 'vue' {
   export interface GlobalComponents {
     AddMenu: typeof import('./src/views/system/menu/components/addMenu.vue')['default']
     Avatar: typeof import('./src/components/Avatar/index.vue')['default']
+    BaseGlobalDialog: typeof import('./src/components/BaseGlobalDialog/index.vue')['default']
     BreadCrumb: typeof import('./src/layout/components/layout-header/breadCrumb.vue')['default']
     Edit: typeof import('./src/components/ProTable/components/searchForm.vue')['default']
     EditorMenu: typeof import('./src/views/system/menu/components/editorMenu.vue')['default']

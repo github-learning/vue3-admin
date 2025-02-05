@@ -61,7 +61,6 @@
 </template>
 
 <script setup lang="ts">
-import { reactive, watch } from 'vue'
 import { ColumnProps } from '../model'
 interface SearchFormItem {
   columns: ColumnProps[]
@@ -71,32 +70,10 @@ const props = defineProps<SearchFormItem>()
 
 const _searchParam = computed(() => props.searchParam)
 
-const emit = defineEmits(['handle-search', 'reset'])
-
-// 动态初始化表单数据
-// const _searchParam = reactive({})
-
-const initializeFormValue = () => {
-  props.columns.forEach((column) => {
-    _searchParam.value[column.dataIndex] =
-      column.defaultValue !== undefined ? column.defaultValue : null
-  })
-}
-
-// 初始化表单值
-initializeFormValue()
-
-// 监听 columns 的变化
-watch(
-  () => props.columns,
-  () => {
-    initializeFormValue()
-  },
-  { immediate: true, deep: true }
-)
+const emit = defineEmits(['search', 'reset'])
 
 // 获取下拉选项
-const getValueEnum = (column) => {
+const getValueEnum = (column: ColumnProps) => {
   const { valueEnum } = column
   if (typeof valueEnum === 'function') {
     return valueEnum()
@@ -114,9 +91,9 @@ const onSubmit = () => {
 // 重置表单
 const onReset = () => {
   props.columns.forEach((column) => {
-    _searchParam[column.dataIndex] =
+    _searchParam.value[column.dataIndex] =
       column.defaultValue !== undefined ? column.defaultValue : null
   })
-  emit('reset', { ..._searchParam })
+  emit('reset')
 }
 </script>

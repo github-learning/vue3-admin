@@ -1,12 +1,14 @@
 <template>
   <!-- <proTable :table-columns="tableColumns" :data="fetchData" stripe /> -->
-  <ProTable
-    ref="proTable"
-    title="用户列表"
-    highlight-current-row
-    :columns="tableColumns"
-    :request-api="getUserList"
-  ></ProTable>
+  <div class="table-box">
+    <ProTable
+      ref="proTable"
+      title="用户列表"
+      highlight-current-row
+      :columns="tableColumns"
+      :request-api="getUserList"
+    ></ProTable>
+  </div>
   <!-- :row-class-name="tableRowClassName"
     :span-method="objectSpanMethod"
     :show-summary="true"

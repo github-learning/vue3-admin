@@ -6,8 +6,8 @@
 
   <SearchForm
     v-show="isShowSearch"
-    @search="toSearch"
-    :reset="_reset"
+    @search="search()"
+    @reset="reset()"
     :columns="searchColumns"
     :search-param="searchParam"
   ></SearchForm>
@@ -77,6 +77,7 @@ const {
   props.dataCallback,
   props.requestError
 )
+
 // 是否显示搜索模块
 const isShowSearch = ref(true)
 // 处理表格数据
@@ -90,9 +91,7 @@ const processTableData = computed(() => {
 })
 
 // 处理表单字段配置
-// !column.hideInSearch &&
-// 	column.dataIndex &&
-// 	column.dataIndex !== 'action'
+
 const searchColumns = computed(() =>
   props.columns
     .filter(
@@ -140,28 +139,6 @@ console.log(
 //     searchInitParam.value[key] = defaultValue;
 //   }
 // });
-
-// 定义 emit 事件
-// const emit = defineEmits<{
-//   search
-//   reset
-// }>()
-
-const toSearch = (params: any) => {
-  search()
-  // emit('search', params)
-}
-
-// console.log(
-//   '%c [  ]-159',
-//   'font-size:13px; background:pink; color:#bf2c9f;',
-//   toSearch()
-// )
-
-const _reset = () => {
-  reset()
-  // emit('reset')
-}
 
 // 初始化表格数据 && 拖拽排序
 onMounted(() => {
