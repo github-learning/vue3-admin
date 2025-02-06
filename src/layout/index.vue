@@ -23,6 +23,7 @@
         </el-scrollbar>
       </el-main>
     </el-container>
+    <base-global-dialog></base-global-dialog>
   </el-container>
 </template>
 

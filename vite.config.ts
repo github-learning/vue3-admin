@@ -1,4 +1,5 @@
 import path from 'path'
+import fs from 'fs'
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import AutoImport from 'unplugin-auto-import/vite'
@@ -27,6 +28,11 @@ const pathSrc = path.resolve(__dirname, 'src')
 //   xlsx: 'XLSX',
 //   echarts: 'echarts'
 // })
+
+// 在此处使用读取package.json，是由于运行时的版本号可能通过bump修改，导致存在老版本
+const packageJsonPath = path.resolve(__dirname, 'package.json')
+const packageJson = JSON.parse(fs.readFileSync(packageJsonPath, 'utf-8'))
+const version = packageJson.version
 export default defineConfig({
   build: {
     sourcemap: false,
@@ -70,6 +76,10 @@ export default defineConfig({
         // assetFileNames: 'static/[ext]/[name]-[hash].[ext]'
       }
     }
+  },
+  // 全局环境变量
+  define: {
+    __APP_VERSION__: JSON.stringify(version)
   },
   resolve: {
     alias: {

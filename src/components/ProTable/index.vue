@@ -4,19 +4,17 @@
     <component :is="item" v-bind="props" />
   </div> -->
 
+  <!-- @reset="reset()" -->
   <SearchForm
     v-show="isShowSearch"
     @search="search()"
-    @reset="reset()"
+    :reset="_reset"
     :columns="searchColumns"
     :search-param="searchParam"
   ></SearchForm>
 
-  <TableColumn
-    v-bind="props"
-    :data="processTableData"
-    v-loading="!processTableData || !processTableData.length"
-  ></TableColumn>
+  <TableColumn v-bind="props" :data="processTableData"></TableColumn>
+  <!-- v-loading="!processTableData || !processTableData.length" -->
 
   <Pagination
     v-if="pagination"
@@ -142,6 +140,10 @@ console.log(
 //     searchInitParam.value[key] = defaultValue;
 //   }
 // });
+
+const _reset = () => {
+  reset()
+}
 
 // 初始化表格数据 && 拖拽排序
 onMounted(() => {

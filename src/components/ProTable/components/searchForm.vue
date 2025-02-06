@@ -55,7 +55,8 @@
     </template>
     <el-form-item>
       <el-button type="primary" @click="onSubmit">搜索</el-button>
-      <el-button @click="onReset">重置</el-button>
+      <el-button @click="reset">重置</el-button>
+      <!-- <el-button @click="onReset">重置</el-button> -->
     </el-form-item>
   </el-form>
 </template>
@@ -65,6 +66,8 @@ import { ColumnProps } from '../model'
 interface SearchFormItem {
   columns: ColumnProps[]
   searchParam: { [key: string]: any }
+  search: (params: any) => void // 搜索方法
+  reset: (params: any) => void // 重置方法
 }
 const props = defineProps<SearchFormItem>()
 

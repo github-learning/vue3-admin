@@ -162,15 +162,15 @@ export const useTable = (
       111
     )
     useGlobalDialog(() => {
-      console.log(
-        '%c [  ]-164',
-        'font-size:13px; background:pink; color:#bf2c9f;',
-        111
-      )
+      //   console.log(
+      //     '%c [  ]-164',
+      //     'font-size:13px; background:pink; color:#bf2c9f;',
+      //     222
+      //   )
       state.pageable.pageNum = 1
       // 重置搜索表单的时，如果有默认搜索参数，则重置默认的搜索参数
       state.searchParam = { ...state.searchInitParam }
-      // updatedTotalParam()
+      updatedTotalParam()
       getTableList()
     })
   }
