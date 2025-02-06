@@ -7,7 +7,7 @@
   <!-- @reset="reset()" -->
   <SearchForm
     v-show="isShowSearch"
-    :search="search"
+    :search="_search"
     :reset="_reset"
     :columns="searchColumns"
     :search-param="searchParam"
