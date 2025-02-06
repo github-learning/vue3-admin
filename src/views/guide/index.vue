@@ -6,7 +6,8 @@
       highlight-current-row
       :columns="tableColumns"
       :request-api="getUserList"
-    ></ProTable>
+    >
+    </ProTable>
   </div>
 
   <el-button @click="focusHandler">聚焦</el-button>
@@ -65,10 +66,12 @@ const tableColumns = ref([
     label: '状态',
     prop: 'status',
     width: '150',
+    dataIndex: 'status',
+    valueType: 'select',
     render: (row) => {
       return (
-        <span style={{ color: row.status == 'Active' ? 'red' : 'green' }}>
-          {row.status}
+        <span style={{ color: row.status == 0 ? 'red' : 'green' }}>
+          {row.status == 0 ? '禁用' : '正常'}
         </span>
       )
     }
@@ -106,11 +109,6 @@ const tableColumns = ref([
       )
     }
   }
-])
-
-const fetchData = ref([
-  { name: 'Item 1', status: 'Active', action: '' },
-  { name: 'Item 2', status: 'Inactive', action: '' }
 ])
 
 const msg = ref('')
