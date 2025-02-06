@@ -7,7 +7,7 @@
   <!-- @reset="reset()" -->
   <SearchForm
     v-show="isShowSearch"
-    @search="search()"
+    :search="_search"
     :reset="_reset"
     :columns="searchColumns"
     :search-param="searchParam"
@@ -144,6 +144,9 @@ console.log(
 const _reset = () => {
   reset()
 }
+const _search = () => {
+  search()
+}
 
 // 初始化表格数据 && 拖拽排序
 onMounted(() => {
@@ -151,6 +154,21 @@ onMounted(() => {
   props.data && (pageable.value.total = props.data.length)
 })
 console.log('props', props)
+
+// 暴露给父组件的参数和方法 (外部需要什么，都可以从这里暴露出去)
+defineExpose({
+  tableData: processTableData,
+  pageable,
+  searchParam,
+  searchInitParam,
+
+  // 下面为 function
+  getTableList,
+  search,
+  reset,
+  handleSizeChange,
+  handleCurrentChange
+})
 </script>
 
 <style lang="scss" scoped></style>
