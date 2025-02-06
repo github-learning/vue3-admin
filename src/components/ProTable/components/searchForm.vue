@@ -54,8 +54,8 @@
       </el-form-item>
     </template>
     <el-form-item>
-      <el-button type="primary" @click="onSubmit">搜索</el-button>
-      <el-button @click="onReset">重置</el-button>
+      <el-button type="primary" @click="search">搜索</el-button>
+      <el-button @click="reset">重置</el-button>
     </el-form-item>
   </el-form>
 </template>
@@ -65,6 +65,8 @@ import { ColumnProps } from '../model'
 interface SearchFormItem {
   columns: ColumnProps[]
   searchParam: { [key: string]: any }
+  search: (params: any) => void // 搜索方法
+  reset: (params: any) => void // 重置方法
 }
 const props = defineProps<SearchFormItem>()
 
@@ -79,21 +81,5 @@ const getValueEnum = (column: ColumnProps) => {
     return valueEnum()
   }
   return valueEnum || {}
-}
-
-// 提交表单
-const onSubmit = () => {
-  console.log('搜索表单提交: ', _searchParam.value)
-
-  emit('search')
-}
-
-// 重置表单
-const onReset = () => {
-  props.columns.forEach((column) => {
-    _searchParam.value[column.dataIndex] =
-      column.defaultValue !== undefined ? column.defaultValue : null
-  })
-  emit('reset')
 }
 </script>

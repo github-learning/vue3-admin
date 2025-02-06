@@ -4,19 +4,17 @@
     <component :is="item" v-bind="props" />
   </div> -->
 
+  <!-- @reset="reset()" -->
   <SearchForm
     v-show="isShowSearch"
-    @search="search()"
-    @reset="reset()"
+    :search="_search"
+    :reset="_reset"
     :columns="searchColumns"
     :search-param="searchParam"
   ></SearchForm>
 
-  <TableColumn
-    v-bind="props"
-    :data="processTableData"
-    v-loading="!processTableData || !processTableData.length"
-  ></TableColumn>
+  <TableColumn v-bind="props" :data="processTableData"></TableColumn>
+  <!-- v-loading="!processTableData || !processTableData.length" -->
 
   <Pagination
     v-if="pagination"
@@ -143,12 +141,34 @@ console.log(
 //   }
 // });
 
+const _reset = () => {
+  reset()
+}
+const _search = () => {
+  search()
+}
+
 // 初始化表格数据 && 拖拽排序
 onMounted(() => {
   props.requestAuto && getTableList()
   props.data && (pageable.value.total = props.data.length)
 })
 console.log('props', props)
+
+// 暴露给父组件的参数和方法 (外部需要什么，都可以从这里暴露出去)
+defineExpose({
+  tableData: processTableData,
+  pageable,
+  searchParam,
+  searchInitParam,
+
+  // 下面为 function
+  getTableList,
+  search,
+  reset,
+  handleSizeChange,
+  handleCurrentChange
+})
 </script>
 
 <style lang="scss" scoped></style>

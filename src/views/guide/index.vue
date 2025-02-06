@@ -20,11 +20,13 @@
 const myInputRef = ref()
 
 import { useUserStore } from '@/stores/user'
-// getUsers
-import { getUserList } from '@/apis/user'
-const userStore = useUserStore()
 
-import proTable from '@/components/ProTable/index.vue'
+import { getUserList } from '@/apis/user'
+
+// import { ProTableInstance } from '@/components/ProTable/model'
+const userStore = useUserStore()
+// ProTable 实例
+const proTable = ref()
 
 // 表格列配置
 
@@ -83,13 +85,21 @@ const tableColumns = ref([
           row
         )
       }
+      const handleEdlAction = (row) => {
+        console.log(
+          '%c [删除的时候再刷新接口  ]-90',
+          'font-size:13px; background:pink; color:#bf2c9f;'
+        )
+
+        proTable.value.getTableList()
+      }
       return (
         <>
           <el-button type="primary" onClick={() => handleAction(row)}>
             新增
           </el-button>
           <el-button onClick={() => handleAction(row)}>编辑</el-button>
-          <el-button type="danger" onClick={() => handleAction(row)}>
+          <el-button type="danger" onClick={() => handleEdlAction(row)}>
             删除
           </el-button>
         </>
@@ -111,6 +121,6 @@ const focusHandler = () => {
     'font-size:13px; background:pink; color:#bf2c9f;',
     myInputRef.value
   )
-  myInputRef.value.focus()
+  // myInputRef.value.focus()
 }
 </script>
