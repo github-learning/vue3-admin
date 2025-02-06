@@ -7,13 +7,21 @@
   <!-- @reset="reset()" -->
   <SearchForm
     v-show="isShowSearch"
-    :search="_search"
+    :search="search"
     :reset="_reset"
     :columns="searchColumns"
     :search-param="searchParam"
   ></SearchForm>
 
-  <TableColumn v-bind="props" :data="processTableData"></TableColumn>
+  <pre>1{{ $attrs }}2</pre>
+  <!-- 打印所有传递的属性 -->
+  <TableColumn
+    v-bind="$attrs"
+    :columns="columns"
+    :data="processTableData"
+    ref="tabRef"
+  ></TableColumn>
+
   <!-- v-loading="!processTableData || !processTableData.length" -->
 
   <Pagination
@@ -31,6 +39,7 @@ import SearchForm from './components/searchForm.vue'
 import Pagination from './components/Pagination.vue'
 
 import { ColumnProps } from './model'
+const tabRef = ref()
 
 export interface ProTableProps {
   columns: ColumnProps[] // 列配置项  ==> 必传
@@ -156,6 +165,7 @@ onMounted(() => {
 console.log('props', props)
 
 // 暴露给父组件的参数和方法 (外部需要什么，都可以从这里暴露出去)
+
 defineExpose({
   tableData: processTableData,
   pageable,
