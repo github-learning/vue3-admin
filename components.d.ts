@@ -53,6 +53,7 @@ declare module 'vue' {
     LayoutHeader: typeof import('./src/layout/components/layout-header/index.vue')['default']
     LayoutMenu: typeof import('./src/layout/components/layout-menu/index.vue')['default']
     MenuTree: typeof import('./src/layout/components/layout-menu/menu-tree.vue')['default']
+    MyButton: typeof import('./src/components/MyButton/index.vue')['default']
     MyInput: typeof import('./src/components/MyInput/index.vue')['default']
     Navbar: typeof import('./src/layout/components/Navbar.vue')['default']
     Pagination: typeof import('./src/components/ProTable/components/Pagination.vue')['default']

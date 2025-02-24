@@ -15,6 +15,7 @@
     <template #prepend>Prepend</template>
     <template #append>Append</template>
   </my-input>
+  <my-button></my-button>
 </template>
 
 <script setup lang="jsx">
