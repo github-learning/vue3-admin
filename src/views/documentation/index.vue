@@ -26,6 +26,12 @@ const initCircles = () => {
       dy: Math.random() * 2 - 1
     })
   }
+
+  console.log(
+    '%c [  ]-30',
+    'font-size:13px; background:pink; color:#bf2c9f;',
+    circles
+  )
 }
 
 // 离屏 canvas 绘制函数（缓存）
