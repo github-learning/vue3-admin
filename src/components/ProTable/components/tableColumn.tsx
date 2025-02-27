@@ -27,7 +27,7 @@ export default defineComponent({
 
     return () => (
       <div>
-        <ElTable data={props.data} border>
+        <ElTable data={props.data}>
           {{
             // 使用 #empty 插槽设置空数据时的内容
             empty: () => (

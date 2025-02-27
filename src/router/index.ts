@@ -64,6 +64,22 @@ export const constantRoutes: RouteRecordRaw[] = [
         component: () => import('@/views/profile/index.vue')
       }
     ]
+  },
+  {
+    path: '/test',
+    component: Layout,
+    name: 'test',
+    redirect: '/test/index',
+
+    meta: {
+      hidden: true
+    },
+    children: [
+      {
+        path: 'index',
+        component: () => import('@/views/test/index.vue')
+      }
+    ]
   }
 ]
 export const asyncRoutes: RouteRecordRaw[] = [

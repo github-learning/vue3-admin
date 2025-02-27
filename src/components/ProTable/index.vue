@@ -13,7 +13,15 @@
     :search-param="searchParam"
   ></SearchForm>
 
-  <TableColumn v-bind="props" :data="processTableData"></TableColumn>
+  <pre>1{{ $attrs }}2</pre>
+  <!-- 打印所有传递的属性 -->
+  <TableColumn
+    v-bind="$attrs"
+    :columns="columns"
+    :data="processTableData"
+    ref="tabRef"
+  ></TableColumn>
+
   <!-- v-loading="!processTableData || !processTableData.length" -->
 
   <Pagination
@@ -31,6 +39,7 @@ import SearchForm from './components/searchForm.vue'
 import Pagination from './components/Pagination.vue'
 
 import { ColumnProps } from './model'
+const tabRef = ref()
 
 export interface ProTableProps {
   columns: ColumnProps[] // 列配置项  ==> 必传
@@ -156,6 +165,7 @@ onMounted(() => {
 console.log('props', props)
 
 // 暴露给父组件的参数和方法 (外部需要什么，都可以从这里暴露出去)
+
 defineExpose({
   tableData: processTableData,
   pageable,
@@ -169,6 +179,13 @@ defineExpose({
   handleSizeChange,
   handleCurrentChange
 })
+// TODO
+/**
+ * 1. 表格和table 联动，实现日期，select，类型的处理
+ * 2. 采用动态组件，重构searchForm
+ * 3. 表格多选 / 二次确认 / 导出为excel  / 表格操作 hooks 处理
+ *
+ */
 </script>
 
 <style lang="scss" scoped></style>
