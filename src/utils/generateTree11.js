@@ -33,20 +33,20 @@ const buildTree = (data) => {
 const tree = buildTree(data)
 console.log(JSON.stringify(tree, null, 2))
 
-// const flattenTree = (tree, parentId = null) => {
-//   let flatData = []
-//   for (let node of tree) {
-//     flatData.push({
-//       id: node.id,
-//       name: node.name,
-//       parentId: parentId
-//     })
-//     if (node.children && node.children.length) {
-//       flatData = flatData.concat(flattenTree(node.children, node.id))
-//     }
-//   }
-//   return flatData
-// }
+const flattenTree = (tree, parentId = null) => {
+  let flatData = []
+  for (let node of tree) {
+    flatData.push({
+      id: node.id,
+      name: node.name,
+      parentId: parentId
+    })
+    if (node.children && node.children.length) {
+      flatData = flatData.concat(flattenTree(node.children, node.id))
+    }
+  }
+  return flatData
+}
 // // 示例树
 // const tree1 = [
 //   {
@@ -71,5 +71,5 @@ console.log(JSON.stringify(tree, null, 2))
 // ]
 
 // // 扁平化数据
-// const flatData = flattenTree(tree1)
-// console.log('flatData', flatData)
+const flatData = flattenTree(tree)
+console.log('flatData', flatData)
