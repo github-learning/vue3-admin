@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="zh">
+  <head>
+    <meta charset="UTF-8" />
+    <title>红包雨</title>
+    <style>
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+        background-color: #f2f2f2;
+      }
+      canvas {
+        display: block;
+      }
+    </style>
+  </head>
+  <body>
+    <canvas id="redPacketCanvas"></canvas>
+
+    <script>
+      const canvas = document.getElementById('redPacketCanvas')
+      const ctx = canvas.getContext('2d')
+
+      // 设置全屏 canvas
+      canvas.width = window.innerWidth
+      canvas.height = window.innerHeight
+
+      const redPacketImg = new Image()
+      redPacketImg.src = './true.png'
+
+      const redPackets = []
+
+      // 创建红包类
+      class RedPacket {
+        constructor() {
+          this.reset()
+        }
+
+        reset() {
+          this.x = Math.random() * canvas.width
+          this.y = -Math.random() * canvas.height
+          this.size = 40 + Math.random() * 20
+          this.speed = 1 + Math.random() * 3
+          this.rotation = Math.random() * 360
+          this.rotationSpeed = (Math.random() - 0.5) * 4
+          this.opacity = 0.8 + Math.random() * 0.2
+        }
+
+        update() {
+          this.y += this.speed
+          this.rotation += this.rotationSpeed
+
+          if (this.y > canvas.height) {
+            this.reset()
+          }
+        }
+
+        draw(ctx) {
+          ctx.save()
+          ctx.globalAlpha = this.opacity
+          ctx.translate(this.x, this.y)
+          ctx.rotate((this.rotation * Math.PI) / 180)
+          ctx.drawImage(
+            redPacketImg,
+            -this.size / 2,
+            -this.size / 2,
+            this.size,
+            this.size
+          )
+          ctx.restore()
+        }
+
+        isClicked(x, y) {
+          const dx = x - this.x
+          const dy = y - this.y
+          return Math.sqrt(dx * dx + dy * dy) < this.size / 2
+        }
+      }
+
+      // 生成多个红包
+      for (let i = 0; i < 40; i++) {
+        redPackets.push(new RedPacket())
+      }
+
+      function animate() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height)
+
+        redPackets.forEach((packet) => {
+          packet.update()
+          packet.draw(ctx)
+        })
+
+        requestAnimationFrame(animate)
+      }
+
+      redPacketImg.onload = () => {
+        animate()
+      }
+
+      // 点击事件
+      canvas.addEventListener('click', (e) => {
+        const rect = canvas.getBoundingClientRect()
+        const clickX = e.clientX - rect.left
+        const clickY = e.clientY - rect.top
+
+        redPackets.forEach((packet, i) => {
+          if (packet.isClicked(clickX, clickY)) {
+            console.log('点击红包 🎉')
+            packet.reset() // 点击后重置（可替换为删除或奖励逻辑）
+          }
+        })
+      })
+
+      // 自适应窗口
+      window.addEventListener('resize', () => {
+        canvas.width = window.innerWidth
+        canvas.height = window.innerHeight
+      })
+    </script>
+  </body>
+</html>
