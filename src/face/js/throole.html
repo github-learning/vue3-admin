@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      防抖 / 节流 / n 个最大数组之和 / 括号匹配的检验js版 / 返回下标 /
+      异步任务，单个输出 / tree / flat / 异步执行顺序
+    </title>
+  </head>
+  <body></body>
+  <script>
+    const throlole = (fn, delay) => {
+      let lastTime = 0
+      return function (...args) {
+        const now = Date.now()
+        if (now - lastTime > delay) {
+          lastTime = now
+          fn.apply(this, args)
+        }
+      }
+    }
+    const handleScroll = throttle(() => {
+      console.log('滚动事件')
+    }, 200)
+
+    window.addEventListener('scroll', handleScroll)
+  </script>
+</html>

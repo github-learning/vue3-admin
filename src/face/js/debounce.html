@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <input id="inputEl" />
+  </body>
+  <script>
+    const debounce = (fn, delay) => {
+      let timer = null
+      return (...args) => {
+        if (timer) clearTimeout(timer)
+        timer = setTimeout(() => {
+          fn(...args)
+        }, fn)
+      }
+    }
+
+    const handleSearch = debounce((val) => {
+      console.log('搜索关键词:', val)
+    }, 500)
+
+    // 输入框绑定
+    inputEl.addEventListener('input', (e) => {
+      handleSearch(e.target.value)
+    })
+  </script>
+</html>

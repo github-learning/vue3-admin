@@ -25,19 +25,37 @@ const flatData = [
 // const nestedDataWithMap = buildNestedStructureWithMap(flatData)
 // console.log(JSON.stringify(nestedDataWithMap, null, 2))
 function buildNestedStructureWithMap(arr) {
+  // const map = new Map()
+  // const result = []
+  // arr.forEach((el) => {
+  //   map.set(el.id, { ...el, children: [] })
+  // })
+  // arr.forEach((el) => {
+  //   if (el.parentId == null) {
+  //     result.push(map.get(el.id))
+  //   } else {
+  //     map.get(el.parentId).children.push(map.get(el.id))
+  //   }
+  // })
+  // return result
   const map = new Map()
-  const result = []
+  const tree = []
   arr.forEach((el) => {
-    map.set(el.id, { ...el, children: [] })
+    map.set(el.id, {
+      ...el,
+      children: []
+    })
   })
   arr.forEach((el) => {
-    if (el.parentId == null) {
-      result.push(map.get(el.id))
+    let parentId = el.parentId
+    if (parentId === null) {
+      tree.push(map.get(el.id))
     } else {
-      map.get(el.parentId).children.push(map.get(el.id))
+      let parent = map.get(el.parentId)
+      parent.children.push(map.get(el.id))
     }
   })
-  return result
+  return tree
 }
 const nestedDataWithMap = buildNestedStructureWithMap(flatData)
 console.log(JSON.stringify(nestedDataWithMap, null, 2))
@@ -59,17 +77,40 @@ console.log(JSON.stringify(nestedDataWithMap, null, 2))
 
 //     return result;
 // }
-function flattenTree(tree) {
-  const result = []
-  tree.forEach((node) => {
-    const { children, ...rest } = node
-    result.push(rest)
-    console.log('rest', rest)
-    if (children && children.length) {
-      console.log('children', children)
-      result.push(...flattenTree(children))
+function flattenTree(tree, parentId = null) {
+  // const result = []
+  // tree.forEach((node) => {
+  //   const { children, ...rest } = node
+  //   result.push(rest)
+  //   console.log('rest', rest)
+  //   if (children && children.length) {
+  //     console.log('children', children)
+  //     result.push(...flattenTree(children))
+  //   }
+  // })
+  let result = []
+  for (let node of tree) {
+    result.push({
+      id: node.id,
+      name: node.name,
+      parentId: parentId
+    })
+    if (node.children && node.children.length) {
+      result = result.concat(flattenTree(node.children, node.id))
     }
-  })
+  }
+  // let result = []
+  // for (let node of tree) {
+  //   result.push({
+  //     id: node.id,
+  //     name: node.name,
+  //     parentId: node.parentId
+  //   })
+  //   if (node.children && node.children.length) {
+  //     result = result.concat(flattenTree(node.children, node.parentId))
+  //   }
+  // }
+  return result
 }
 
 // 执行拍平
