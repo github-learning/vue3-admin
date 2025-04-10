@@ -1,19 +1,40 @@
-// 给定 nums = [2, 3, 5, 9], target = 7
+// const nums = [2, 3, 5, 7, 8, 9]
+// const target = 11
+// // 定义一个名为 twoSum 的函数，接收两个参数：一个数组 arr 和一个目标值 target
+// function twoSum(arr, target) {
+//   // 使用 for 循环遍历数组
+//   for (let i = 0; i < arr.length; i++) {
+//     // 使用 for 循环遍历数组，从 i+1 开始
+//     for (let j = i + 1; j < arr.length; j++) {
+//       // 如果当前两个数的和等于目标值，则返回这两个数的索引
+//       if (arr[i] + arr[j] === target) {
+//         return [i, j]
+//       }
+//     }
+//   }
+// }
 
-// 因为 nums[0] + nums[3] = 2 + 5 = 7
-// 所以返回 [0, 2]
+// console.log(
+//   '%c [  ]-17',
+//   'font-size:13px; background:pink; color:#bf2c9f;',
+//   twoSum(nums, target)
+// )
 
+const nums = [2, 3, 5, 7, 8, 9]
+const target = 11
 const twoSum = (nums, target) => {
   const map = new Map()
   for (let i = 0; i < nums.length; i++) {
-    const item = nums[i]
-    const diff = target - item
-    if (map.has(diff)) {
+    const diff = target - nums[i]
+    if (map.get(diff)) {
       return [map.get(diff), i]
-    } else {
-      map.set(item, i)
     }
+    map.set(nums[i], i)
   }
   return []
 }
-console.log(twoSum([2, 3, 5, 9], 7))
+console.log(
+  '%c [  ]-17',
+  'font-size:13px; background:pink; color:#bf2c9f;',
+  twoSum(nums, target)
+)
