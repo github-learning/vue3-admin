@@ -13,6 +13,7 @@ const deepClone = (obj, cache = new WeakMap()) => {
       clone[key] = deepClone(obj[key], cache)
     }
   }
+  return clone
 }
 
 const a = { val: 1 }
@@ -20,4 +21,10 @@ const b = { a }
 a.b = b
 
 const cloned = deepClone(a)
+
+console.log(
+  '%c [  ]-24',
+  'font-size:13px; background:pink; color:#bf2c9f;',
+  cloned
+)
 console.log(cloned.b.a === cloned) // true ✅

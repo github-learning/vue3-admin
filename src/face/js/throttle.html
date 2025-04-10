@@ -10,7 +10,7 @@
   </head>
   <body></body>
   <script>
-    const throlole = (fn, delay) => {
+    const throttle = (fn, delay) => {
       let lastTime = 0
       return function (...args) {
         const now = Date.now()

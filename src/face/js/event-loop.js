@@ -18,3 +18,4 @@ new Promise((resolve) => {
   console.log(7)
 })
 console.log(8)
+// 5, 1, 3,6,8,2,7,4
