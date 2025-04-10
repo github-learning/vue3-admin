@@ -11,11 +11,15 @@
   <script>
     const debounce = (fn, delay) => {
       let timer = null
-      return (...args) => {
-        if (timer) clearTimeout(timer)
+
+      return function (...args) {
+        if (timer) {
+          clearTimeout(timer)
+        }
+
         timer = setTimeout(() => {
-          fn(...args)
-        }, fn)
+          fn.apply(this, args)
+        }, delay)
       }
     }
 

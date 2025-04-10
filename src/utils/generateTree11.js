@@ -9,25 +9,40 @@ const data = [
 ]
 
 const buildTree = (data) => {
+  // const map = new Map()
+  // const tree = []
+  // data.forEach((element) => {
+  //   map.set(element.id, { ...element, children: [] })
+  // })
+
+  // data.forEach((item) => {
+  //   let parentId = item.parentId
+  //   if (parentId === null) {
+  //     // 根节点
+  //     tree.push(map.get(item.id))
+  //   } else {
+  //     // 子节点，找到根节点, 将子节点放入根节点中
+  //     const parent = map.get(item.parentId)
+
+  //     parent.children.push(map.get(item.id))
+  //   }
+  // })
+  // return tree
   const map = new Map()
   const tree = []
   data.forEach((element) => {
     map.set(element.id, { ...element, children: [] })
   })
-
   data.forEach((item) => {
     let parentId = item.parentId
     if (parentId === null) {
-      // 根节点
       tree.push(map.get(item.id))
     } else {
-      // 子节点，找到根节点, 将子节点放入根节点中
       const parent = map.get(item.parentId)
-
       parent.children.push(map.get(item.id))
     }
+    return tree
   })
-  return tree
 }
 // 构建树结构
 const tree = buildTree(data)

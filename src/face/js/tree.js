@@ -116,3 +116,78 @@ function flattenTree(tree, parentId = null) {
 // 执行拍平
 const flatData1 = flattenTree(nestedDataWithMap)
 console.log('flatData1', flatData1)
+
+// var obj = {a: {b: {c: 2}}}; console.log(get(obj, 'a.b.c')); // 输出 2
+// const get = (obj, path) => {
+//   let keys = path.split('.')
+//   let result = obj
+//   for (let key of keys) {
+//     if (result) {
+//       result = result[key]
+//     } else {
+//       return undefined
+//     }
+//   }
+//   return result
+// }
+var obj = { a: { b: { c: 2 } } }
+
+console.log(get(obj, 'a.b.c')) // 输出 2
+
+// // 做题 2 把数组平分，实现 fn
+// // fn([1, 2, 3, 4, 5], 2)  //
+const fn = (arr, count) => {
+  let result = []
+  for (let k = 0; k < arr.length; k += count) {
+    result.push(arr.slice(k, k + count))
+  }
+  return result
+}
+
+console.log('fn', fn([1, 2, 3, 4, 5], 2))
+
+// const data = [
+//   { id: 1, parentId: null, name: '根节点' },
+//   { id: 2, parentId: 1, name: '节点 1' },
+//   { id: 3, parentId: 1, name: '节点 2' },
+//   { id: 4, parentId: 2, name: '节点 1-1' },
+//   { id: 5, parentId: 2, name: '节点 1-2' },
+//   { id: 6, parentId: 3, name: '节点 2-1' }
+// ]
+
+// const buildTree = (data) => {
+//   const tree = []
+//   const map = new Map()
+//   data.forEach(item => {
+//     map.set(item.id, { ...item, children: [] })
+//   })
+//   data.forEach(item => {
+//     let parentId = item.parentId
+//     if (parentId == null) {
+//       tree.push(map.get(item.id))
+//     } else {
+//       let parent = map.get(item.parentId)
+//       parent.children.push(map.get(item.id))
+//     }
+//   })
+//   return tree
+// }
+// const tree = buildTree(data)
+// console.log(JSON.stringify(tree, null, 2))
+// const flattenTree = (tree, parentId = null) => {
+//   let flatData = []
+//   for (node of tree) {
+//     flatData.push({
+//       id: node.id,
+//       name: node.name,
+//       parentId: node.parentId
+//     })
+//   }
+//   if (node.children && node.children.length) {
+//     flatData = flatData.concat(flattenTree(node.children, node.parentId))
+
+//   }
+//   return flatData
+// }
+// const flatData = flattenTree(tree)
+// console.log('flatData', flatData)
