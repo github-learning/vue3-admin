@@ -15,61 +15,67 @@ const classScores = {
 }
 
 function calculateRankings(scores) {
-  const results = []
+  // 创建排名映射表
+  const rankMap = {}
 
   // 处理每个班级
   for (const [className, students] of Object.entries(scores)) {
-    // 将学生转为数组并排序
-    const sortedStudents = Object.entries(students)
-      .map(([name, score]) => ({ name, score }))
-      .sort((a, b) => b.score - a.score)
+    console.log(
+      '%c [  ]-24',
+      'font-size:13px; background:pink; color:#bf2c9f;',
+      className
+    )
+
+    console.log(
+      '%c [  ]-29',
+      'font-size:13px; background:pink; color:#bf2c9f;',
+      students
+    )
+    // 将学生转为数组并保持原始顺序
+    const studentList = Object.entries(students).map(([name, score]) => ({
+      name,
+      score
+    }))
+
+    console.log(
+      '%c [  ]-40',
+      'font-size:13px; background:pink; color:#bf2c9f;',
+      studentList
+    )
+
+    // 创建排序副本用于计算排名
+    const sortedStudents = [...studentList].sort((a, b) => b.score - a.score)
+
+    console.log(
+      '%c [  ]-49',
+      'font-size:13px; background:pink; color:#bf2c9f;',
+      sortedStudents
+    )
 
     // 计算排名
     let rank = 1
     for (let i = 0; i < sortedStudents.length; i++) {
-      // 如果不是第一个学生，且分数小于前一个学生，则更新rank
       if (i > 0 && sortedStudents[i].score < sortedStudents[i - 1].score) {
         rank = i + 1
       }
-      // 保存结果
-      results.push({
-        className,
-        name: sortedStudents[i].name,
-        rank
-      })
-    }
-  }
+      // 存储排名结果
+      const studentName = sortedStudents[i].name
+      rankMap[`${className}_${studentName}`] = rank
 
-  // 输出结果（按题目示例顺序）
-  // 一班
-  console.log(
-    `一班 张小丙 第${results.find((r) => r.name === '张小丙').rank}名`
-  )
-  console.log(
-    `一班 张小甲 第${results.find((r) => r.name === '张小甲').rank}名`
-  )
-  console.log(
-    `一班 张小乙 第${results.find((r) => r.name === '张小乙').rank}名`
-  )
-  // 二班
-  console.log(
-    `二班 李八一 第${results.find((r) => r.name === '李八一').rank}名`
-  )
-  console.log(
-    `二班 刘八一 第${results.find((r) => r.name === '刘八一').rank}名`
-  )
-  console.log(
-    `二班 胡八一 第${results.find((r) => r.name === '胡八一').rank}名`
-  )
-  console.log(
-    `二班 王七六 第${results.find((r) => r.name === '王七六').rank}名`
-  )
-  console.log(
-    `二班 王九七 第${results.find((r) => r.name === '王九七').rank}名`
-  )
-  console.log(
-    `二班 王六零 第${results.find((r) => r.name === '王六零').rank}名`
-  )
+      console.log(
+        '%c [  ]-65',
+        'font-size:13px; background:pink; color:#bf2c9f;',
+        rankMap
+      )
+    }
+
+    // 按原始顺序输出
+    studentList.forEach((student) => {
+      console.log(
+        `${className} ${student.name} 第${rankMap[`${className}_${student.name}`]}名`
+      )
+    })
+  }
 }
 
 // 执行计算
