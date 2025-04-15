@@ -14,66 +14,36 @@ const classScores = {
   }
 }
 
-function calculateRankings(scores) {
-  // 创建排名映射表
-  const rankMap = {}
+function calculateRankings(classScores) {
+  // 读取出班级 / student
+  // 对student 再读取出name / score
+  // 对score 进行排序 （要保留原始数据位置）
+  // 对排名进行处理，如果current排名 < current -1 则rank  + 1
+  // 输出 班级 - student - 排名
+  const map = {}
 
-  // 处理每个班级
-  for (const [className, students] of Object.entries(scores)) {
+  for (const [className, students] of Object.entries(classScores)) {
     console.log(
-      '%c [  ]-24',
-      'font-size:13px; background:pink; color:#bf2c9f;',
-      className
-    )
-
-    console.log(
-      '%c [  ]-29',
+      '%c [  ]-25',
       'font-size:13px; background:pink; color:#bf2c9f;',
       students
     )
-    // 将学生转为数组并保持原始顺序
     const studentList = Object.entries(students).map(([name, score]) => ({
       name,
       score
     }))
-
-    console.log(
-      '%c [  ]-40',
-      'font-size:13px; background:pink; color:#bf2c9f;',
-      studentList
-    )
-
-    // 创建排序副本用于计算排名
-    const sortedStudents = [...studentList].sort((a, b) => b.score - a.score)
-
-    console.log(
-      '%c [  ]-49',
-      'font-size:13px; background:pink; color:#bf2c9f;',
-      sortedStudents
-    )
-
-    // 计算排名
+    const tempList = [...studentList].sort((a, b) => b.score - a.score)
+    // console.log(tempList)
     let rank = 1
-    for (let i = 0; i < sortedStudents.length; i++) {
-      if (i > 0 && sortedStudents[i].score < sortedStudents[i - 1].score) {
+    for (let i = 0; i < tempList.length; i++) {
+      if (i > 0 && tempList[i].score < tempList[i - 1].score) {
         rank = i + 1
       }
-      // 存储排名结果
-      const studentName = sortedStudents[i].name
-      rankMap[`${className}_${studentName}`] = rank
-
-      console.log(
-        '%c [  ]-65',
-        'font-size:13px; background:pink; color:#bf2c9f;',
-        rankMap
-      )
+      const studentName = tempList[i].name
+      map[studentName] = rank
     }
-
-    // 按原始顺序输出
-    studentList.forEach((student) => {
-      console.log(
-        `${className} ${student.name} 第${rankMap[`${className}_${student.name}`]}名`
-      )
+    studentList.forEach((item) => {
+      console.log(`${className}${item.name}${map[`${item.name}`]}`)
     })
   }
 }
