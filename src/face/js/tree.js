@@ -7,55 +7,22 @@ const flatData = [
   { id: 6, name: '子节点2-1', parentId: 3 }
 ]
 
-// function buildNestedStructureWithMap(arr) {
-//   const map = {}
-//   const result = []
-//   arr.forEach((el) => {
-//     map[el.id] = { ...el, children: [] }
-//   })
-//   arr.forEach((el) => {
-//     if (el.parentId == null) {
-//       result.push(map[el.id])
-//     } else {
-//       map[el.parentId].children.push(map[el.id])
-//     }
-//   })
-//   return result
-// }
-// const nestedDataWithMap = buildNestedStructureWithMap(flatData)
-// console.log(JSON.stringify(nestedDataWithMap, null, 2))
 function buildNestedStructureWithMap(arr) {
-  // const map = new Map()
-  // const result = []
-  // arr.forEach((el) => {
-  //   map.set(el.id, { ...el, children: [] })
-  // })
-  // arr.forEach((el) => {
-  //   if (el.parentId == null) {
-  //     result.push(map.get(el.id))
-  //   } else {
-  //     map.get(el.parentId).children.push(map.get(el.id))
-  //   }
-  // })
-  // return result
   const map = new Map()
-  const tree = []
-  arr.forEach((el) => {
-    map.set(el.id, {
-      ...el,
-      children: []
-    })
+  const result = []
+  arr.forEach((element) => {
+    map.set(element.id, { ...element, children: [] })
   })
   arr.forEach((el) => {
     let parentId = el.parentId
     if (parentId === null) {
-      tree.push(map.get(el.id))
+      result.push(map.get(el.id))
     } else {
       let parent = map.get(el.parentId)
       parent.children.push(map.get(el.id))
     }
   })
-  return tree
+  return result
 }
 const nestedDataWithMap = buildNestedStructureWithMap(flatData)
 console.log(JSON.stringify(nestedDataWithMap, null, 2))
@@ -88,6 +55,7 @@ function flattenTree(tree, parentId = null) {
   //     result.push(...flattenTree(children))
   //   }
   // })
+
   let result = []
   for (let node of tree) {
     result.push({
@@ -99,17 +67,7 @@ function flattenTree(tree, parentId = null) {
       result = result.concat(flattenTree(node.children, node.id))
     }
   }
-  // let result = []
-  // for (let node of tree) {
-  //   result.push({
-  //     id: node.id,
-  //     name: node.name,
-  //     parentId: node.parentId
-  //   })
-  //   if (node.children && node.children.length) {
-  //     result = result.concat(flattenTree(node.children, node.parentId))
-  //   }
-  // }
+
   return result
 }
 
@@ -118,21 +76,31 @@ const flatData1 = flattenTree(nestedDataWithMap)
 console.log('flatData1', flatData1)
 
 // var obj = {a: {b: {c: 2}}}; console.log(get(obj, 'a.b.c')); // 输出 2
-// const get = (obj, path) => {
-//   let keys = path.split('.')
-//   let result = obj
-//   for (let key of keys) {
-//     if (result) {
-//       result = result[key]
-//     } else {
-//       return undefined
-//     }
-//   }
-//   return result
-// }
+const get = (obj, path) => {
+  let keys = path.split('.')
+  let result = obj
+  for (let key of keys) {
+    if (result) {
+      result = result[key]
+    } else {
+      return undefined
+    }
+  }
+  return result
+  // let keys = path.split('.')
+  // let result = obj
+  // for (let key of keys) {
+  //   if (result) {
+  //     result = result[key]
+  //   } else {
+  //     return undefined
+  //   }
+  // }
+  // return result
+}
 var obj = { a: { b: { c: 2 } } }
 
-console.log(get(obj, 'a.b.c')) // 输出 2
+console.log('get', get(obj, 'a.b.c')) // 输出 2
 
 // // 做题 2 把数组平分，实现 fn
 // // fn([1, 2, 3, 4, 5], 2)  //

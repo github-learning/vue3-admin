@@ -64,6 +64,7 @@ declare module 'vue' {
     Search: typeof import('./src/components/ProTable/components/form.vue')['default']
     SearchForm: typeof import('./src/components/ProTable/components/searchForm.vue')['default']
     SidebarItemLink: typeof import('./src/layout/components/layout-menu/SidebarItemLink.vue')['default']
+    Test: typeof import('./src/views/dashboard/components/test.vue')['default']
   }
   export interface ComponentCustomProperties {
     vLoading: typeof import('element-plus/es')['ElLoadingDirective']

@@ -1,7 +1,8 @@
 <template>
   <div>
     <el-button>hello</el-button>
-
+    <test :count="count"></test>
+    <el-button type="primary" @click="count++">count++</el-button>
     <!-- <div i-ant-design:apple-filled icon></div> -->
 
     <svg-icon
@@ -33,11 +34,13 @@
 defineOptions({
   name: 'dashboard'
 })
+
+const count = ref(1)
 // 将这些服务型的组件 放到 实例上来 调用
-const { proxy } = getCurrentInstance()!
+// const { proxy } = getCurrentInstance()!
 
 const handle = () => {
-  proxy?.$message('This is a message.')
+  // proxy?.$message('This is a message.')
 }
 
 const val = ref('text-blue')
