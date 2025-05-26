@@ -1,3 +1,6 @@
+// 1.分数相同的时候名次相同
+// 2.当出现相同分数的情况下,名次并不连续.既排名在两个并列第一之后的学生名次是第三,排名在三个并列第一之后的学生名次是第四
+// 输出示例(不需要考虑输出顺序):
 const classScores = {
   一班: {
     张小丙: 87,
@@ -22,28 +25,42 @@ function calculateRankings(classScores) {
   // 输出 班级 - student - 排名
   const map = {}
 
-  for (const [className, students] of Object.entries(classScores)) {
-    console.log(
-      '%c [  ]-25',
-      'font-size:13px; background:pink; color:#bf2c9f;',
-      students
-    )
+  // 处理每个班级
+  for (const [className, students] of Object.entries(scores)) {
+    // 将学生转为数组并保持原始顺序
     const studentList = Object.entries(students).map(([name, score]) => ({
       name,
       score
     }))
-    const tempList = [...studentList].sort((a, b) => b.score - a.score)
-    // console.log(tempList)
+
+    // 创建排序副本用于计算排名
+    const sortedStudents = [...studentList].sort((a, b) => b.score - a.score)
+
+    // 计算排名
+    // 初始化排名为1
     let rank = 1
-    for (let i = 0; i < tempList.length; i++) {
-      if (i > 0 && tempList[i].score < tempList[i - 1].score) {
+    // 遍历排序后的学生列表
+    for (let i = 0; i < sortedStudents.length; i++) {
+      // 如果当前学生的分数小于前一个学生的分数，则排名加1
+      if (i > 0 && sortedStudents[i].score < sortedStudents[i - 1].score) {
         rank = i + 1
       }
-      const studentName = tempList[i].name
-      map[studentName] = rank
+      // 存储排名结果
+      const studentName = sortedStudents[i].name
+      rankMap[`${className}_${studentName}`] = rank
+
+      console.log(
+        '%c [  ]-48',
+        'font-size:13px; background:pink; color:#bf2c9f;',
+        rankMap
+      )
     }
-    studentList.forEach((item) => {
-      console.log(`${className}${item.name}${map[`${item.name}`]}`)
+
+    // 按原始顺序输出
+    studentList.forEach((student) => {
+      console.log(
+        `${className} ${student.name} 第${rankMap[`${className}_${student.name}`]}`
+      )
     })
   }
 }
